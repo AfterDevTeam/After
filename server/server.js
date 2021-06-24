@@ -13,12 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // const apiRouter = require('./routes/api');
 
+app.use(express.static(path.join(__dirname, './build')));
+
 app.get('/', (req, res) => {
   console.log("It's working!");
-  return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
-
-app.use(express.static(path.join(__dirname, './build')));
 
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
