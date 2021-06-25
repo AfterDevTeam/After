@@ -3,6 +3,7 @@ import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio } from '@ma
 
 const RitesQuestion = () => {
   const [rite, setRite] = useState(null);
+  
   return (
     <div>
       <FormControl component="fieldset">

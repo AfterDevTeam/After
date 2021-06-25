@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Slide } from '@material-ui/core';
 import RitesQuestion from './BurialPlanQuestions/RitesQuestion';
+import FuneralHomeQuestion from './BurialPlanQuestions/FuneralHomeQuestion';
 
 const BurialPlan = () => {
 
   const [BPQuestionIdx, setBPQuestionIdx] = useState(0);
 
   const BurialPlanQuestions = [
-    <RitesQuestion />
+    <RitesQuestion />,
+    <FuneralHomeQuestion />
   ]
 
   return(
