@@ -1,5 +1,6 @@
-// add the database access here
-// const db = require('')
+// const plan = require(model for plan)
+// const service = require(model for service)
+// const future = require(model for future)
 
 const afterController = {};
 
@@ -8,7 +9,7 @@ const afterController = {};
 afterController.getPlan = async (req, res, next) => {
   try {
     // const planQuery = 'Select...
-    // const plan = await db.query(planQuery);
+    // const plan = await plan.query(planQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -19,7 +20,7 @@ afterController.getPlan = async (req, res, next) => {
 afterController.getService = async (req, res, next) => {
   try {
     // const serviceQuery = 'Select...
-    // const plan = await db.query(serviceQuery);
+    // const plan = await service.query(serviceQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -30,7 +31,7 @@ afterController.getService = async (req, res, next) => {
 afterController.getFuture = async (req, res, next) => {
   try {
     // const futureQuery = 'Select...
-    // const plan = await db.query(futureQuery);
+    // const plan = await future.query(futureQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -42,7 +43,7 @@ afterController.addPlan = async (req, res, next) => {
   try {
     // const text = 'INSERT INTO '
     // const values = [req.body....]
-    // await db.query(text,value)
+    // await plan.query(text,value)
     next();
   } catch (error) {
     return next(error);
@@ -53,7 +54,7 @@ afterController.addService = async (req, res, next) => {
   try {
     // const text = 'INSERT INTO '
     // const values = [req.body....]
-    //  await db.query(text,value)
+    //  await service.query(text,value)
     next();
   } catch (error) {
     return next(error);
@@ -64,11 +65,15 @@ afterController.addFuture = async (req, res, next) => {
   try {
     //  const text = 'INSERT INTO '
     //  const values = [req.body....]
-    //  await db.query(text,value)
+    //  await future.query(text,value)
     next();
   } catch (error) {
     return next(error);
   }
 };
+
+//  need delete functionality
+
+//  need update functionality
 
 module.exports = afterController;
