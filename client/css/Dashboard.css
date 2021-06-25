@@ -1,0 +1,7 @@
+#dashboard-container {
+  text-align: center;
+}
+
+#dashboard-squares-container {
+  display: flex;
+}
