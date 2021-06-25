@@ -13,11 +13,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-<<<<<<< HEAD
-    extensions: ['', '.js', '.jsx', '.json', '.jpg', '.jpeg' ,'png'],
-=======
     extensions: ['', '.js', '.jsx', '.json', '.jpg', '.jpeg', '.png'],
->>>>>>> 34368b57a2533d76d4b12df2612c68357228af35
   },
   module: {
     rules: [
