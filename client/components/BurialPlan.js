@@ -14,7 +14,7 @@ const BurialPlan = () => {
 
   return(
     <div id="burial-plan-container">
-      <Slide in={true} direction="left">
+      <Slide in={true} direction="left" mountOnEnter unmountOnExit>
         <div>
           {BurialPlanQuestions[BPQuestionIdx]}
         </div>

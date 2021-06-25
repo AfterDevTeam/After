@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio } from '@material-ui/core';
+import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, TextField } from '@material-ui/core';
 
 const RitesQuestion = () => {
   const [rite, setRite] = useState(null);
-  
+
   return (
     <div>
       <FormControl component="fieldset">
@@ -11,7 +11,19 @@ const RitesQuestion = () => {
         <RadioGroup aria-label="select-your-rites">
           <FormControlLabel value="casket" control={<Radio />} label="Casket" onClick={() => setRite('casket')} />
           <FormControlLabel value="cremation" control={<Radio />} label="Cremation" onClick={() => setRite('cremation')} />
-          <FormControlLabel value="other" control={<Radio />} label="Other" onClick={() => setRite('other')} />
+          <FormControlLabel 
+            value="other" 
+            control={<Radio />} 
+            label={
+              <TextField
+                placeholder="Other: Write your wishes here."
+                onChange={(e) => {
+                    setRite('Other: ' + e.target.value)
+                  }
+                }
+              />
+            }
+            />
         </RadioGroup>
       </FormControl>
     </div>
