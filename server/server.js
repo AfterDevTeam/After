@@ -16,12 +16,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRouter)
 
 
+app.use(express.static(path.join(__dirname, './build')));
+
 app.get('/', (req, res) => {
+<<<<<<< HEAD
   //console.log("It's working!");
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 app.use(express.static(path.join(__dirname, './build')));
 
+=======
+  console.log("It's working!");
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../client/index.html'));
+});
+>>>>>>> 34368b57a2533d76d4b12df2612c68357228af35
 
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
