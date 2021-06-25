@@ -1,5 +1,6 @@
 import React from 'react';
 import DashboardSquare from './DashboardSquare';
+import { Button } from '@material-ui/core';
 import '../css/Dashboard.css';
 
 const Dashboard = () => {
@@ -11,7 +12,7 @@ const Dashboard = () => {
         <DashboardSquare title="Plan Your Service" />
         <DashboardSquare title ="Notes For The Future" />
       </div>
-      <button>Export</button>
+      <Button id="export-button">Export</Button>
     </div>
   )
 }
