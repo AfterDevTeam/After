@@ -3,13 +3,10 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/Navbar';
-
 // import CSS
 import './App.css';
-
 // import components
 import SplashPage from './components/SplashPage';
-
 // react router
 const App = () => {
   return (
@@ -23,5 +20,4 @@ const App = () => {
     </div>
   )
 }
-
 export default App;
