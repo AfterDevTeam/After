@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core';
 
 const Music = () => {
-
   const { funeralService, gravesideService, memorialService } = service;
   const funeralHidden = !service.funeralService;
   const gravesideHidden = !service.gravesideService;
@@ -97,4 +96,3 @@ const Music = () => {
 };
 
 export default ServiceQuestions;
-};
