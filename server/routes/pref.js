@@ -19,8 +19,6 @@ router.get('/fetch/:id', prefController.fetchPreferences, (req, res) =>
   res.status(200).send(res.locals.fetchedPreferences)
 );
 
-
-
 router.put(
   `/burialcreate`,
   prefController.createBurialTable,
