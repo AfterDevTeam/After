@@ -3,44 +3,63 @@ const db = require('../models/afterModels');
 const afterController = {};
 
 // Initial setup.
-afterController.initialSetup = (req, res, next) => {
-  const initial = {
+afterController.initialCreateTable = (req, res, next) => {
+  const initialCreateTable = {
     text: `CREATE TABLE IF NOT EXISTS userinfo (
             _id SERIAL,
             username varchar(50) NOT NULL,
             password varchar(250) NOT NULL,
             name varchar(250) NOT NULL,
-            user_id int NOT NULL);`,
+            user_id int NOT NULL,
+            PRIMARY KEY (_id),
+            UNIQUE (username));`,
   };
 
-  db.query(initial)
+  db.query(initialCreateTable)
     .then((data) => next())
     .catch((err) => next(err));
 };
+
+afterController.initialAddUnique = (req, res, next) => {
+  const initialAddUnique = {
+    text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`
+  }
+
+  db.query(initialAddUnique)
+  .then(data=>next())
+  .catch((err) => next(err));
+}
+
 
 afterController.registerUser = (req, res, next) => {
   // This is only for test
   // Fetch relevant information from front end later
-  const username = 'Codesmith';
+  const username = 'HotChocoBanana';
   const password = '1234';
-  const name = 'Armadillo';
-  const user_id = 2;
+  const name = 'Heeho';
+  const user_id = 420;
 
   // Inserting fetched information to the table called user.
-  const getuser = {
-    text: 'INSERT INTO userinfo (username, password, name, user_id) VALUES ($1, $2, $3, $4)',
+  const registerUser = {
+    text: `INSERT INTO userinfo (username, password, name, user_id) VALUES ($1, $2, $3, $4)
+    ON CONFLICT DO NOTHING`,
     values: [username, password, name, user_id],
   };
 
-  db.query(getuser)
-    .then((data) => next())
+  db.query(registerUser)
+    .then((data) => {
+      let cacheString = (data.rowCount === 1) ? 'User Created' : 'Failed to create'
+      //res.locals.registerSuccessful = data.rowCount;
+      res.locals.registerSuccessful = cacheString;
+      next();
+    })
     .catch((err) => next(err));
 };
 
-afterController.getuserid = (req, res, next) => {
-  const getuserid = 'SELECT user_id FROM userinfo';
+afterController.getUserId = (req, res, next) => {
+  const getUserId = 'SELECT user_id FROM userinfo';
 
-  db.query(getuserid)
+  db.query(getUserId)
     .then((data) => {
       res.locals.userid = data.rows[0].user_id;
       next();

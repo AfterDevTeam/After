@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const PORT = process.env.PORT || 3000;
 const apiRouter = require('./routes/api')
-const testRouter = require('./routes/testRouter')
+const prefRouter = require('./routes/pref')
 
 // Handle Parsing Request Body
 app.use(express.json());
@@ -14,12 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Define Route Handlers
+app.use('/api/pref', prefRouter)
 app.use('/api', apiRouter)
-
-
-
-// This is for test. Delete it when you are done
-app.use('/test', testRouter)
 
 app.use(express.static(path.join(__dirname, './build')));
 

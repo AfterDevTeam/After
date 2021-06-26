@@ -4,15 +4,18 @@ const router = express.Router();
 const afterController = require('../controllers/afterController');
 const multipleInsertController = require('../controllers/multipleInsertController');
 
-router.get('/', afterController.initialSetup, (req, res) =>
-  res.status(200).send('working')
+router.put(
+  '/',
+  afterController.initialCreateTable,
+  afterController.initialAddUnique,
+  (req, res) => res.status(200).send('Initial Setup done')
 );
 
 router.post('/register', afterController.registerUser, (req, res) =>
-  res.status(200).json(res.locals.user)
+  res.status(200).json(res.locals.registerSuccessful)
 );
 
-router.get('/getuserid', afterController.getuserid, (req, res) =>
+router.get('/getUserId', afterController.getUserId, (req, res) =>
   res.status(200).json(res.locals.userid)
 );
 
@@ -20,7 +23,7 @@ router.post(
   '/guestlist/:id',
   afterController.createGuestList,
   multipleInsertController.populateGuestList,
-  (req, res) => res.status(200).send('working id')
+  (req, res) => res.status(200).send('Created Guest List')
 );
 
 module.exports = router;
