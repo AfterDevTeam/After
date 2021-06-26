@@ -12,9 +12,17 @@ import {
 } from '@material-ui/core';
 import { service } from '../../slices/chooseServiceSlice';
 
+<<<<<<< HEAD
 const Music = ({ serviceItems, setServiceItems }) => {
   const { musicBool } = serviceItems;
   const musicHidden = !serviceItems.musicBool;
+=======
+const Music = () => {
+  const { funeralService, gravesideService, memorialService } = service;
+  const funeralHidden = !service.funeralService;
+  const gravesideHidden = !service.gravesideService;
+  const memorialHidden = !service.memorialService;
+>>>>>>> dev
 
   const handleChange = (event) => {
     setServiceItems({
@@ -56,4 +64,8 @@ const Music = ({ serviceItems, setServiceItems }) => {
   );
 };
 
+<<<<<<< HEAD
 export default Music;
+=======
+export default ServiceQuestions;
+>>>>>>> dev

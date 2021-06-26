@@ -12,7 +12,7 @@ const Dashboard = () => {
       <div id='dashboard-squares-container'>
         <DashboardSquare title='Select Your Burial Plan' route='/burial-plan' />
         <DashboardSquare title='Plan Your Service' route='/service-plan' />
-        <DashboardSquare title='Notes For The Future' />
+        <DashboardSquare title='Notes For The Future' route='/checklist' />
       </div>
       <Button id='export-button'>Export</Button>
     </div>
