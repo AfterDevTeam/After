@@ -7,6 +7,18 @@ import GuestList from './ServicePlanQuestions/GuestList';
 const ServicePlan = () => {
   const [SPQuestionIdx, setSPQuestionIdx] = useState(0);
 
+  const [serviceItems, setServiceItems] = useState({
+    guestList: [],
+    participants: [],
+    prayersBool: false,
+    prayersRead: [],
+    musicBool: false,
+    musicPlayed: [],
+    cateringBool: false,
+    cateringService: '',
+    extras: '',
+  });
+
   const ServicePlanQuestions = [<GuestList />];
 
   return (
