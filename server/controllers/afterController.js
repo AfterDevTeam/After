@@ -1,11 +1,22 @@
-/** @format */
-
 const plan = require('../models/afterModels.js');
 // const service = require(model for service)
 // const future = require(model for future)
 // const db = require('../models/afterModels');
 
 const afterController = {};
+
+
+// Install the extension uuid-oosp
+afterController.installUUID = (req, res, next) =>{
+  const installUUID = {
+    text:`CREATE extension IF NOT EXISTS "uuid-ossp"`
+  }
+
+  plan.query(installUUID)
+  .then((data)=>next())
+  .catch(err=>next(err))
+}
+
 
 // these are the get request for each box
 // retrieve information from the database for plan
@@ -90,35 +101,6 @@ afterController.addFuture = async (req, res, next) => {
 
 //  need update functionality
 
-// Initial setup - only needed if we dont set up the table ahead of time
-afterController.initialCreateTable = (req, res, next) => {
-  const initialCreateTable = {
-    text: `CREATE TABLE IF NOT EXISTS userinfo (
-            _id SERIAL,
-            username varchar(50) NOT NULL,
-            password varchar(250) NOT NULL,
-            name varchar(250) NOT NULL,
-            user_id int NOT NULL,
-            PRIMARY KEY (_id),
-            UNIQUE (username));`,
-  };
-
-  db.query(initialCreateTable)
-    .then((data) => next())
-    .catch((err) => next(err));
-};
-
-//setting userID to be unique
-afterController.initialAddUnique = (req, res, next) => {
-  const initialAddUnique = {
-    text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`,
-  };
-
-  db.query(initialAddUnique)
-    .then((data) => next())
-    .catch((err) => next(err));
-};
-
 afterController.registerUser = (req, res, next) => {
   // This is only for test
   // Fetch relevant information from front end later
@@ -173,5 +155,31 @@ afterController.createGuestList = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
+
+
+
+
+
+
+/*
+prefController.fetchPreferences = (req, res, next) => {
+  const user_id = req.params.id;
+
+  const fetchPreferences = {
+    text: `SELECT u.username, u.name, p.funeral_home AS funeral_home, 
+    p.location AS funeral_location 
+    FROM userinfo u INNER JOIN preference p
+    ON u.user_id = p._id
+    WHERE user_id = ${user_id}`,
+  };
+
+  db.query(fetchPreferences)
+    .then((data) => {
+      res.locals.fetchedPreferences = data.rows[0];
+      next();
+    })
+    .catch((err) => next(err));
+};
+*/
 
 module.exports = afterController;

@@ -6,6 +6,7 @@ const multipleInsertController = require('../controllers/multipleInsertControlle
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  afterController.installUUID,
   res.send('This is the API Router - it works!');
 });
 
@@ -32,13 +33,6 @@ router.post('/service', afterController.addService, (req, res) => {
 router.post('/future', afterController.addFuture, (req, res) => {
   res.status(200);
 });
-
-router.put(
-  '/',
-  afterController.initialCreateTable,
-  afterController.initialAddUnique,
-  (req, res) => res.status(200).send('Initial Setup done')
-);
 
 router.post('/register', afterController.registerUser, (req, res) =>
   res.status(200).json(res.locals.registerSuccessful)
