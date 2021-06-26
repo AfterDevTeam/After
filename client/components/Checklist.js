@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Slide } from '@material-ui/core';
 import PetsQuestion from './ChecklistQuestions/PetsQuestion';
+import BillsQuestion from './ChecklistQuestions/BillsQuestion';
+import ExtrasQuestion from './ChecklistQuestions/ExtrasQuestion';
+import {
+  petsReducer,
+  billsReducer,
+  extrasReducer
+} from '../slices/futureChecklistSlice';
 
 const Checklist = () => {
   const dispatch = useDispatch();
@@ -15,10 +22,12 @@ const Checklist = () => {
     extras: ''
   });
 
-  console.log('checklist', checklist)
-
+  const { petsBool, petsList, billsBool, billsList, extras } = checklist;
+  
   const checklistQuestions = [
     <PetsQuestion checklist={checklist} setChecklist={setChecklist} />,
+    <BillsQuestion checklist={checklist} setChecklist={setChecklist} />,
+    <ExtrasQuestion checklist={checklist} setChecklist={setChecklist} />
   ]
 
   return (

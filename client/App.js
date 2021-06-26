@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import BurialPlan from './components/BurialPlan';
 import ServicePlan from './components/ServicePlan';
+import Checklist from './components/Checklist';
 // react router
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path='/login' component={Login} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/burial-plan' component={BurialPlan} />
+          <Route exact path='/checklist' component={Checklist} />
         </Switch>
       </BrowserRouter>
     </div>
