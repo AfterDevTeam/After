@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Slide } from '@material-ui/core';
@@ -40,10 +38,12 @@ const BurialPlan = () => {
     <BurialPlanSubmit />,
   ];
 
-  return (
-    <div id='burial-plan-container'>
-      <Slide in={true} direction='left' mountOnEnter unmountOnExit>
-        <div>{BurialPlanQuestions[BPQuestionIdx]}</div>
+  return(
+    <div id="burial-plan-container">
+      <Slide in={true} direction="left" mountOnEnter unmountOnExit>
+        <div>
+          {BurialPlanQuestions[BPQuestionIdx]}
+        </div>
       </Slide>
       <button
         onClick={() =>
@@ -81,7 +81,7 @@ const BurialPlan = () => {
         Next
       </button>
     </div>
-  );
-};
+  )
+}
 
 export default BurialPlan;
