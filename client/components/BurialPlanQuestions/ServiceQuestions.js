@@ -1,21 +1,20 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormLabel,
   FormControl,
   FormGroup,
   FormControlLabel,
   Checkbox,
-  Radio,
   TextField,
 } from '@material-ui/core';
 
 const ServiceQuestions = ({ service, setService }) => {
   const { funeralService, gravesideService, memorialService } = service;
-  const funeralHidden = !service.funeralService;
-  const gravesideHidden = !service.gravesideService;
-  const memorialHidden = !service.memorialService;
+  const funeralHidden = !funeralService;
+  const gravesideHidden = !gravesideService;
+  const memorialHidden = !memorialService;
 
   const handleChange = (event) => {
     setService({ ...service, [event.target.name]: event.target.checked });
