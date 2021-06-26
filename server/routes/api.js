@@ -15,11 +15,11 @@ router.get('/plan', afterController.getPlan, (req, res) => {
 });
 
 router.get('/service', afterController.getService, (req, res) => {
-  res.status(200).json();
+  res.status(200).json(res.locals);
 });
 
 router.get('/future', afterController.getFuture, (req, res) => {
-  res.status(200).json();
+  res.status(200).json(res.locals);
 });
 
 //  post routes
@@ -27,10 +27,10 @@ router.post('/plan', afterController.addPlan, (req, res) => {
   res.status(200).json(res.locals);
 });
 router.post('/service', afterController.addService, (req, res) => {
-  res.status(200);
+  res.status(200).json(res.locals);
 });
 router.post('/future', afterController.addFuture, (req, res) => {
-  res.status(200);
+  res.status(200).json(res.locals);
 });
 
 router.put(
