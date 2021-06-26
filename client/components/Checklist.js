@@ -4,6 +4,7 @@ import { Slide } from '@material-ui/core';
 import PetsQuestion from './ChecklistQuestions/PetsQuestion';
 import BillsQuestion from './ChecklistQuestions/BillsQuestion';
 import ExtrasQuestion from './ChecklistQuestions/ExtrasQuestion';
+import ChecklistSubmit from './ChecklistQuestions/ChecklistSubmit';
 import {
   petsReducer,
   billsReducer,
@@ -27,7 +28,8 @@ const Checklist = () => {
   const checklistQuestions = [
     <PetsQuestion checklist={checklist} setChecklist={setChecklist} />,
     <BillsQuestion checklist={checklist} setChecklist={setChecklist} />,
-    <ExtrasQuestion checklist={checklist} setChecklist={setChecklist} />
+    <ExtrasQuestion checklist={checklist} setChecklist={setChecklist} />,
+    <ChecklistSubmit />
   ]
 
   return (
