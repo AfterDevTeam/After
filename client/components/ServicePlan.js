@@ -6,8 +6,14 @@ import { Slide } from '@material-ui/core';
 import GuestList from './ServicePlanQuestions/GuestList';
 import Participants from './ServicePlanQuestions/Participants';
 import Music from './ServicePlanQuestions/Music';
+import Readings from './ServicePlanQuestions/Readings';
 
-import { guestListReducer } from '../slices/chooseServiceSlice';
+import {
+  guestListReducer,
+  musicPlayedReducer,
+  participantsReducer,
+  prayersReadReducer,
+} from '../slices/chooseServiceSlice';
 
 const ServicePlan = () => {
   const dispatch = useDispatch();
@@ -31,6 +37,7 @@ const ServicePlan = () => {
     <GuestList setGuestList={setGuestList} />,
     <Participants setParticipants={setParticipants} />,
     <Music serviceItems={serviceItems} setServiceItems={setServiceItems} />,
+    <Readings serviceItems={serviceItems} setServiceItems={setServiceItems} />,
   ];
 
   return (
@@ -48,6 +55,11 @@ const ServicePlan = () => {
       <button
         onClick={() => {
           if (SPQuestionIdx === 0) dispatch(guestListReducer(guestList));
+          if (SPQuestionIdx === 1) dispatch(participantsReducer(participants));
+          if (SPQuestionIdx === 2 && serviceItems.musicBool === true)
+            dispatch(musicPlayedReducer(serviceItems.musicPlayed));
+          if (SPQuestionIdx === 3 && serviceItems.prayersBool === true)
+            dispatch(prayersReadReducer(serviceItems.prayersRead));
           setSPQuestionIdx(
             SPQuestionIdx < ServicePlanQuestions.length - 1
               ? SPQuestionIdx + 1

@@ -34,14 +34,14 @@ const Music = ({ serviceItems, setServiceItems }) => {
               <Checkbox
                 checked={musicBool}
                 onChange={handleChange}
-                name='musicPlayed'
+                name='musicBool'
               />
             }
             label='I want some special music played at my service'
           />
-          {musicBool === false && (
+          {musicBool === true && (
             <TextField
-              placeholder='Location'
+              placeholder='Music'
               onChange={(e) => {
                 setServiceItems({
                   ...serviceItems,
