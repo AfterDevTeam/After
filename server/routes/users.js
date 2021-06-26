@@ -7,7 +7,7 @@ router.post(
   [userController.getAllUsers, userController.createUser],
   (req, res) => {
     res.send('user signedup');
-  };
+  }
 );
 
 router.post(
@@ -15,7 +15,7 @@ router.post(
   [userController.getAllUsers, userController.verifyUser],
   (req, res) => {
     res.send('user verified');
-  };
+  }
 );
 
 module.exports = router;
