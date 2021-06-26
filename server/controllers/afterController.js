@@ -1,7 +1,9 @@
+/** @format */
+
 const plan = require('../models/afterModels.js');
 // const service = require(model for service)
 // const future = require(model for future)
-const db = require('../models/afterModels');
+// const db = require('../models/afterModels');
 
 const afterController = {};
 
@@ -43,15 +45,15 @@ afterController.getFuture = async (req, res, next) => {
 afterController.addPlan = async (req, res, next) => {
   try {
     const text =
-      'INSERT INTO burialPlan (rite,funeralHome,funeralBeforeRites, funeralLocation,gravesideService,gravesideLocation,memorialService,memorialLocation) values($1,$2,$3,$4,$5,$6,$7,$8)';
+      'INSERT INTO burialPlan (rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) values($1,$2,$3,$4,$5,$6,$7,$8)';
 
     const values = [
       req.body.rite,
       req.body.funeralHome,
       req.body.funeralBeforeRites,
       req.body.funeralLocation,
-      req.body.gravesideService,
-      req.body.gravesideLocation,
+      req.body.graveSideService,
+      req.body.graveSideLocation,
       req.body.memorialService,
       req.body.memorialLocation,
     ];

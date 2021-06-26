@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -16,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define Route Handlers
 app.use('/api', apiRouter);
-app.use('/api/pref', prefRouter);
+app.use('/pref', prefRouter);
 app.use('/user', userRouter);
 
 app.use(express.static(path.join(__dirname, './build')));

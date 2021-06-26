@@ -8,8 +8,11 @@ export const service = createSlice({
   initialState: {
     guestList: [],
     participants: [],
+    prayersBool: false,
     prayersRead: [],
+    musicBool: false,
     musicPlayed: [],
+    cateringBool: false,
     cateringService: '',
     extras: '',
   },
