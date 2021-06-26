@@ -6,12 +6,12 @@ const multipleInsertController = require('../controllers/multipleInsertControlle
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('This Works');
+  res.send('This is the API Router - it works!');
 });
 
 // get routes
 router.get('/plan', afterController.getPlan, (req, res) => {
-  res.status(200).json();
+  res.status(200).json(res.locals);
 });
 
 router.get('/service', afterController.getService, (req, res) => {
@@ -24,7 +24,7 @@ router.get('/future', afterController.getFuture, (req, res) => {
 
 //  post routes
 router.post('/plan', afterController.addPlan, (req, res) => {
-  res.status(200);
+  res.status(200).json(res.locals);
 });
 router.post('/service', afterController.addService, (req, res) => {
   res.status(200);
