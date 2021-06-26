@@ -21,4 +21,19 @@ router.get(
   (req, res) => res.status(200).send(res.locals.fetchedPreferences)
 );
 
+
+
+router.put(
+  `/burialcreate`,
+  prefController.createBurialTable,
+  (req, res) => res.status(200).send("Burial Table created")
+)
+
+// When creating burialPlan, userid(/:id) should be given
+router.post(
+  '/burialplan',
+  prefController.storeBurialPreferences,
+  (req, res) => res.status(200).send("Burial Table stored")
+)
+
 module.exports = router;
