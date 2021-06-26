@@ -20,8 +20,6 @@ const ServiceQuestions = () => {
     setService({ ...service, [event.target.name]: event.target.checked });
   }
 
-  console.log(service);
-
   return (
     <div>
       <FormControl component="fieldset">
