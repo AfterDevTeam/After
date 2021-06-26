@@ -1,8 +1,96 @@
-const db = require('../models/afterModels');
+/** @format */
+
+const plan = require('../models/afterModels.js');
+// const service = require(model for service)
+// const future = require(model for future)
+// const db = require('../models/afterModels');
 
 const afterController = {};
 
-// Initial setup.
+// these are the get request for each box
+// retrieve information from the database for plan
+afterController.getPlan = async (req, res, next) => {
+  try {
+    const planQuery = 'SELECT * FROM burialPlan';
+    res.locals = await plan.query(planQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// retrieve information from the database for service
+afterController.getService = async (req, res, next) => {
+  try {
+    // const serviceQuery = 'Select...
+    // const plan = await service.query(serviceQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// retrieve information from the database for future
+afterController.getFuture = async (req, res, next) => {
+  try {
+    // const futureQuery = 'Select...
+    // const plan = await future.query(futureQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// these are the add controllers for each box
+afterController.addPlan = async (req, res, next) => {
+  try {
+    const text =
+      'INSERT INTO burialPlan (rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) values($1,$2,$3,$4,$5,$6,$7,$8)';
+
+    const values = [
+      req.body.rite,
+      req.body.funeralHome,
+      req.body.funeralBeforeRites,
+      req.body.funeralLocation,
+      req.body.graveSideService,
+      req.body.graveSideLocation,
+      req.body.memorialService,
+      req.body.memorialLocation,
+    ];
+    res.locals = await plan.query(text, values);
+    next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+afterController.addService = async (req, res, next) => {
+  try {
+    // const text = 'INSERT INTO '
+    // const values = [req.body....]
+    //  await service.query(text,value)
+    next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+afterController.addFuture = async (req, res, next) => {
+  try {
+    //  const text = 'INSERT INTO '
+    //  const values = [req.body....]
+    //  await future.query(text,value)
+    next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//  need delete functionality
+
+//  need update functionality
+
+// Initial setup - only needed if we dont set up the table ahead of time
 afterController.initialCreateTable = (req, res, next) => {
   const initialCreateTable = {
     text: `CREATE TABLE IF NOT EXISTS userinfo (
@@ -20,16 +108,16 @@ afterController.initialCreateTable = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+//setting userID to be unique
 afterController.initialAddUnique = (req, res, next) => {
   const initialAddUnique = {
-    text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`
-  }
+    text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`,
+  };
 
   db.query(initialAddUnique)
-  .then(data=>next())
-  .catch((err) => next(err));
-}
-
+    .then((data) => next())
+    .catch((err) => next(err));
+};
 
 afterController.registerUser = (req, res, next) => {
   // This is only for test
@@ -48,7 +136,8 @@ afterController.registerUser = (req, res, next) => {
 
   db.query(registerUser)
     .then((data) => {
-      let cacheString = (data.rowCount === 1) ? 'User Created' : 'Failed to create'
+      let cacheString =
+        data.rowCount === 1 ? 'User Created' : 'Failed to create';
       //res.locals.registerSuccessful = data.rowCount;
       res.locals.registerSuccessful = cacheString;
       next();

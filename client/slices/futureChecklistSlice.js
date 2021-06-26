@@ -5,7 +5,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const checklist = createSlice({
   name: 'checklist',
   initialState: {
+    petsBool: false,
     pets: [],
+    billsBool: false,
     bills: [],
     extras: '',
   },
