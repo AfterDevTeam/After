@@ -29,8 +29,6 @@ const BurialPlan = () => {
     memorialServiceLocation: '',
   });
 
-  console.log('service', service);
-
   const BurialPlanQuestions = [
     <RitesQuestion setRite={setRite} />,
     <FuneralHomeQuestion setFuneralHome={setFuneralHome} />,
@@ -54,6 +52,7 @@ const BurialPlan = () => {
       </button>
       <button
         onClick={() => {
+          //dispatch state to redux store depending on which question in the carousel
           if (BPQuestionIdx === 0) dispatch(chooseRitesReducer(rite));
           else if (BPQuestionIdx === 1)
             dispatch(funeralHomeReducer(funeralHome));

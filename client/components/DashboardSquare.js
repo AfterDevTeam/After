@@ -7,7 +7,7 @@ import '../css/DashboardSquare.css';
 const DashboardSquare = (props) => {
   return (
     <div className='dashboard-square'>
-      <Link to={props.route}>{props.title}</Link>
+      <Link to={props.route || '/'}>{props.title}</Link>
     </div>
   );
 };

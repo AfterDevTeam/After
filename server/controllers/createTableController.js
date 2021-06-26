@@ -1,4 +1,4 @@
-const plan = require('../models/afterModels.js');
+const db = require('../models/afterModels.js');
 
 const createTableController = {};
 
@@ -19,7 +19,7 @@ createTableController.userInfoCreateTable = (req, res, next) => {
             );`,
   };
 
-  plan.query(initialCreateTable)
+  db.query(initialCreateTable)
     .then((data) => next())
     .catch((err) => next(err));
 };
@@ -30,7 +30,7 @@ createTableController.userInfoAddUnique = (req, res, next) => {
     text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`,
   };
 
-  plan.query(initialAddUnique)
+  db.query(initialAddUnique)
     .then((data) => next())
     .catch((err) => next(err));
 };
@@ -38,7 +38,7 @@ createTableController.userInfoAddUnique = (req, res, next) => {
 createTableController.createBurialPlanTable = (req, res, next) => {
   const createBurialPlanTable = {
     text: `CREATE TABLE burialPlan (
-            _id SERIAL,
+            _id UUID,
             rite varchar(250),
             funeralHome varchar(250) ,
             funeralBeforeRites boolean,
@@ -47,19 +47,48 @@ createTableController.createBurialPlanTable = (req, res, next) => {
             gravesideLocation varchar(500),
             memorialService boolean,
             memorialLocation varchar(500),
-            user_id INT,
-            PRIMARY KEY (_id),
-            UNIQUE (user_id));`,
+            PRIMARY KEY (_id));`,
   };
 
-  plan.query(createBurialPlanTable)
+  db.query(createBurialPlanTable)
     .then((data) => next())
     .catch((err) => next(err));
 };
 
 
-createTableController.createServicePlanTable = (req, res, next)=>{
-  
+createTableController.createChecklistTable = (req, res, next)=>{
+  const createChecklistTable = {
+    text: `CREATE TABLE IF NOT EXISTS checklist (
+            _id UUID,
+            petsBool BOOLEAN,
+            pets VARCHAR(1000),
+            billsBool BOOLEAN,
+            bills VARCHAR(1000),
+            extras VARCHAR(1000),
+            PRIMARY KEY (_id));`,
+  };
+
+  db.query(createChecklistTable)
+    .then((data) => next())
+    .catch((err) => next(err));
 }
+
+
+createTableController.createServiceTable = (req, res, next) => {
+  const createServiceTable = {
+    text: `CREATE TABLE IF NOT EXISTS service (
+      name VARCHAR(250),
+      guest BOOLEAN,
+      prayer BOOLEAN default false,
+      music
+    );`,
+  };
+
+  db.query(createServiceTable)
+    .then((data) => {
+      next();
+    })
+    .catch((err) => next(err));
+};
 
 module.exports = createTableController;
