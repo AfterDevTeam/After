@@ -3,6 +3,8 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/Navbar';
+import BurialPlan from './components/BurialPlan';
+import ServicePlan from './components/ServicePlan';
 // import CSS
 import './App.css';
 // import components
@@ -14,10 +16,10 @@ const App = () => {
       <Navbar />
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' component={SplashPage}/>
+          <Route exact path='/' component={SplashPage} />
         </Switch>
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 export default App;
