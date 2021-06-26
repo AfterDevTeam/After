@@ -2,6 +2,10 @@ const express = require('express');
 const userController = require('../controllers/userController.js');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.send('This is the User Router - it works!');
+});
+
 router.post(
   '/signup',
   [userController.getAllUsers, userController.createUser],
