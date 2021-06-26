@@ -7,7 +7,7 @@ export const plan = createSlice({
   initialState: {
     rites: '',
     funeralHome: '',
-    funeralBeforeRites: '',
+    funeralBeforeRites: false,
     funeralLocation: '',
     graveSideService: false,
     graveSideLocation: '',
