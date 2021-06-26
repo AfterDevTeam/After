@@ -1,9 +1,6 @@
 /** @format */
 
-const plan = require('../models/afterModels.js');
-// const service = require(model for service)
-// const future = require(model for future)
-// const db = require('../models/afterModels');
+const db = require('../models/afterModels.js');
 
 const afterController = {};
 
@@ -12,7 +9,7 @@ const afterController = {};
 afterController.getPlan = async (req, res, next) => {
   try {
     const planQuery = 'SELECT * FROM burialPlan';
-    res.locals = await plan.query(planQuery);
+    res.locals = await db.query(planQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -22,8 +19,8 @@ afterController.getPlan = async (req, res, next) => {
 // retrieve information from the database for service
 afterController.getService = async (req, res, next) => {
   try {
-    // const serviceQuery = 'Select...
-    // const plan = await service.query(serviceQuery);
+    const serviceQuery = 'SELECT * FROM servicePlan';
+    res.locals = await db.query(serviceQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -33,8 +30,8 @@ afterController.getService = async (req, res, next) => {
 // retrieve information from the database for future
 afterController.getFuture = async (req, res, next) => {
   try {
-    // const futureQuery = 'Select...
-    // const plan = await future.query(futureQuery);
+    const futureQuery = 'SELECT * FROM futurePlan';
+    res.locals = await db.query(futureQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -57,7 +54,7 @@ afterController.addPlan = async (req, res, next) => {
       req.body.memorialService,
       req.body.memorialLocation,
     ];
-    res.locals = await plan.query(text, values);
+    res.locals = await db.query(text, values);
     next();
   } catch (error) {
     return next(error);
@@ -66,9 +63,21 @@ afterController.addPlan = async (req, res, next) => {
 
 afterController.addService = async (req, res, next) => {
   try {
-    // const text = 'INSERT INTO '
-    // const values = [req.body....]
-    //  await service.query(text,value)
+    const text =
+      'INSERT INTO futurePlan (guestList,participant,prayersBool,prayersRead,musicBool,musicPlayed,cateringBool,cateringService,extras) values($1,$2,$3,$4,$5,$6,$7,$8,$9)';
+
+    const values = [
+      req.body.guestList,
+      req.body.participant,
+      req.body.prayersBool,
+      req.body.prayersRead,
+      req.body.musicBool,
+      req.body.musicPlayed,
+      req.body.cateringBool,
+      req.body.cateringService,
+      req.body.extras,
+    ];
+    res.locals = await db.query(text, values);
     next();
   } catch (error) {
     return next(error);
@@ -77,9 +86,18 @@ afterController.addService = async (req, res, next) => {
 
 afterController.addFuture = async (req, res, next) => {
   try {
-    //  const text = 'INSERT INTO '
-    //  const values = [req.body....]
-    //  await future.query(text,value)
+    const text =
+      'INSERT INTO futurePlan (petsBool,pets,billsBool,bills,extras) values($1,$2,$3,$4,$5)';
+
+    const values = [
+      req.body.petsBool,
+      req.body.pets,
+      req.body.billsBool,
+      req.body.bills,
+      req.body.extras,
+    ];
+
+    res.locals = await db.query(text, values);
     next();
   } catch (error) {
     return next(error);
@@ -87,8 +105,35 @@ afterController.addFuture = async (req, res, next) => {
 };
 
 //  need delete functionality
-
+afterController.deletePlan = async (req, res, next) => {
+  try {
+    const planQuery =
+      'DELETE FROM burialPlan WHERE userID = ${req.body.userID}';
+    res.locals = await db.query(planQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
 //  need update functionality
+afterController.updatePlan = async (req, res, next) => {
+  try {
+    const planQuery =
+      'UPDATE burialPlan SET (column1=value1, column2=value2) WHERE userID = ${req.body.userID}';
+
+    /*
+      iterate through req.body and create the column = value template
+      var set = []
+      Object.keys(req.body).forEach(function(key,i) {
+        set.push(key + ' = ($ + (i+1) + ')');
+      })
+      */
+    res.locals = await db.query(planQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
 
 // Initial setup - only needed if we dont set up the table ahead of time
 afterController.initialCreateTable = (req, res, next) => {
