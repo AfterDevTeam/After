@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Slide } from '@material-ui/core';
 import RitesQuestion from './BurialPlanQuestions/RitesQuestion';
 import FuneralHomeQuestion from './BurialPlanQuestions/FuneralHomeQuestion';
+import ServiceQuestions from './BurialPlanQuestions/ServiceQuestions';
 
 const BurialPlan = () => {
 
@@ -9,7 +10,8 @@ const BurialPlan = () => {
 
   const BurialPlanQuestions = [
     <RitesQuestion />,
-    <FuneralHomeQuestion />
+    <FuneralHomeQuestion />,
+    <ServiceQuestions />
   ]
 
   return(

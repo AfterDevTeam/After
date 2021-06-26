@@ -7,10 +7,10 @@ const RitesQuestion = () => {
   return (
     <div>
       <FormControl component="fieldset">
-        <FormLabel component="legend">Select Your Rites</FormLabel>
+        <FormLabel component="legend">Select your rites.</FormLabel>
         <RadioGroup aria-label="select-your-rites">
-          <FormControlLabel value="casket" control={<Radio />} label="Casket" onClick={() => setRite('casket')} />
-          <FormControlLabel value="cremation" control={<Radio />} label="Cremation" onClick={() => setRite('cremation')} />
+          <FormControlLabel value="casket" control={<Radio />} label="Casket" onClick={() => setRite('Casket')} />
+          <FormControlLabel value="cremation" control={<Radio />} label="Cremation" onClick={() => setRite('Cremation')} />
           <FormControlLabel 
             value="other" 
             control={<Radio />} 
