@@ -47,28 +47,27 @@ const Navbar = () => {
             className={classes.menuButton}
             color='inherit'
             aria-label='menu'
-          >
-            <div>
-              <Button
-                aria-controls='simple-menu'
-                aria-haspopup='true'
-                onClick={handleClick}
-              >
-                <MenuIcon />
-              </Button>
-              <Menu
-                id='simple-menu'
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
-            </div>
-          </IconButton>
+          ></IconButton>
+          <div>
+            <Button
+              aria-controls='simple-menu'
+              aria-haspopup='true'
+              onClick={handleClick}
+            >
+              <MenuIcon />
+            </Button>
+            <Menu
+              id='simple-menu'
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+          </div>
           <Typography variant='h6' className='title'>
             After
           </Typography>

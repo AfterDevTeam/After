@@ -1,6 +1,7 @@
 const express = require('express');
 
 const afterController = require('../controllers/afterController.js');
+const multipleInsertController = require('../controllers/multipleInsertController');
 
 const router = express.Router();
 
@@ -31,5 +32,27 @@ router.post('/service', afterController.addService, (req, res) => {
 router.post('/future', afterController.addFuture, (req, res) => {
   res.status(200);
 });
+
+router.put(
+  '/',
+  afterController.initialCreateTable,
+  afterController.initialAddUnique,
+  (req, res) => res.status(200).send('Initial Setup done')
+);
+
+router.post('/register', afterController.registerUser, (req, res) =>
+  res.status(200).json(res.locals.registerSuccessful)
+);
+
+router.get('/getUserId', afterController.getUserId, (req, res) =>
+  res.status(200).json(res.locals.userid)
+);
+
+router.post(
+  '/guestlist/:id',
+  afterController.createGuestList,
+  multipleInsertController.populateGuestList,
+  (req, res) => res.status(200).send('Created Guest List')
+);
 
 module.exports = router;

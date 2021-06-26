@@ -1,13 +1,11 @@
 //  const db = require(model for user)
 
-const { restart } = require('nodemon');
-
 const userController = {};
 
 userController.getAllUsers = async (req, res, next) => {
   try {
     const userQuery = 'SELECT * FROM tableName';
-    //const users = await //db.query(userQuery);
+    //const users = await db.query(userQuery);
     res.locals = users;
     return next();
   } catch (error) {
@@ -18,7 +16,7 @@ userController.getAllUsers = async (req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   try {
     const { username, password } = req.query;
-    const userQuery = 'SELECT * FROM tablename WHERE username = ${username}';
+    //const userQuery = 'SELECT * FROM tablename WHERE username = ${username}';
     //res.locals = await //db.query(userQuery);
     //console.log(res.locals)
     //compare username to what is in res.local and password, if all matches, redirect to dashboard
