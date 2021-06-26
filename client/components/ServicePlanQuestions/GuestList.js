@@ -30,7 +30,7 @@ const GuestList = () => {
         <Button
           variant='contained'
           onClick={() => {
-            console.log('gueslist', guestList);
+            console.log('guestlist', guestList);
             dispatch(guestListReducer(guestList));
           }}
         >
