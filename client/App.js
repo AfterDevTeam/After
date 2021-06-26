@@ -19,7 +19,7 @@ const App = () => {
       <Navbar />
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' component={SplashPage} />
+          <Route exact path='/' component={ServicePlan} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/burial-plan' component={BurialPlan} />

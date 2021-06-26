@@ -1,31 +1,36 @@
 /** @format */
 
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { guestListReducer } from '../../slices/chooseServiceSlice';
 import {
   FormControl,
   InputLabel,
   Input,
   FormHelperText,
+  Button,
 } from '@material-ui/core';
 
-const GuestList = () => {
-  const [funeralHome, setFuneralHome] = useState(null);
+const Participants = ({ setParticipants }) => {
+  // console.log('setGuestList', props);
 
   return (
     <div>
       <FormControl>
-        <InputLabel htmlFor='guest-list'>Guest List</InputLabel>
+        <InputLabel htmlFor='participant-list'>Participants</InputLabel>
         <Input
-          id='guest-list'
-          aria-describedby='guest-list-helper-text'
-          onChange={(e) => setFuneralHome(e.target.value)}
+          id='participant-list'
+          aria-describedby='participant-list-helper-text'
+          onChange={(e) => setParticipants(e.target.value)}
         />
-        <FormHelperText id='guest-list-helper-text'>
-          Please provide a guest list of those you would like to attend.
+        <FormHelperText id='participant-list-helper-text'>
+          Please provide a participant list of those you would like to
+          facilitate your service.
         </FormHelperText>
       </FormControl>
+      {/* {Guests} */}
     </div>
   );
 };
 
-export default GuestList;
+export default Participants;

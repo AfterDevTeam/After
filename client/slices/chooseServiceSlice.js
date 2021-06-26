@@ -19,7 +19,7 @@ export const service = createSlice({
   reducers: {
     guestListReducer: (state, action) => {
       console.log('action.payload in guestListReducer', action.payload);
-      // state.guestList.push(action.payload);
+      state.guestList.push(action.payload);
       return;
     },
     participantsReducer: (state, action) => {

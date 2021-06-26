@@ -11,9 +11,8 @@ import {
   Button,
 } from '@material-ui/core';
 
-const GuestList = () => {
-  const dispatch = useDispatch();
-  const [guestList, setGuestList] = useState(null);
+const GuestList = ({ setGuestList }) => {
+  // console.log('setGuestList', props);
 
   return (
     <div>
@@ -27,15 +26,6 @@ const GuestList = () => {
         <FormHelperText id='guest-list-helper-text'>
           Please provide a guest list of those you would like to attend.
         </FormHelperText>
-        <Button
-          variant='contained'
-          onClick={() => {
-            console.log('guestlist', guestList);
-            dispatch(guestListReducer(guestList));
-          }}
-        >
-          Submit
-        </Button>
       </FormControl>
       {/* {Guests} */}
     </div>
