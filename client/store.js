@@ -5,10 +5,13 @@ import chooseServiceSlice from './slices/chooseServiceSlice';
 import chooseServiceReducer from './slices/chooseServiceSlice';
 import futureChecklistSlice from './slices/futureChecklistSlice';
 import selectPlanSlice from './slices/selectPlanSlice';
+import userInfoSlice from './slices/userInfoSlice';
+
 export default configureStore({
   reducer: {
     plan: selectPlanSlice,
     service: chooseServiceSlice,
     checklist: futureChecklistSlice,
+    userInfo: userInfoSlice,
   },
 });

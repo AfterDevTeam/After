@@ -7,7 +7,7 @@ import {
   lastNameReducer,
   emailReducer,
   showPasswordReducer,
-} from '../slices/signUpSlice';
+} from '../slices/userInfoSlice';
 
 
 const SignUp = () => {
@@ -89,20 +89,22 @@ const SignUp = () => {
                 variant='outlined'
                 fullWidth
               />
-            </Grid> 
-            <Button
-              type='submit'
-              variant='contained'
-              fullWidth
-              onClick = {() => {
-                dispatch(firstNameReducer(signUpInputs.firstName));
-                dispatch(lastNameReducer(signUpInputs.lastName));
-                dispatch(emailReducer(signUpInputs.email));
+            </Grid>
+            <Link to='/dashboard'> 
+              <Button
+                type='submit'
+                variant='contained'
+                fullWidth
+                onClick = {() => {
+                  dispatch(firstNameReducer(signUpInputs.firstName));
+                  dispatch(lastNameReducer(signUpInputs.lastName));
+                  dispatch(emailReducer(signUpInputs.email));
+                  }
                 }
-              }
-            >
-              Sign Up
-            </Button>
+              >
+                Sign Up
+              </Button>
+            </Link>
             <Grid item>
               <Link>
                 Already have an account? Sign in
