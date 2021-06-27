@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import '../css/login.css';
 
 const Login = (props) => {
@@ -63,6 +64,7 @@ const Login = (props) => {
         <div>
           <Button type='submit'>Log in</Button>
         </div>
+        <Link to='/SignUp'>Click here to make an account.</Link>
       </form>
     </div>
   );

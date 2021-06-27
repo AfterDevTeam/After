@@ -10,15 +10,17 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 const userRouter = require('./routes/users.js');
 const apiRouter = require('./routes/api');
-const prefRouter = require('./routes/pref');
+
+// To make my life easier
+const createTableRouter = require('./routes/createTable.js')
 
 // Handle Parsing Request Body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define Route Handlers
+app.use('/create', createTableRouter);
 app.use('/api', apiRouter);
-app.use('/pref', prefRouter);
 app.use('/user', userRouter);
 
 app.use(express.static(path.join(__dirname, './build')));
