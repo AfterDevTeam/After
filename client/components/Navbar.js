@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import '../App.css';
+import { Link } from 'react-router-dom';
 
 import { MenuItem } from '@material-ui/core';
 
@@ -71,8 +72,10 @@ const Navbar = () => {
           <Typography variant='h6' className='title'>
             After
           </Typography>
-          <Button color='inherit'>Login</Button>
-        </Toolbar>
+          <Link to='/login'>
+            <Button color='inherit'>Login</Button>
+          </Link>
+          </Toolbar>
       </AppBar>
     </div>
   );

@@ -1,3 +1,5 @@
+/** @format */
+
 const db = require('../models/afterModels');
 
 const prefController = {};
@@ -17,17 +19,71 @@ prefController.initialCreateTable = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+prefController.createBurialTable = (req, res, next) => {
+  const createBurialTable = {
+    text: `CREATE TABLE burialPlan (
+            _id SERIAL,
+            rite varchar(250),
+            funeral_service_bool boolean,
+            funeral_service_location varchar(500),
+            graveside_service_bool boolean,
+            graveside_service_location varchar(500),
+            memorial_service_bool boolean,
+            memorial_service_location varchar(500),
+            user_id INT,
+            PRIMARY KEY (_id),
+            UNIQUE (user_id));`,
+  };
+
+  db.query(createBurialTable)
+    .then((data) => next())
+    .catch((err) => next(err));
+};
+
+prefController.storeBurialPreferences = (req, res, next) => {
+  const rite = 'Casket';
+  const funeral_service_bool = true;
+  const funeral_service_location = 'myhome';
+  const graveside_service_bool = false;
+  const graveside_service_location = '';
+  const memorial_service_bool = false;
+  const memorial_service_location = '';
+  const user_id = 3;
+
+  const storeBurialPreferences = {
+    text: `INSERT INTO burialPlan (rite, funeral_service_bool, funeral_service_location,
+        graveside_service_bool, graveside_service_location, memorial_service_bool, memorial_service_location, user_id  
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (user_id) DO NOTHING`,
+    values: [
+      rite,
+      funeral_service_bool,
+      funeral_service_location,
+      graveside_service_bool,
+      graveside_service_location,
+      memorial_service_bool,
+      memorial_service_location,
+      user_id,
+    ],
+  };
+
+  db.query(storeBurialPreferences)
+    .then((data) => {
+      next();
+    })
+    .catch((err) => next(err));
+};
+
 prefController.storePreferences = (req, res, next) => {
   const user_id = req.params.id;
 
-  const funueral_Home = 'Cabin';
+  const funeral_Home = 'Cabin';
   const location = 'Mars';
   const types = 'Cremate';
 
   const storePreferences = {
     text: `INSERT INTO preference (_id, funeral_Home, location, types)
            VALUES ($1, $2, $3, $4)`,
-    values: [user_id, funueral_Home, location, types],
+    values: [user_id, funeral_Home, location, types],
   };
 
   db.query(storePreferences)
