@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Grid, TextField, Button, Link } from '@material-ui/core';
+import {useHistory} from 'react-router-dom'
 import {
   firstNameReducer,
   lastNameReducer,
@@ -11,7 +12,8 @@ import {
 
 
 const SignUp = () => {
-  const dispatch = useDispatch;
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   // use react hook, useState, to capture local state
   const [signUpInputs, setSignUpInputs] = useState({
@@ -90,23 +92,22 @@ const SignUp = () => {
                 fullWidth
               />
             </Grid>
-            <Link to='/dashboard'> 
               <Button
-                type='submit'
+                type='button'
                 variant='contained'
                 fullWidth
                 onClick = {() => {
                   dispatch(firstNameReducer(signUpInputs.firstName));
                   dispatch(lastNameReducer(signUpInputs.lastName));
-                  dispatch(emailReducer(signUpInputs.email));
+                  dispatch(emailReducer(signUpInputs.email));    
+                  history.push('/dashboard');
                   }
                 }
               >
                 Sign Up
               </Button>
-            </Link>
             <Grid item>
-              <Link>
+              <Link to='/login'>
                 Already have an account? Sign in
               </Link>
             </Grid> 
