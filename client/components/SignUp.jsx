@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux;'
+import { useDispatch } from 'react-redux';
 import { Container, Grid, TextField, Button, Link } from '@material-ui/core';
 import {
   firstNameReducer,
