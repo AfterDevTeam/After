@@ -1,11 +1,9 @@
-/** @format */
-
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { planState } from '../../slices/selectPlanSlice';
+import { checklistState } from '../../slices/futureChecklistSlice';
 
-const BurialPlanSubmit = () => {
-  const state = useSelector(planState);
+const ChecklistSubmit = () => {
+  const state = useSelector(checklistState);
   console.log('state', state);
   const submitToDb = () => {
     fetch('/api/plan', {
@@ -13,16 +11,16 @@ const BurialPlanSubmit = () => {
       headers: {
         'Content-type': 'Application/JSON',
       },
-      body: JSON.stringify(state.plan),
+      body: JSON.stringify(state.checklist),
     });
   };
 
   return (
     <div>
-      Are you ready to submit your arrangements?
+      Are you ready to submit your checklist?
       <button onClick={submitToDb}>Submit</button>
     </div>
   );
 };
 
-export default BurialPlanSubmit;
+export default ChecklistSubmit;

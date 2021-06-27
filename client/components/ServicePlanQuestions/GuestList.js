@@ -11,33 +11,29 @@ import {
   Button,
 } from '@material-ui/core';
 
-const GuestList = () => {
-  const dispatch = useDispatch();
-  const [guestList, setGuestList] = useState(null);
+const GuestList = ({ serviceItems, setServiceItems }) => {
+  console.log('service items', serviceItems);
 
   return (
     <div>
       <FormControl>
         <InputLabel htmlFor='guest-list'>Guest List</InputLabel>
-        <Input
-          id='guest-list'
-          aria-describedby='guest-list-helper-text'
-          onChange={(e) => setGuestList(e.target.value)}
-        />
+        {
+          <Input
+            id='guest-list'
+            aria-describedby='guest-list-helper-text'
+            onChange={(e) => {
+              setServiceItems({
+                ...serviceItems,
+                guestList: e.target.value.split(',').map((elem) => elem.trim()),
+              });
+            }}
+          />
+        }
         <FormHelperText id='guest-list-helper-text'>
           Please provide a guest list of those you would like to attend.
         </FormHelperText>
-        <Button
-          variant='contained'
-          onClick={() => {
-            console.log('gueslist', guestList);
-            dispatch(guestListReducer(guestList));
-          }}
-        >
-          Submit
-        </Button>
       </FormControl>
-      {/* {Guests} */}
     </div>
   );
 };

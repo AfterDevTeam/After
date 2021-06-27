@@ -2,19 +2,20 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { planState } from '../../slices/selectPlanSlice';
+import { serviceState } from '../../slices/chooseServiceSlice';
 
-const BurialPlanSubmit = () => {
-  const state = useSelector(planState);
-  console.log('state', state);
+const ServicePlanSubmit = () => {
+  const state = useSelector(serviceState);
+  console.log('state in submit component', state);
   const submitToDb = () => {
     fetch('/api/plan', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',
       },
-      body: JSON.stringify(state.plan),
+      body: JSON.stringify(state.service),
     });
+    return;
   };
 
   return (
@@ -25,4 +26,4 @@ const BurialPlanSubmit = () => {
   );
 };
 
-export default BurialPlanSubmit;
+export default ServicePlanSubmit;

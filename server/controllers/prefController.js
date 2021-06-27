@@ -1,3 +1,5 @@
+/** @format */
+
 const db = require('../models/afterModels');
 
 const prefController = {};
@@ -65,23 +67,23 @@ prefController.storeBurialPreferences = (req, res, next) => {
   };
 
   db.query(storeBurialPreferences)
-  .then((data)=>{
-    next();
-  })
-  .catch(err=>next(err));
+    .then((data) => {
+      next();
+    })
+    .catch((err) => next(err));
 };
 
 prefController.storePreferences = (req, res, next) => {
   const user_id = req.params.id;
 
-  const funueral_Home = 'Cabin';
+  const funeral_Home = 'Cabin';
   const location = 'Mars';
   const types = 'Cremate';
 
   const storePreferences = {
     text: `INSERT INTO preference (_id, funeral_Home, location, types)
            VALUES ($1, $2, $3, $4)`,
-    values: [user_id, funueral_Home, location, types],
+    values: [user_id, funeral_Home, location, types],
   };
 
   db.query(storePreferences)
