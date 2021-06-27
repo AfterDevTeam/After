@@ -182,7 +182,7 @@ afterController.registerUser = (req, res, next) => {
 };
 
 afterController.getUserId = (req, res, next) => {
-  //const currentUserEmail = req.body.email;
+  //const currentUsername = req.body.username;
   let currentUsername= "HotChocoBanana";
 
   const getUserId = `SELECT user_id FROM userinfo

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Slide } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 import RitesQuestion from './BurialPlanQuestions/RitesQuestion';
 import FuneralHomeQuestion from './BurialPlanQuestions/FuneralHomeQuestion';
 import ServiceQuestions from './BurialPlanQuestions/ServiceQuestions';
@@ -16,9 +17,10 @@ import {
 const BurialPlan = () => {
   const dispatch = useDispatch();
   const [BPQuestionIdx, setBPQuestionIdx] = useState(0);
-
+  const [toDashboard, setToDashboard] = useState(false);
   const [rite, setRite] = useState(null);
   const [funeralHome, setFuneralHome] = useState(null);
+
 
   const [service, setService] = useState({
     funeralService: false,
@@ -36,6 +38,10 @@ const BurialPlan = () => {
     <BurialPlanSubmit />,
   ];
 
+  if(toDashboard === true){
+    return <Redirect to='/dashboard' />
+  }
+
   return(
     <div id="burial-plan-container">
       <Slide in={true} direction="left" mountOnEnter unmountOnExit>
@@ -44,8 +50,7 @@ const BurialPlan = () => {
         </div>
       </Slide>
       <button
-        onClick={() =>
-          setBPQuestionIdx(BPQuestionIdx > 0 ? BPQuestionIdx - 1 : 0)
+        onClick={() => setBPQuestionIdx(BPQuestionIdx > 0 ? BPQuestionIdx - 1 : setToDashboard(true))
         }
       >
         Previous
