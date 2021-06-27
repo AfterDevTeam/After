@@ -11,6 +11,7 @@ import {
 } from '../slices/userInfoSlice';
 
 
+
 const SignUp = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const SignUp = () => {
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
     showPassword: false,
   });
 
@@ -31,10 +33,23 @@ const SignUp = () => {
     console.log('signUpInput ${prop}: ', prop);
   };
 
-  // function to not/show password
+  // function to not/show password (currently not implemented)
   const handleClickShowPassword = (() => {
     setSignUpInputs({...signUpInputs, showPassword: !signUpInputs.showPassword})
   });
+
+  // function to add user to database using only local state because no passwords are stored on the front end
+  const addUserToDatabase = () => {
+    console.log('signUpInputs ',signUpInputs)
+    fetch('/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'Application/JSON',
+      },
+      body: JSON.stringify(signUpInputs),
+      });
+      return;
+  }
 
 
   return (
@@ -83,6 +98,8 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              
+              onChange= {handleChangeSignUp('password')}
                 name='password'
                 id='password'
                 label='Password'
@@ -100,7 +117,8 @@ const SignUp = () => {
                   dispatch(firstNameReducer(signUpInputs.firstName));
                   dispatch(lastNameReducer(signUpInputs.lastName));
                   dispatch(emailReducer(signUpInputs.email));    
-                  history.push('/dashboard');
+                  history.push('/login');
+                  addUserToDatabase();
                   }
                 }
               >
