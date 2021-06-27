@@ -33,6 +33,8 @@ userController.verifyUser = async (req, res, next) => {
 };
 
 userController.createUser = async (req, res, next) => {
+  const {firstname, lastname, username, email, password} = req.body;
+
   try {
     const { email, password, firstName, lastName } = req.body;
     const value = [email, password, firstName, lastName];
