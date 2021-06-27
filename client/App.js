@@ -12,15 +12,18 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import BurialPlan from './components/BurialPlan';
 import ServicePlan from './components/ServicePlan';
+import SignUp from './components/SignUp';
+
 // react router
 const App = () => {
   return (
     <div>
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route exact path='/' component={SplashPage} />
           <Route exact path='/login' component={Login} />
+          <Route exact path='/signup'component={SignUp} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/burial-plan' component={BurialPlan} />
         </Switch>
