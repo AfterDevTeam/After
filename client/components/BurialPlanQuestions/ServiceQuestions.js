@@ -17,6 +17,7 @@ const ServiceQuestions = ({ service, setService }) => {
   const memorialHidden = !memorialService;
 
   const handleChange = (event) => {
+    console.log('service, e', { ...service }, event.target.name);
     setService({ ...service, [event.target.name]: event.target.checked });
   };
 
