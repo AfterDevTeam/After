@@ -24,18 +24,26 @@ export const service = createSlice({
     },
     participantsReducer: (state, action) => {
       console.log('action.payload in participantsReducer', action.payload);
+      state.participants.push(action.payload);
     },
     prayersReadReducer: (state, action) => {
       console.log('action.payload in prayersReadReducer', action.payload);
+      state.prayersBool = true;
+      state.prayersRead.push(action.payload);
     },
     musicPlayedReducer: (state, action) => {
       console.log('action.payload in musicPlayedReducer', action.payload);
+      state.musicBool = true;
+      state.musicPlayed.push(action.payload);
     },
     cateringServiceReducer: (state, action) => {
       console.log('action.payload in cateringServiceReducer', action.payload);
+      state.cateringBool = true;
+      state.cateringService = action.payload;
     },
     extrasReducer: (state, action) => {
       console.log('action.payload in extrasReducer', action.payload);
+      state.extras = action.payload;
     },
   },
 });

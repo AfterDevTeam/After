@@ -8,22 +8,22 @@ import {
   FormHelperText,
 } from '@material-ui/core';
 
-const ExtrasQuestion = ({ checklist, setChecklist }) => {
+const ExtrasServiceQuestion = ({ serviceItems, setServiceItems }) => {
   return (
     <div>
       <FormControl>
-        <InputLabel htmlFor='checklist-extras'>Extra Tasks</InputLabel>
+        <InputLabel htmlFor='serviceItems-extras'>Extra Tasks</InputLabel>
         <Input
           id='checklist-extras'
-          aria-describedby='checklist-extras-helper-text'
+          aria-describedby='serviceItems-extras-helper-text'
           onChange={(e) =>
-            setChecklist({
-              ...checklist,
+            setServiceItems({
+              ...serviceItems,
               extras: e.target.value,
             })
           }
         />
-        <FormHelperText id='funeral-home-helper-text'>
+        <FormHelperText id='serviceItems-extras-helper-text'>
           Write any extra tasks that needed to be completed after your passing.
         </FormHelperText>
       </FormControl>
@@ -31,4 +31,4 @@ const ExtrasQuestion = ({ checklist, setChecklist }) => {
   );
 };
 
-export default ExtrasQuestion;
+export default ExtrasServiceQuestion;

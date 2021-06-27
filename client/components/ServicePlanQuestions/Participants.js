@@ -11,7 +11,7 @@ import {
   Button,
 } from '@material-ui/core';
 
-const Participants = ({ setParticipants }) => {
+const Participants = ({ serviceItems, setServiceItems }) => {
   // console.log('setGuestList', props);
 
   return (
@@ -21,7 +21,14 @@ const Participants = ({ setParticipants }) => {
         <Input
           id='participant-list'
           aria-describedby='participant-list-helper-text'
-          onChange={(e) => setParticipants(e.target.value)}
+          onChange={(e) => {
+            setServiceItems({
+              ...serviceItems,
+              participants: e.target.value
+                .split(',')
+                .map((elem) => elem.trim()),
+            });
+          }}
         />
         <FormHelperText id='participant-list-helper-text'>
           Please provide a participant list of those you would like to
