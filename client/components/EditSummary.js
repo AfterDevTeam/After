@@ -18,8 +18,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux';
-import { userInfoState } from '../slices/userInfoSlice';
-
+import {
+  userInfoState,
+  updateUserInfoSummaryReducer,
+} from '../slices/userInfoSlice';
+import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
+import { update } from 'lodash';
 const useStyles = makeStyles((theme) => ({
   root2: {
     flexGrow: 1,
@@ -106,24 +112,27 @@ const EditSummary = () => {
                 <RadioGroup aria-label='select-your-rites'>
                   <FormControlLabel
                     value='casket'
+                    rite='rite'
                     control={<Radio />}
                     label='Casket'
-                    onClick={() => setRite('Casket')}
+                    onClick={handlePlanSummaryChange('Casket')}
                   />
                   <FormControlLabel
                     value='cremation'
+                    rite='rite'
                     control={<Radio />}
                     label='Cremation'
-                    onClick={() => setRite('Cremation')}
+                    onClick={handlePlanSummaryChange('Cremation')}
                   />
                   <FormControlLabel
                     value='other'
+                    rite='rite'
                     control={<Radio />}
                     label={
                       <TextField
                         placeholder='Other: Write your wishes here.'
                         onChange={(e) => {
-                          setRite('Other: ' + e.target.value);
+                          handlePlanSummaryChange('Other: ' + e.target.value);
                         }}
                       />
                     }
@@ -276,7 +285,10 @@ const EditSummary = () => {
           </Grid>
           <Button
             onClick={() => {
-              dispatchEvent;
+              dispatch(updateUserInfoSummaryReducer(userInfoSummary));
+              dispatch(updateRitesPlanSummaryReducer(planSummary));
+              dispatch(updateServiceSummaryReducer(serviceSummary));
+              dispatch(updateChecklistSummaryReducer(checklistSummary));
               history.push('/summary');
             }}
           >
