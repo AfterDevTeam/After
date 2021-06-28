@@ -155,31 +155,6 @@ afterController.updatePlan = async (req, res, next) => {
   }
 };
 
-afterController.registerUser = (req, res, next) => {
-  // This is only for test
-  // Fetch relevant information from front end later
-  const username = 'HotChocoBanana';
-  const password = '1234';
-  const name = 'Heeho';
-  const user_id = 420;
-
-  // Inserting fetched information to the table called user.
-  const registerUser = {
-    text: `INSERT INTO userinfo (username, password, name, user_id) VALUES ($1, $2, $3, $4)
-    ON CONFLICT DO NOTHING`,
-    values: [username, password, name, user_id],
-  };
-
-  db.query(registerUser)
-    .then((data) => {
-      let cacheString =
-        data.rowCount === 1 ? 'User Created' : 'Failed to create';
-      //res.locals.registerSuccessful = data.rowCount;
-      res.locals.registerSuccessful = cacheString;
-      next();
-    })
-    .catch((err) => next(err));
-};
 
 afterController.getUserId = (req, res, next) => {
   //const currentUsername = req.body.username;
@@ -196,6 +171,10 @@ afterController.getUserId = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
+
+
+
+
 
 
 /*

@@ -4,7 +4,7 @@ const userController = {};
 
 userController.getAllUsers = async (req, res, next) => {
   try {
-    const userQuery = 'SELECT * FROM tableName';
+    const userQuery = 'SELECT * FROM userinfo';
     const users = await db.query(userQuery);
     res.locals = users;
     return next();
@@ -33,21 +33,18 @@ userController.verifyUser = async (req, res, next) => {
 };
 
 userController.createUser = async (req, res, next) => {
-  const {firstname, lastname, username, email, password} = req.body;
-
   try {
     const { email, password, firstName, lastName } = req.body;
     const value = [email, password, firstName, lastName];
-    const queryText = 'SELECT * FROM tabletname WHERE email = $1';
-
+    const queryText = `SELECT * FROM userinfo WHERE email = '${email}'`;
     const userValid = await db.query(queryText);
 
-    if (!userValid) {
+    if (userValid.rows[0] === undefined) {
       const addText =
-        'INSERT INTO tablename(firstname, lastname, email, password) value($1,$2,$3,$4)';
+        'INSERT INTO userinfo(email, password, firstname, lastname) values($1,$2,$3,$4)';
       await db.query(addText, value);
     } else {
-      res.redirect('/signup');
+      res.redirect('/signup'); // so entering localhost:8080/signup in the address bar doesn't work. Why is that?
     }
   } catch (error) {
     return next(error);

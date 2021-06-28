@@ -36,6 +36,22 @@ const SignUp = () => {
     setSignUpInputs({...signUpInputs, showPassword: !signUpInputs.showPassword})
   });
 
+  // POST Sign Up info to server
+  const submitToServer = (firstName, lastName, email, password) => {
+    const info = {firstName, lastName, email, password};
+    if(firstName&&lastName&&email&&password){
+      fetch('/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/JSON',
+        },
+        body: JSON.stringify(info),
+      })
+    }else{
+      alert('you forgot something')
+    };
+  }
+
 
   return (
     <Container maxWidth='xs'>
@@ -99,8 +115,10 @@ const SignUp = () => {
                 onClick = {() => {
                   dispatch(firstNameReducer(signUpInputs.firstName));
                   dispatch(lastNameReducer(signUpInputs.lastName));
-                  dispatch(emailReducer(signUpInputs.email));    
+                  dispatch(emailReducer(signUpInputs.email));
+
                   history.push('/dashboard');
+                  submitToServer(signUpInputs.firstName, signUpInputs.lastName, signUpInputs.email, document.getElementById('password').value)
                   }
                 }
               >

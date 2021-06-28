@@ -8,14 +8,13 @@ createTableController.userInfoCreateTable = (req, res, next) => {
   const initialCreateTable = {
     text: `CREATE TABLE IF NOT EXISTS userinfo (
             _id SERIAL,
-            firstName varchar(50),
-            lastName varchar(50),
-            username varchar(250) NOT NULL,
             email varchar(1000) NOT NULL,
             password varchar(250) NOT NULL,
+            firstName varchar(250),
+            lastName varchar(250),
             user_id UUID NOT NULL DEFAULT uuid_generate_v1(),
             PRIMARY KEY (_id),
-            UNIQUE (username)
+            UNIQUE (email)
             );`,
   };
 
@@ -24,7 +23,7 @@ createTableController.userInfoCreateTable = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-//setting userID to be unique
+//setting email to be unique
 createTableController.userInfoAddUnique = (req, res, next) => {
   const initialAddUnique = {
     text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`,
