@@ -1,18 +1,23 @@
+import { HistorySharp } from '@material-ui/icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { checklistState } from '../../slices/futureChecklistSlice';
 
 const ChecklistSubmit = () => {
   const state = useSelector(checklistState);
-  console.log('state', state);
+  const history = useHistory();
+
   const submitToDb = () => {
-    fetch('/api/plan', {
+    fetch('/api/future', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify(state.checklist),
     });
+
+    history.push('/dashboard');
   };
 
   return (

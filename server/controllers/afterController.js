@@ -1,8 +1,20 @@
-/** @format */
-
 const db = require('../models/afterModels.js');
+// const service = require(model for service)
+// const future = require(model for future)
+// const db = require('../models/afterModels');
 
 const afterController = {};
+
+// Install the extension uuid-oosp
+afterController.installUUID = (req, res, next) => {
+  const installUUID = {
+    text: `CREATE extension IF NOT EXISTS "uuid-ossp"`,
+  };
+
+  db.query(installUUID)
+    .then((data) => next())
+    .catch((err) => next(err));
+};
 
 // these are the get request for each box
 // retrieve information from the database for plan
@@ -19,7 +31,7 @@ afterController.getPlan = async (req, res, next) => {
 // retrieve information from the database for service
 afterController.getService = async (req, res, next) => {
   try {
-    const serviceQuery = 'SELECT * FROM servicePlan';
+    const serviceQuery = 'SELECT * FROM serviceplan';
     res.locals = await db.query(serviceQuery);
     return next();
   } catch (error) {
@@ -30,7 +42,7 @@ afterController.getService = async (req, res, next) => {
 // retrieve information from the database for future
 afterController.getFuture = async (req, res, next) => {
   try {
-    const futureQuery = 'SELECT * FROM futurePlan';
+    const futureQuery = 'SELECT * FROM checklist';
     res.locals = await db.query(futureQuery);
     return next();
   } catch (error) {
@@ -40,11 +52,14 @@ afterController.getFuture = async (req, res, next) => {
 
 // these are the add controllers for each box
 afterController.addPlan = async (req, res, next) => {
+  const id = res.locals.userid;
+
   try {
-    const text =
-      'INSERT INTO burialPlan (rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) values($1,$2,$3,$4,$5,$6,$7,$8)';
+    const text = `INSERT INTO burialPlan (_id, rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) 
+      values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
 
     const values = [
+      id,
       req.body.rite,
       req.body.funeralHome,
       req.body.funeralBeforeRites,
@@ -63,8 +78,8 @@ afterController.addPlan = async (req, res, next) => {
 
 afterController.addService = async (req, res, next) => {
   try {
-    const text =
-      'INSERT INTO futurePlan (guestList,participant,prayersBool,prayersRead,musicBool,musicPlayed,cateringBool,cateringService,extras) values($1,$2,$3,$4,$5,$6,$7,$8,$9)';
+    const text = `INSERT INTO serviceplan (guestList,participant,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
+      values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
 
     const values = [
       req.body.guestList,
@@ -85,11 +100,12 @@ afterController.addService = async (req, res, next) => {
 };
 
 afterController.addFuture = async (req, res, next) => {
+  const id = res.locals.userid;
   try {
     const text =
-      'INSERT INTO futurePlan (petsBool,pets,billsBool,bills,extras) values($1,$2,$3,$4,$5)';
-
+      'INSERT INTO checklist (_id, petsBool,pets,billsBool,bills,extras) values($1,$2,$3,$4,$5,$6)';
     const values = [
+      id,
       req.body.petsBool,
       req.body.pets,
       req.body.billsBool,
@@ -135,35 +151,6 @@ afterController.updatePlan = async (req, res, next) => {
   }
 };
 
-// Initial setup - only needed if we dont set up the table ahead of time
-afterController.initialCreateTable = (req, res, next) => {
-  const initialCreateTable = {
-    text: `CREATE TABLE IF NOT EXISTS userinfo (
-            _id SERIAL,
-            username varchar(50) NOT NULL,
-            password varchar(250) NOT NULL,
-            name varchar(250) NOT NULL,
-            user_id int NOT NULL,
-            PRIMARY KEY (_id),
-            UNIQUE (username));`,
-  };
-
-  db.query(initialCreateTable)
-    .then((data) => next())
-    .catch((err) => next(err));
-};
-
-//setting userID to be unique
-afterController.initialAddUnique = (req, res, next) => {
-  const initialAddUnique = {
-    text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`,
-  };
-
-  db.query(initialAddUnique)
-    .then((data) => next())
-    .catch((err) => next(err));
-};
-
 afterController.registerUser = (req, res, next) => {
   // This is only for test
   // Fetch relevant information from front end later
@@ -191,7 +178,12 @@ afterController.registerUser = (req, res, next) => {
 };
 
 afterController.getUserId = (req, res, next) => {
-  const getUserId = 'SELECT user_id FROM userinfo';
+  //const currentUserEmail = req.body.email;
+  let currentUsername = 'HotChocoBanana';
+
+  const getUserId = `SELECT user_id FROM userinfo
+  WHERE username = '${currentUsername}'
+  `;
 
   db.query(getUserId)
     .then((data) => {
@@ -201,22 +193,25 @@ afterController.getUserId = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-afterController.createGuestList = (req, res, next) => {
-  const userid = req.params.id;
-  const guestlist = {
-    text: `CREATE TABLE IF NOT EXISTS guestList_${userid} (
-      name varchar(250) NOT NULL,
-      pallbearer BOOL default 'false',
-      eulogies BOOL default 'false',
-      UNIQUE (name)
-    );`,
+/*
+prefController.fetchPreferences = (req, res, next) => {
+  const user_id = req.params.id;
+
+  const fetchPreferences = {
+    text: `SELECT u.username, u.name, p.funeral_home AS funeral_home, 
+    p.location AS funeral_location 
+    FROM userinfo u INNER JOIN preference p
+    ON u.user_id = p._id
+    WHERE user_id = ${user_id}`,
   };
 
-  db.query(guestlist)
+  db.query(fetchPreferences)
     .then((data) => {
+      res.locals.fetchedPreferences = data.rows[0];
       next();
     })
     .catch((err) => next(err));
 };
+*/
 
 module.exports = afterController;

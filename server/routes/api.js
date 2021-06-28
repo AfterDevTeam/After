@@ -6,7 +6,7 @@ const multipleInsertController = require('../controllers/multipleInsertControlle
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('This is the API Router - it works!');
+  afterController.installUUID, res.send('This is the API Router - it works!');
 });
 
 // get routes
@@ -23,36 +23,44 @@ router.get('/future', afterController.getFuture, (req, res) => {
 });
 
 //  post routes
-router.post('/plan', afterController.addPlan, (req, res) => {
-  res.status(200).json(res.locals);
-});
-router.post('/service', afterController.addService, (req, res) => {
-  res.status(200).json(res.locals);
-});
-router.post('/future', afterController.addFuture, (req, res) => {
-  res.status(200).json(res.locals);
-});
-
-router.put(
-  '/',
-  afterController.initialCreateTable,
-  afterController.initialAddUnique,
-  (req, res) => res.status(200).send('Initial Setup done')
+router.post(
+  '/plan',
+  afterController.getUserId,
+  afterController.addPlan,
+  (req, res) => {
+    res.status(200).send('');
+  }
+);
+router.post(
+  '/service',
+  afterController.getUserId,
+  afterController.addService,
+  (req, res) => {
+    res.status(200).send('');
+  }
+);
+router.post(
+  '/future',
+  afterController.getUserId,
+  afterController.addFuture,
+  (req, res) => {
+    res.status(200).send('');
+  }
 );
 
+router.post(
+  '/guestlist/:id',
+  multipleInsertController.populateGuestList,
+  (req, res) => res.status(200).send('Created Guest List')
+);
+
+//consider moving these into routers/user.js
 router.post('/register', afterController.registerUser, (req, res) =>
   res.status(200).json(res.locals.registerSuccessful)
 );
 
 router.get('/getUserId', afterController.getUserId, (req, res) =>
   res.status(200).json(res.locals.userid)
-);
-
-router.post(
-  '/guestlist/:id',
-  afterController.createGuestList,
-  multipleInsertController.populateGuestList,
-  (req, res) => res.status(200).send('Created Guest List')
 );
 
 module.exports = router;

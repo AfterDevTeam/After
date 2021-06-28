@@ -14,7 +14,6 @@ const RitesQuestion = ({ setRite }) => {
   return (
     <div>
       <FormControl component='fieldset'>
-        <FormLabel component='legend'>Select your rites.</FormLabel>
         <RadioGroup aria-label='select-your-rites'>
           <FormControlLabel
             value='casket'
