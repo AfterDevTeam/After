@@ -61,7 +61,8 @@ multipleInsertController.populateGuestList = async (req, res, next) => {
   });
 
   // Insert query for one object or an array of objects
-  const query = pgp.helpers.insert(values, cs)+ 'ON CONFLICT (name) DO NOTHING';
+  const query =
+    pgp.helpers.insert(values, cs) + 'ON CONFLICT (name) DO NOTHING';
 
   await db.none(query);
 

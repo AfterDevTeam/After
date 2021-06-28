@@ -10,7 +10,7 @@ router.post(
   '/signup',
   [userController.getAllUsers, userController.createUser],
   (req, res) => {
-    res.send('user signedup');
+    res.send('user signed up');
   }
 );
 
