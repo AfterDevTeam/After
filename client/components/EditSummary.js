@@ -68,8 +68,8 @@ const EditSummary = () => {
   const sendToDB = () => {};
 
   const updateUserInfo = () => {
-    return axios
-      .put('/', { body: userInfoSummary })
+    axios
+      .put('/user/update', { body: userInfoSummary })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -321,7 +321,7 @@ const EditSummary = () => {
               dispatch(updateRitesPlanSummaryReducer(planSummary));
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
-              // updateUserInfo();
+              updateUserInfo();
               // updatePlanInfo();
               // updateServiceInfo();
               // updateChecklistInfo();
