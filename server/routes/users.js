@@ -24,6 +24,8 @@ router.post(
   }
 );
 
+
+
 router.put('/update', userController.updateUser, (req, res) =>
   res.status(200).send('User Info Updated')
 );

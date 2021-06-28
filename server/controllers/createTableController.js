@@ -73,10 +73,17 @@ createTableController.createChecklistTable = (req, res, next) => {
 createTableController.createServiceTable = (req, res, next) => {
   const createServiceTable = {
     text: `CREATE TABLE IF NOT EXISTS service (
-      name VARCHAR(250),
-      guest BOOLEAN,
-      prayer BOOLEAN default false,
-      music
+      _id UUID,
+      guestlist VARCHAR,
+      participants VARCHAR,
+      musicBool BOOLEAN,
+      musicPlayed VARCHAR,
+      prayersBool BOOLEAN,
+      prayersRead VARCHAR,
+      cateringBool BOOLEAN,
+      cateringService VARCHAR,
+      extras VARCHAR,
+      PRIMARY KEY (_id)
     );`,
   };
 
