@@ -15,6 +15,9 @@ import ServicePlan from './components/ServicePlan';
 import SignUp from './components/SignUp';
 
 import Checklist from './components/Checklist';
+import Summary from './components/Summary';
+import EditSummary from './components/EditSummary';
+
 // react router
 const App = () => {
   return (
@@ -24,11 +27,13 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={SplashPage} />
           <Route exact path='/login' component={Login} />
-          <Route exact path='/signup'component={SignUp} />
+          <Route exact path='/signup' component={SignUp} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/burial-plan' component={BurialPlan} />
           <Route exact path='/service-plan' component={ServicePlan} />
           <Route exact path='/checklist' component={Checklist} />
+          <Route exact path='/summary' component={Summary} />
+          <Route exact path='/edit' component={EditSummary} />
         </Switch>
       </BrowserRouter>
     </div>

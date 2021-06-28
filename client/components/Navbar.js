@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import '../App.css';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import { MenuItem } from '@material-ui/core';
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -64,7 +66,9 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={() => history.push('/summary')}>
+                Profile
+              </MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
@@ -75,7 +79,7 @@ const Navbar = () => {
           <Link to='/login'>
             <Button color='inherit'>Login</Button>
           </Link>
-          </Toolbar>
+        </Toolbar>
       </AppBar>
     </div>
   );
