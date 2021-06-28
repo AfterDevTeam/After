@@ -37,13 +37,11 @@ userController.createUser = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const value = [firstName, lastName, email, password];
-    const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
-
+    const queryText = `SELECT * FROM userinfo WHERE userinfo.email = '${email}'`;
     const userValid = await db.query(queryText);
-
-    if (!userValid) {
+    if (userValid.rows[0] === undefined) {
       const addText =
-        'INSERT INTO userinfo (firstName, lastName, email, password) value($1,$2,$3,$4)';
+        'INSERT INTO userinfo (firstName, lastName, email, password) values($1,$2,$3,$4)';
       await db.query(addText, value);
       res.redirect('/dashboard');
     } else {
