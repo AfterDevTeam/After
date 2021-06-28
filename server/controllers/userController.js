@@ -1,3 +1,5 @@
+/** @format */
+
 const db = require('../models/afterModels.js');
 
 const userController = {};
@@ -50,6 +52,17 @@ userController.createUser = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
+};
+
+userController.getLoggedInUser = async (req, res, next) => {};
+
+userController.updateUser = async (req, res, next) => {
+  console.log('Hello from update user');
+  console.log('Req.body', req.body);
+  const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
+  const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.firstName} `;
+  const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.lastName} `;
+  const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.email} `;
 };
 
 module.exports = userController;

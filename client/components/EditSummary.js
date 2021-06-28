@@ -1,6 +1,7 @@
 /** @format */
-
+//Node Modules
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   FormControl,
   FormControlLabel,
@@ -18,6 +19,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux';
+
+//Other Components
 import {
   userInfoState,
   updateUserInfoSummaryReducer,
@@ -25,7 +28,7 @@ import {
 import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
 import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
 import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
-import { update } from 'lodash';
+
 const useStyles = makeStyles((theme) => ({
   root2: {
     flexGrow: 1,
@@ -62,6 +65,35 @@ const EditSummary = () => {
     setChecklistSummary({ ...checklistSummary, [prop]: e.target.value });
   };
 
+  const sendToDB = () => {};
+
+  const updateUserInfo = () => {
+    axios
+      .put('/user/update', { body: userInfoSummary })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const updatePlanInfo = () => {
+    return axios
+      .put('/api/plan', { body: planSummary })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const updateServiceInfo = () => {
+    return axios
+      .put('/api/service', { body: serviceSummary })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const updateChecklistInfo = () => {
+    axios
+      .put('/api/future', { body: checklistSummary })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   const classes = useStyles();
   console.log('userInfoSummary: ', userInfoSummary);
   console.log('planSummary: ', planSummary);
@@ -289,6 +321,10 @@ const EditSummary = () => {
               dispatch(updateRitesPlanSummaryReducer(planSummary));
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
+              updateUserInfo();
+              // updatePlanInfo();
+              // updateServiceInfo();
+              // updateChecklistInfo();
               history.push('/summary');
             }}
           >
