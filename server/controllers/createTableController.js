@@ -7,14 +7,13 @@ createTableController.userInfoCreateTable = (req, res, next) => {
   const initialCreateTable = {
     text: `CREATE TABLE IF NOT EXISTS userinfo (
             _id SERIAL,
-            firstName varchar(50),
-            lastName varchar(50),
-            username varchar(250) NOT NULL,
+            firstName varchar(250),
+            lastName varchar(250),
             email varchar(1000) NOT NULL,
             password varchar(250) NOT NULL,
             user_id UUID NOT NULL DEFAULT uuid_generate_v1(),
             PRIMARY KEY (_id),
-            UNIQUE (username)
+            UNIQUE (email)
             );`,
   };
 
@@ -23,7 +22,7 @@ createTableController.userInfoCreateTable = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-//setting userID to be unique
+//setting email to be unique
 createTableController.userInfoAddUnique = (req, res, next) => {
   const initialAddUnique = {
     text: `ALTER TABLE userinfo ADD CONSTRAINT userinfo_user_id UNIQUE (user_id);`,
@@ -74,10 +73,17 @@ createTableController.createChecklistTable = (req, res, next) => {
 createTableController.createServiceTable = (req, res, next) => {
   const createServiceTable = {
     text: `CREATE TABLE IF NOT EXISTS service (
-      name VARCHAR(250),
-      guest BOOLEAN,
-      prayer BOOLEAN default false,
-      music
+      _id UUID,
+      guestlist VARCHAR,
+      participants VARCHAR,
+      musicBool BOOLEAN,
+      musicPlayed VARCHAR,
+      prayersBool BOOLEAN,
+      prayersRead VARCHAR,
+      cateringBool BOOLEAN,
+      cateringService VARCHAR,
+      extras VARCHAR,
+      PRIMARY KEY (_id)
     );`,
   };
 

@@ -5,8 +5,8 @@ const multipleInsertController = require('../controllers/multipleInsertControlle
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  afterController.installUUID, res.send('This is the API Router - it works!');
+router.get('/', afterController.installUUID,  (req, res) => {
+  res.send('This is the API Router - it works!');
 });
 
 // get routes
@@ -51,13 +51,13 @@ router.post(
 router.post(
   '/guestlist/:id',
   multipleInsertController.populateGuestList,
-  (req, res) => res.status(200).send('Created Guest List')
+  (req, res) => {res.status(200).send('Created Guest List')}
 );
 
 //consider moving these into routers/user.js
-router.post('/register', afterController.registerUser, (req, res) =>
-  res.status(200).json(res.locals.registerSuccessful)
-);
+// router.post('/register', afterController.registerUser, (req, res) =>{
+//   res.status(200).json(res.locals.registerSuccessful)}
+// );
 
 router.get('/getUserId', afterController.getUserId, (req, res) =>
   res.status(200).json(res.locals.userid)

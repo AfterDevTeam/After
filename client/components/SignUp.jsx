@@ -1,16 +1,16 @@
+/** @format */
+
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Grid, TextField, Button, Link } from '@material-ui/core';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import {
   firstNameReducer,
   lastNameReducer,
   emailReducer,
   showPasswordReducer,
 } from '../slices/userInfoSlice';
-
-
 
 const SignUp = () => {
   const history = useHistory();
@@ -29,40 +29,40 @@ const SignUp = () => {
 
   // function to update state upon textfield user input
   const handleChangeSignUp = (prop) => (event) => {
-    setSignUpInputs({...signUpInputs, [prop]: event.target.value});
+    setSignUpInputs({ ...signUpInputs, [prop]: event.target.value });
     console.log('signUpInput ${prop}: ', prop);
   };
 
   // function to not/show password (currently not implemented)
-  const handleClickShowPassword = (() => {
-    setSignUpInputs({...signUpInputs, showPassword: !signUpInputs.showPassword})
-  });
+  const handleClickShowPassword = () => {
+    setSignUpInputs({
+      ...signUpInputs,
+      showPassword: !signUpInputs.showPassword,
+    });
+  };
 
   // function to add user to database using only local state because no passwords are stored on the front end
   const addUserToDatabase = () => {
-    console.log('signUpInputs ',signUpInputs)
+    console.log('signUpInputs ', signUpInputs);
     fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify(signUpInputs),
-      });
-      return;
-  }
-
+    });
+    return;
+  };
 
   return (
     <Container maxWidth='xs'>
       <div>
-        <h2>
-          Sign up to start planning for what comes after.
-        </h2>
+        <h2>Sign up to start planning for what comes after.</h2>
         <form className='signUpForm'>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField 
-                onChange= {handleChangeSignUp('firstName')}
+              <TextField
+                onChange={handleChangeSignUp('firstName')}
                 firstName='firstName'
                 id='firstName'
                 label='First Name'
@@ -74,7 +74,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-              onChange= {handleChangeSignUp('lastName')}
+                onChange={handleChangeSignUp('lastName')}
                 lastName='lastName'
                 id='lastName'
                 label='Last Name'
@@ -86,7 +86,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange= {handleChangeSignUp('email')}
+                onChange={handleChangeSignUp('email')}
                 name='email'
                 id='email'
                 label='Email Address'
@@ -98,8 +98,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-              
-              onChange= {handleChangeSignUp('password')}
+                onChange={handleChangeSignUp('password')}
                 name='password'
                 id='password'
                 label='Password'
@@ -109,26 +108,23 @@ const SignUp = () => {
                 fullWidth
               />
             </Grid>
-              <Button
-                type='button'
-                variant='contained'
-                fullWidth
-                onClick = {() => {
-                  dispatch(firstNameReducer(signUpInputs.firstName));
-                  dispatch(lastNameReducer(signUpInputs.lastName));
-                  dispatch(emailReducer(signUpInputs.email));    
-                  history.push('/login');
-                  addUserToDatabase();
-                  }
-                }
-              >
-                Sign Up
-              </Button>
+            <Button
+              type='button'
+              variant='contained'
+              fullWidth
+              onClick={() => {
+                dispatch(firstNameReducer(signUpInputs.firstName));
+                dispatch(lastNameReducer(signUpInputs.lastName));
+                dispatch(emailReducer(signUpInputs.email));
+                history.push('/login');
+                addUserToDatabase();
+              }}
+            >
+              Sign Up
+            </Button>
             <Grid item>
-              <Link to='/login'>
-                Already have an account? Sign in
-              </Link>
-            </Grid> 
+              <Link to='/login'>Already have an account? Sign in</Link>
+            </Grid>
           </Grid>
         </form>
       </div>

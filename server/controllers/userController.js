@@ -49,13 +49,13 @@ userController.createUser = async (req, res, next) => {
 
     if (queryResult.rowCount === 0) {
       const addText =
-      // added an 's' to value
+        // added an 's' to value
         'INSERT INTO userinfo (firstName, lastName, email, password) values($1,$2,$3,$4)';
       await db.query(addText, value);
-      res.send('Success')
+      res.send('Success');
       // res.redirect('/dashboard');
     } else {
-      res.send('User already exists')
+      res.send('User already exists');
       // res.redirect('/login');
     }
   } catch (error) {

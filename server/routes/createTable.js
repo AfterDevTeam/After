@@ -28,6 +28,14 @@ router.put(
   }
 );
 
+router.put(
+  '/service',
+  createTableController.createServiceTable,
+  (req, res) => {
+    res.status(200).send('service Created');
+  }
+);
+
 router.put('/serviceplan', (req, res) => {
   res.status(200).send('service plan Created');
 });
