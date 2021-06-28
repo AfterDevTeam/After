@@ -5,18 +5,16 @@ const db = require('../models/afterModels.js');
 
 const afterController = {};
 
-
 // Install the extension uuid-oosp
-afterController.installUUID = (req, res, next) =>{
+afterController.installUUID = (req, res, next) => {
   const installUUID = {
-    text:`CREATE extension IF NOT EXISTS "uuid-ossp"`
-  }
+    text: `CREATE extension IF NOT EXISTS "uuid-ossp"`,
+  };
 
   db.query(installUUID)
-  .then((data)=>next())
-  .catch(err=>next(err))
-}
-
+    .then((data) => next())
+    .catch((err) => next(err));
+};
 
 // these are the get request for each box
 // retrieve information from the database for plan
@@ -33,7 +31,7 @@ afterController.getPlan = async (req, res, next) => {
 // retrieve information from the database for service
 afterController.getService = async (req, res, next) => {
   try {
-    const serviceQuery = 'SELECT * FROM servicePlan';
+    const serviceQuery = 'SELECT * FROM serviceplan';
     res.locals = await db.query(serviceQuery);
     return next();
   } catch (error) {
@@ -44,7 +42,7 @@ afterController.getService = async (req, res, next) => {
 // retrieve information from the database for future
 afterController.getFuture = async (req, res, next) => {
   try {
-    const futureQuery = 'SELECT * FROM futurePlan';
+    const futureQuery = 'SELECT * FROM checklist';
     res.locals = await db.query(futureQuery);
     return next();
   } catch (error) {
@@ -57,8 +55,7 @@ afterController.addPlan = async (req, res, next) => {
   const id = res.locals.userid;
 
   try {
-    const text =
-      `INSERT INTO burialPlan (_id, rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) 
+    const text = `INSERT INTO burialPlan (_id, rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) 
       values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
 
     const values = [
@@ -70,7 +67,7 @@ afterController.addPlan = async (req, res, next) => {
       req.body.graveSideService,
       req.body.graveSideLocation,
       req.body.memorialService,
-      req.body.memorialLocation
+      req.body.memorialLocation,
     ];
     res.locals = await db.query(text, values);
     next();
@@ -81,8 +78,7 @@ afterController.addPlan = async (req, res, next) => {
 
 afterController.addService = async (req, res, next) => {
   try {
-    const text =
-      `INSERT INTO futurePlan (guestList,participant,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
+    const text = `INSERT INTO serviceplan (guestList,participant,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
       values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
 
     const values = [
@@ -157,8 +153,8 @@ afterController.updatePlan = async (req, res, next) => {
 
 
 afterController.getUserId = (req, res, next) => {
-  //const currentUsername = req.body.username;
-  let currentUsername= "HotChocoBanana";
+  //const currentUserEmail = req.body.email;
+  let currentUsername = 'HotChocoBanana';
 
   const getUserId = `SELECT user_id FROM userinfo
   WHERE username = '${currentUsername}'
@@ -171,11 +167,6 @@ afterController.getUserId = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
-
-
-
-
-
 
 /*
 prefController.fetchPreferences = (req, res, next) => {

@@ -4,14 +4,13 @@ const createTableController = {};
 
 // Initial setup - only needed if we dont set up the table ahead of time
 createTableController.userInfoCreateTable = (req, res, next) => {
-
   const initialCreateTable = {
     text: `CREATE TABLE IF NOT EXISTS userinfo (
             _id SERIAL,
-            email varchar(1000) NOT NULL,
-            password varchar(250) NOT NULL,
             firstName varchar(250),
             lastName varchar(250),
+            email varchar(1000) NOT NULL,
+            password varchar(250) NOT NULL,
             user_id UUID NOT NULL DEFAULT uuid_generate_v1(),
             PRIMARY KEY (_id),
             UNIQUE (email)
@@ -54,8 +53,7 @@ createTableController.createBurialPlanTable = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-
-createTableController.createChecklistTable = (req, res, next)=>{
+createTableController.createChecklistTable = (req, res, next) => {
   const createChecklistTable = {
     text: `CREATE TABLE IF NOT EXISTS checklist (
             _id UUID,
@@ -70,8 +68,7 @@ createTableController.createChecklistTable = (req, res, next)=>{
   db.query(createChecklistTable)
     .then((data) => next())
     .catch((err) => next(err));
-}
-
+};
 
 createTableController.createServiceTable = (req, res, next) => {
   const createServiceTable = {

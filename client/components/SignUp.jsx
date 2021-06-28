@@ -117,7 +117,7 @@ const SignUp = () => {
                   dispatch(lastNameReducer(signUpInputs.lastName));
                   dispatch(emailReducer(signUpInputs.email));
 
-                  history.push('/dashboard');
+                  history.push('/dashboard'); 
                   submitToServer(signUpInputs.firstName, signUpInputs.lastName, signUpInputs.email, document.getElementById('password').value)
                   }
                 }

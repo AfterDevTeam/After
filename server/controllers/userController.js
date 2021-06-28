@@ -1,3 +1,5 @@
+/** @format */
+
 const db = require('../models/afterModels.js');
 
 const userController = {};
@@ -6,7 +8,7 @@ userController.getAllUsers = async (req, res, next) => {
   try {
     const userQuery = 'SELECT * FROM userinfo';
     const users = await db.query(userQuery);
-    res.locals = users;
+    res.locals.users = users;
     return next();
   } catch (error) {
     return next(error);
@@ -16,17 +18,16 @@ userController.getAllUsers = async (req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const userQuery = 'SELECT * FROM tablename WHERE email = ${email}';
+    const userQuery = `SELECT * FROM userinfo WHERE email = ${email}`;
     const userValid = await db.query(userQuery);
 
     if (userValid) {
-      //compare pasword in req body to what is in userValid
-      //if true - redirect to dashboard
+      if (userValid.password === password) {
+        res.redirect('/dashboard');
+      }
     } else {
       res.redirect('/signup');
     }
-
-    //compare username to what is in res.local and password, if all matches, redirect to dashboard
   } catch (error) {
     return next(error);
   }
@@ -34,21 +35,32 @@ userController.verifyUser = async (req, res, next) => {
 
 userController.createUser = async (req, res, next) => {
   try {
-    const { email, password, firstName, lastName } = req.body;
-    const value = [email, password, firstName, lastName];
-    const queryText = `SELECT * FROM userinfo WHERE email = '${email}'`;
+    const { firstName, lastName, email, password } = req.body;
+    const value = [firstName, lastName, email, password];
+    const queryText = `SELECT * FROM userinfo WHERE userinfo.email = '${email}'`;
     const userValid = await db.query(queryText);
-
     if (userValid.rows[0] === undefined) {
       const addText =
-        'INSERT INTO userinfo(email, password, firstname, lastname) values($1,$2,$3,$4)';
+        'INSERT INTO userinfo (firstName, lastName, email, password) values($1,$2,$3,$4)';
       await db.query(addText, value);
+      res.redirect('/dashboard');
     } else {
-      res.redirect('/signup'); // so entering localhost:8080/signup in the address bar doesn't work. Why is that?
+      res.redirect('/login');
     }
   } catch (error) {
     return next(error);
   }
+};
+
+userController.getLoggedInUser = async (req, res, next) => {};
+
+userController.updateUser = async (req, res, next) => {
+  console.log('Hello from update user');
+  console.log('Req.body', req.body);
+  const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
+  const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.firstName} `;
+  const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.lastName} `;
+  const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.email} `;
 };
 
 module.exports = userController;
