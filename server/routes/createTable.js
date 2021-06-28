@@ -26,14 +26,18 @@ router.put(
   (req, res) => {
     res.status(200).send('Checklist Created');
   }
-)
+);
 
 router.put(
-  '/serviceplan',
+  '/service',
+  createTableController.createServiceTable,
   (req, res) => {
-    res.status(200).send('service plan Created');
+    res.status(200).send('service Created');
   }
-)
+);
 
+router.put('/serviceplan', (req, res) => {
+  res.status(200).send('service plan Created');
+});
 
 module.exports = router;

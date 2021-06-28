@@ -12,7 +12,7 @@ const userRouter = require('./routes/users.js');
 const apiRouter = require('./routes/api');
 
 // To make my life easier
-const createTableRouter = require('./routes/createTable.js')
+const createTableRouter = require('./routes/createTable.js');
 
 // Handle Parsing Request Body
 app.use(express.json());

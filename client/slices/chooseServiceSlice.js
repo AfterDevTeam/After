@@ -45,6 +45,17 @@ export const service = createSlice({
       console.log('action.payload in extrasReducer', action.payload);
       state.extras = action.payload;
     },
+    updateServiceSummaryReducer: (state, action) => {
+      state.guestList = action.payload.guestList;
+      state.participants = action.payload.participants;
+      state.prayersBool = action.payload.prayersBool;
+      state.prayersRead = action.payload.prayersRead;
+      state.musicBool = action.payload.musicBool;
+      state.musicPlayed = action.payload.musicPlayed;
+      state.cateringBool = action.payload.cateringBool;
+      state.cateringService = action.payload.cateringService;
+      state.extras = action.payload.extras;
+    },
   },
 });
 
@@ -55,6 +66,7 @@ export const {
   musicPlayedReducer,
   cateringServiceReducer,
   extrasReducer,
+  updateServiceSummaryReducer,
 } = service.actions;
 
 export default service.reducer;
