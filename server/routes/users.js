@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
 
 router.post(
   '/signup',
-  userController.getAllUsers, userController.createUser,
+  // removed []
+  // userController.getAllUsers,
+  userController.createUser,
   (req, res) => {
     res.send('user signed up');
   }
@@ -18,13 +20,12 @@ router.post(
 
 router.post(
   '/login',
-  userController.getAllUsers, userController.verifyUser,
+  userController.getAllUsers,
+  userController.verifyUser,
   (req, res) => {
     res.status(200).send('user verified');
   }
 );
-
-
 
 router.put('/update', userController.updateUser, (req, res) =>
   res.status(200).send('User Info Updated')
