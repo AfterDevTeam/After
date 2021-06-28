@@ -41,7 +41,7 @@ const SignUp = () => {
   // function to add user to database using only local state because no passwords are stored on the front end
   const addUserToDatabase = () => {
     console.log('signUpInputs ',signUpInputs)
-    fetch('/users/signup', {
+    fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',

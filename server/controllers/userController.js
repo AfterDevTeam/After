@@ -37,17 +37,26 @@ userController.createUser = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const value = [firstName, lastName, email, password];
-    const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
+    // console.log('value: ', value);
 
-    const userValid = await db.query(queryText);
+    // added '' to ${email}
+    const queryText = `SELECT * FROM userinfo WHERE email = '${email}'`;
+    // console.log('queryText: ', queryText);
 
-    if (!userValid) {
+    const queryResult = await db.query(queryText);
+    // console.log('queryResult: ', queryResult);
+    // db.query will always return something...therefore, !userValid will never be null
+
+    if (queryResult.rowCount === 0) {
       const addText =
-        'INSERT INTO userinfo (firstName, lastName, email, password) value($1,$2,$3,$4)';
+      // added an 's' to value
+        'INSERT INTO userinfo (firstName, lastName, email, password) values($1,$2,$3,$4)';
       await db.query(addText, value);
-      res.redirect('/dashboard');
+      res.send('Success')
+      // res.redirect('/dashboard');
     } else {
-      res.redirect('/login');
+      res.send('User already exists')
+      // res.redirect('/login');
     }
   } catch (error) {
     return next(error);

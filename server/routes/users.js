@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
 
 router.post(
   '/signup',
-  [userController.getAllUsers, userController.createUser],
+  // removed []
+  // userController.getAllUsers, 
+  userController.createUser,
   (req, res) => {
     res.send('user signed up');
   }
