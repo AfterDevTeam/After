@@ -6,10 +6,21 @@ import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import '../css/login.css';
+import { useDispatch } from 'react-redux';
+import {
+  firstNameReducer,
+  lastNameReducer,
+  emailReducer,
+} from '../slices/userInfoSlice';
+
 
 const Login = (props) => {
   //history for routing
   const history = useHistory();
+
+  // dispatch for redux state
+  const dispatch = useDispatch();
+
   // usestate hook to update state
   const [inputUsername, setInputUsername] = useState('');
   const [inputPassword, setInputPassword] = useState('');
@@ -17,22 +28,33 @@ const Login = (props) => {
   // function to handle submission
   const handleSubmitLogin = (event) => {
     event.preventDefault();
-    alert('You have logged in!');
-    history.push('/dashboard');
+    // make a fetch request
+    fetch ('/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/JSON'
+        },
+        body: JSON.stringify(inputUsername, inputPassword)
+    })
+      // if successful
+        // destructure the response to get user firstName, lastName, and id
+        // dispatch(firstNameReducer(firstName));
+        // dispatch(lastNameReducer(lastName));
+        // dispatch(emailReducer(email));
+        // reset the inputs to empty strings
+        setInputUsername('');
+        setInputPassword('')
+        history.push('/dashboard');  
   };
 
   //function to handle change username
   const handleChangeLoginUserName = (event) => {
     setInputUsername(event.target.value);
-    // return state to an empty string after running some functionality test to database
-    // setInputUsername('');
   };
 
   // function to handle change password
   const handleChangeLoginPassword = (event) => {
     setInputPassword(event.target.value);
-    // return state to an empty string after running some functionality test to database
-    // setInputPassword('');
   };
 
   return (

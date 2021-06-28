@@ -26,14 +26,10 @@ router.put(
   (req, res) => {
     res.status(200).send('Checklist Created');
   }
-)
+);
 
-router.put(
-  '/serviceplan',
-  (req, res) => {
-    res.status(200).send('service plan Created');
-  }
-)
-
+router.put('/serviceplan', (req, res) => {
+  res.status(200).send('service plan Created');
+});
 
 module.exports = router;

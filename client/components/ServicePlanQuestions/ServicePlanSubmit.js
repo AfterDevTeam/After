@@ -2,20 +2,22 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { serviceState } from '../../slices/chooseServiceSlice';
 
 const ServicePlanSubmit = () => {
   const state = useSelector(serviceState);
+  const history = useHistory();
   console.log('state in submit component', state);
   const submitToDb = () => {
-    fetch('/api/plan', {
+    fetch('/api/service', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify(state.service),
     });
-    return;
+    history.push('/dashboard');
   };
 
   return (

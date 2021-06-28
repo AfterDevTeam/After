@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require('express');
 const userController = require('../controllers/userController.js');
 const router = express.Router();
@@ -8,9 +10,11 @@ router.get('/', (req, res) => {
 
 router.post(
   '/signup',
-  [userController.getAllUsers, userController.createUser],
+  // removed []
+  // userController.getAllUsers, 
+  userController.createUser,
   (req, res) => {
-    res.send('user signedup');
+    res.send('user signed up');
   }
 );
 
@@ -20,6 +24,10 @@ router.post(
   (req, res) => {
     res.send('user verified');
   }
+);
+
+router.put('/update', userController.updateUser, (req, res) =>
+  res.status(200).send('User Info Updated')
 );
 
 module.exports = router;
