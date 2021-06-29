@@ -36,9 +36,7 @@ const Dashboard = () => {
       service: dashboardStatus.service,
       futureChecklist: dashboardStatus.futureChecklist,
     }))
-  }, []);
-
-  console.log(squareHidden);
+  });
 
   return (
     <div id='dashboard-container'>
