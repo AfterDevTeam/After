@@ -35,7 +35,7 @@ router.post('/future', afterController.addFuture, (req, res) => {
   res.status(200).send('Successfully added to future');
 });
 router.post('/dashboard-check', afterController.dashboardCheck, (req, res) => {
-  res.status(200).send(JSON.stringify('Successfully checked for dashboard data'))
+  res.status(200).send(res.locals.dashboardState);
 });
 
 // delete routes
