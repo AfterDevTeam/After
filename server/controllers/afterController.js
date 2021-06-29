@@ -172,6 +172,12 @@ afterController.updatePlan = async (req, res, next) => {
   }
 };
 
+afterController.dashboardCheck = async (req, res, next) => {
+  console.log('dashboardcheck middleware triggered');
+  console.log(req.body);
+  return next();
+}
+
 /*
 prefController.fetchPreferences = (req, res, next) => {
   const user_id = req.params.id;
