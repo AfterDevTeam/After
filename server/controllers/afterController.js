@@ -1,3 +1,5 @@
+/** @format */
+
 const db = require('../models/afterModels.js');
 // const service = require(model for service)
 // const future = require(model for future)
@@ -78,12 +80,12 @@ afterController.addPlan = async (req, res, next) => {
 
 afterController.addService = async (req, res, next) => {
   try {
-    const text = `INSERT INTO serviceplan (guestList,participant,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
+    const text = `INSERT INTO service (guestList,participants,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
       values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
 
     const values = [
       req.body.guestList,
-      req.body.participant,
+      req.body.participants,
       req.body.prayersBool,
       req.body.prayersRead,
       req.body.musicBool,
@@ -92,6 +94,7 @@ afterController.addService = async (req, res, next) => {
       req.body.cateringService,
       req.body.extras,
     ];
+    console.log('values:', values);
     res.locals = await db.query(text, values);
     next();
   } catch (error) {
@@ -150,7 +153,6 @@ afterController.updatePlan = async (req, res, next) => {
     return next(error);
   }
 };
-
 
 afterController.getUserId = (req, res, next) => {
   //const currentUserEmail = req.body.email;

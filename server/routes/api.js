@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require('express');
 
 const afterController = require('../controllers/afterController.js');
@@ -5,7 +7,7 @@ const multipleInsertController = require('../controllers/multipleInsertControlle
 
 const router = express.Router();
 
-router.get('/', afterController.installUUID,  (req, res) => {
+router.get('/', afterController.installUUID, (req, res) => {
   res.send('This is the API Router - it works!');
 });
 
@@ -51,7 +53,9 @@ router.post(
 router.post(
   '/guestlist/:id',
   multipleInsertController.populateGuestList,
-  (req, res) => {res.status(200).send('Created Guest List')}
+  (req, res) => {
+    res.status(200).send('Created Guest List');
+  }
 );
 
 //consider moving these into routers/user.js
