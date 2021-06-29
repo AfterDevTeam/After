@@ -54,22 +54,23 @@ afterController.getFuture = async (req, res, next) => {
 
 // these are the add controllers for each box
 afterController.addPlan = async (req, res, next) => {
-  const id = res.locals.userid;
+  console.log('req.body in add plan ', req.body);
+  //const id = res.locals.userId;
 
   try {
     const text = `INSERT INTO burialPlan (_id, rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) 
       values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
 
     const values = [
-      id,
-      req.body.rite,
-      req.body.funeralHome,
-      req.body.funeralBeforeRites,
-      req.body.funeralLocation,
-      req.body.graveSideService,
-      req.body.graveSideLocation,
-      req.body.memorialService,
-      req.body.memorialLocation,
+      req.body.userInfo.userId,
+      req.body.plan.rite,
+      req.body.plan.funeralHome,
+      req.body.plan.funeralBeforeRites,
+      req.body.plan.funeralLocation,
+      req.body.plan.graveSideService,
+      req.body.plan.graveSideLocation,
+      req.body.plan.memorialService,
+      req.body.plan.memorialLocation,
     ];
     res.locals = await db.query(text, values);
     next();
@@ -80,19 +81,20 @@ afterController.addPlan = async (req, res, next) => {
 
 afterController.addService = async (req, res, next) => {
   try {
-    const text = `INSERT INTO service (guestList,participants,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
-      values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
+    const text = `INSERT INTO service (_id,guestList,participants,prayersBool,prayersRead,musicBool, musicPlayed,cateringBool,cateringService,extras) 
+      values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`;
 
     const values = [
-      req.body.guestList,
-      req.body.participants,
-      req.body.prayersBool,
-      req.body.prayersRead,
-      req.body.musicBool,
-      req.body.musicPlayed,
-      req.body.cateringBool,
-      req.body.cateringService,
-      req.body.extras,
+      req.body.userInfo.userId,
+      req.body.service.guestList,
+      req.body.service.participants,
+      req.body.service.prayersBool,
+      req.body.service.prayersRead,
+      req.body.service.musicBool,
+      req.body.service.musicPlayed,
+      req.body.service.cateringBool,
+      req.body.service.cateringService,
+      req.body.service.extras,
     ];
     console.log('values:', values);
     res.locals = await db.query(text, values);
@@ -103,17 +105,16 @@ afterController.addService = async (req, res, next) => {
 };
 
 afterController.addFuture = async (req, res, next) => {
-  const id = res.locals.userid;
   try {
     const text =
       'INSERT INTO checklist (_id, petsBool,pets,billsBool,bills,extras) values($1,$2,$3,$4,$5,$6)';
     const values = [
-      id,
-      req.body.petsBool,
-      req.body.pets,
-      req.body.billsBool,
-      req.body.bills,
-      req.body.extras,
+      req.body.userInfo.userId,
+      req.body.checklist.petsBool,
+      req.body.checklist.pets,
+      req.body.checklist.billsBool,
+      req.body.checklist.bills,
+      req.body.checklist.extras,
     ];
 
     res.locals = await db.query(text, values);
@@ -123,51 +124,52 @@ afterController.addFuture = async (req, res, next) => {
   }
 };
 
-//  need delete functionality
+//  delete functionality
 afterController.deletePlan = async (req, res, next) => {
   try {
-    const planQuery =
-      'DELETE FROM burialPlan WHERE userID = ${req.body.userID}';
-    res.locals = await db.query(planQuery);
+    const planQuery = `DELETE FROM burialPlan WHERE _id = '${req.body.userInfo.userId}'`;
+    await db.query(planQuery);
     return next();
   } catch (error) {
     return next(error);
   }
 };
+afterController.deleteService = async (req, res, next) => {
+  try {
+    const serviceQuery = `DELETE FROM service WHERE _id = '${req.body.userInfo.userId}'`;
+    await db.query(serviceQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+afterController.deleteFuture = async (req, res, next) => {
+  try {
+    const futureQuery = `DELETE FROM checklist WHERE _id = '${req.body.userInfo.userId}'`;
+    await db.query(futureQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
 //  need update functionality
 afterController.updatePlan = async (req, res, next) => {
   try {
-    const planQuery =
-      'UPDATE burialPlan SET (column1=value1, column2=value2) WHERE userID = ${req.body.userID}';
+    const planQuery = `UPDATE burialPlan SET (column1=value1, column2=value2) WHERE _id = '${req.body.userInfo.userId}'`;
 
     /*
-      iterate through req.body and create the column = value template
+      iterate through req.body.plan and create the column = value template
       var set = []
       Object.keys(req.body).forEach(function(key,i) {
         set.push(key + ' = ($ + (i+1) + ')');
       })
       */
-    res.locals = await db.query(planQuery);
+    await db.query(planQuery);
     return next();
   } catch (error) {
     return next(error);
   }
-};
-
-afterController.getUserId = (req, res, next) => {
-  const currentUserEmail = req.body.email;
-  //let currentUsername = 'HotChocoBanana';
-
-  const currentUserEmail = `SELECT user_id FROM userinfo
-  WHERE email = '${currentUserEmail}'
-  `;
-
-  db.query(currentUserEmail)
-    .then((data) => {
-      res.locals.userid = data.rows[0].user_id;
-      next();
-    })
-    .catch((err) => next(err));
 };
 
 /*

@@ -25,30 +25,19 @@ router.get('/future', afterController.getFuture, (req, res) => {
 });
 
 //  post routes
-router.post(
-  '/plan',
-  afterController.getUserId,
-  afterController.addPlan,
-  (req, res) => {
-    res.status(200).send('');
-  }
-);
-router.post(
-  '/service',
-  afterController.getUserId,
-  afterController.addService,
-  (req, res) => {
-    res.status(200).send('');
-  }
-);
-router.post(
-  '/future',
-  afterController.getUserId,
-  afterController.addFuture,
-  (req, res) => {
-    res.status(200).send('');
-  }
-);
+router.post('/plan', afterController.addPlan, (req, res) => {
+  res.status(200).send('');
+});
+router.post('/service', afterController.addService, (req, res) => {
+  res.status(200).send('');
+});
+router.post('/future', afterController.addFuture, (req, res) => {
+  res.status(200).send('');
+});
+
+// delete routes
+
+//  update routes
 
 router.post(
   '/guestlist/:id',
@@ -63,8 +52,8 @@ router.post(
 //   res.status(200).json(res.locals.registerSuccessful)}
 // );
 
-router.get('/getUserId', afterController.getUserId, (req, res) =>
-  res.status(200).json(res.locals.userid)
-);
+// router.get('/getUserId', afterController.getUserId, (req, res) =>
+//   res.status(200).json(res.locals.userid)
+// );
 
 module.exports = router;
