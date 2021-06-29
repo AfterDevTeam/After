@@ -108,29 +108,29 @@ const EditSummary = () => {
               <Typography>First Name: {state.userInfo.firstName}</Typography>
               <TextField
                 onChange={handleUserInfoSummaryChange('firstName')}
-                firstName='firstName'
-                id='firstName'
-                label='First Name'
+                firstName="firstName"
+                id="firstName"
+                label="First Name"
                 value={userInfoSummary.firstName}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>Last Name: {state.userInfo.lastName}</Typography>
               <TextField
                 onChange={handleUserInfoSummaryChange('lastName')}
-                lastName='lastName'
-                id='lastName'
-                label='Last Name'
+                lastName="lastName"
+                id="lastName"
+                label="Last Name"
                 value={userInfoSummary.lastName}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>email: {state.userInfo.email}</Typography>
               <TextField
                 onChange={handleUserInfoSummaryChange('email')}
-                email='email'
-                id='email'
-                label='email'
+                email="email"
+                id="email"
+                label="email"
                 value={userInfoSummary.email}
-                variant='outlined'
+                variant="outlined"
               />
             </Paper>
           </Grid>
@@ -139,30 +139,30 @@ const EditSummary = () => {
               <Typography>Burial/Rites Plan</Typography>
               <br></br>
               <Typography>Rite: {state.plan.rite}</Typography>
-              <FormControl component='fieldset'>
-                <FormLabel component='legend'>Select your rites.</FormLabel>
-                <RadioGroup aria-label='select-your-rites'>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Select your rites.</FormLabel>
+                <RadioGroup aria-label="select-your-rites">
                   <FormControlLabel
-                    value='casket'
-                    rite='rite'
+                    value="casket"
+                    rite="rite"
                     control={<Radio />}
-                    label='Casket'
+                    label="Casket"
                     onClick={handlePlanSummaryChange('Casket')}
                   />
                   <FormControlLabel
-                    value='cremation'
-                    rite='rite'
+                    value="cremation"
+                    rite="rite"
                     control={<Radio />}
-                    label='Cremation'
+                    label="Cremation"
                     onClick={handlePlanSummaryChange('Cremation')}
                   />
                   <FormControlLabel
-                    value='other'
-                    rite='rite'
+                    value="other"
+                    rite="rite"
                     control={<Radio />}
                     label={
                       <TextField
-                        placeholder='Other: Write your wishes here.'
+                        placeholder="Other: Write your wishes here."
                         onChange={(e) => {
                           handlePlanSummaryChange('Other: ' + e.target.value);
                         }}
@@ -174,44 +174,44 @@ const EditSummary = () => {
               <Typography>Funeral Home: {state.plan.funeralHome}</Typography>
               <TextField
                 onChange={handlePlanSummaryChange('funeralHome')}
-                funeralHome='funeralHome'
-                id='funeralHome'
-                label='Funeral Home'
+                funeralHome="funeralHome"
+                id="funeralHome"
+                label="Funeral Home"
                 value={planSummary.funeralHome}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>
                 Funeral Location: {state.plan.funeralLocation}
               </Typography>
               <TextField
                 onChange={handlePlanSummaryChange('funeralLocation')}
-                funeralLocation='funeralLocation'
-                id='funeralLocation'
-                label='Funeral Location'
+                funeralLocation="funeralLocation"
+                id="funeralLocation"
+                label="Funeral Location"
                 value={planSummary.funeralLocation}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>
                 Graveside Service Location: {state.plan.graveSideLocation}
               </Typography>
               <TextField
                 onChange={handlePlanSummaryChange('graveSideLocation')}
-                graveSideService='graveSideLocation'
-                id='graveSideLocation'
-                label='Graveside Service Location'
+                graveSideService="graveSideLocation"
+                id="graveSideLocation"
+                label="Graveside Service Location"
                 value={planSummary.graveSideLocation}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>
                 Memorial Service Location: {state.plan.memorialLocation}
               </Typography>
               <TextField
                 onChange={handlePlanSummaryChange('memorialLocation')}
-                memorialLocation='memorialLocation'
-                id='memorialLocation'
-                label='Memorial Service Location'
+                memorialLocation="memorialLocation"
+                id="memorialLocation"
+                label="Memorial Service Location"
                 value={planSummary.memorialLocation}
-                variant='outlined'
+                variant="outlined"
               />
             </Paper>
           </Grid>
@@ -222,62 +222,62 @@ const EditSummary = () => {
               <Typography>Guest List: {state.service.guestList}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('guestList')}
-                guestList='guestList'
-                id='guestList'
-                label='Guest List'
+                guestList="guestList"
+                id="guestList"
+                label="Guest List"
                 value={serviceSummary.guestList}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>
                 Participants: {state.service.participants}
               </Typography>
               <TextField
                 onChange={handleServiceSummaryChange('participants')}
-                participants='participants'
-                id='participants'
-                label='Participants'
+                participants="participants"
+                id="participants"
+                label="Participants"
                 value={serviceSummary.participants}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>
                 Prayers/Readings: {state.service.prayersRead}
               </Typography>
               <TextField
                 onChange={handleServiceSummaryChange('prayersRead')}
-                prayersRead='prayersRead'
-                id='prayersRead'
-                label='Paryers/Readings'
+                prayersRead="prayersRead"
+                id="prayersRead"
+                label="Paryers/Readings"
                 value={serviceSummary.prayersRead}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>Music: {state.service.musicPlayed}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('musicPlayed')}
-                musicPlayed='musicPlayed'
-                id='musicPlayed'
-                label='Music Played'
+                musicPlayed="musicPlayed"
+                id="musicPlayed"
+                label="Music Played"
                 value={serviceSummary.musicPlayed}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>
                 Catering Service: {state.service.cateringService}
               </Typography>
               <TextField
                 onChange={handleServiceSummaryChange('cateringService')}
-                cateringService='cateringService'
-                id='cateringService'
-                label='Catering Service'
+                cateringService="cateringService"
+                id="cateringService"
+                label="Catering Service"
                 value={serviceSummary.cateringService}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>Extras {state.service.extras}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('extras')}
-                extras='extras'
-                id='serviceExtras'
-                label='Extras'
+                extras="extras"
+                id="serviceExtras"
+                label="Extras"
                 value={serviceSummary.extras}
-                variant='outlined'
+                variant="outlined"
               />
             </Paper>
           </Grid>
@@ -288,30 +288,30 @@ const EditSummary = () => {
               <Typography>Pets: {state.checklist.pets}</Typography>
               <TextField
                 onChange={handleChecklistSummaryChange('pets')}
-                pets='pets'
-                id='pets'
-                label='Pets'
+                pets="pets"
+                id="pets"
+                label="Pets"
                 value={checklistSummary.pets}
-                variant='outlined'
+                variant="outlined"
               />
 
               <Typography>Bills: {state.checklist.bills}</Typography>
               <TextField
                 onChange={handleChecklistSummaryChange('bills')}
-                bills='bills'
-                id='bills'
-                label='Bills'
+                bills="bills"
+                id="bills"
+                label="Bills"
                 value={checklistSummary.bills}
-                variant='outlined'
+                variant="outlined"
               />
               <Typography>Extras {state.checklist.extras}</Typography>
               <TextField
                 onChange={handleChecklistSummaryChange('extras')}
-                extras='extras'
-                id='checklistExtras'
-                label='Extras'
+                extras="extras"
+                id="checklistExtras"
+                label="Extras"
                 value={checklistSummary.extras}
-                variant='outlined'
+                variant="outlined"
               />
             </Paper>
           </Grid>
@@ -322,7 +322,7 @@ const EditSummary = () => {
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
               updateUserInfo();
-              // updatePlanInfo();
+              updatePlanInfo();
               // updateServiceInfo();
               // updateChecklistInfo();
               history.push('/summary');
