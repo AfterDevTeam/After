@@ -11,8 +11,8 @@ import {
   firstNameReducer,
   lastNameReducer,
   emailReducer,
+  userIdReducer,
 } from '../slices/userInfoSlice';
-
 
 const Login = (props) => {
   //history for routing
@@ -24,27 +24,43 @@ const Login = (props) => {
   // usestate hook to update state
   const [inputUsername, setInputUsername] = useState('');
   const [inputPassword, setInputPassword] = useState('');
-
   // function to handle submission
   const handleSubmitLogin = (event) => {
     event.preventDefault();
     // make a fetch request
-    fetch ('/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'Application/JSON'
-        },
-        body: JSON.stringify(inputUsername, inputPassword)
+    fetch('/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'Application/JSON',
+      },
+      body: JSON.stringify({
+        email: inputUsername,
+        password: inputPassword,
+      }),
     })
-      // if successful
-        // destructure the response to get user firstName, lastName, and id
-        // dispatch(firstNameReducer(firstName));
-        // dispatch(lastNameReducer(lastName));
-        // dispatch(emailReducer(email));
-        // reset the inputs to empty strings
-        setInputUsername('');
-        setInputPassword('')
-        history.push('/dashboard');  
+      .then((res) => res.json())
+      .then((data) => {
+        //if response is an object, successful retrieval from database
+        if (typeof data === 'object') {
+          //save the data in the Redux store
+          const { firstName, lastName, email, userId } = data;
+
+          dispatch(firstNameReducer(firstName));
+          dispatch(lastNameReducer(lastName));
+          dispatch(emailReducer(email));
+          dispatch(userIdReducer(userId));
+          // reset the inputs to empty strings
+          setInputUsername('');
+          setInputPassword('');
+          //redirect to dashboard
+          history.push('/dashboard');
+        }
+        //if string, failure to login
+        if (typeof data === 'string') {
+          //redirect to signup
+          history.push('/signup');
+        }
+      });
   };
 
   //function to handle change username

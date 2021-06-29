@@ -155,14 +155,14 @@ afterController.updatePlan = async (req, res, next) => {
 };
 
 afterController.getUserId = (req, res, next) => {
-  //const currentUserEmail = req.body.email;
-  let currentUsername = 'HotChocoBanana';
+  const currentUserEmail = req.body.email;
+  //let currentUsername = 'HotChocoBanana';
 
-  const getUserId = `SELECT user_id FROM userinfo
-  WHERE username = '${currentUsername}'
+  const currentUserEmail = `SELECT user_id FROM userinfo
+  WHERE email = '${currentUserEmail}'
   `;
 
-  db.query(getUserId)
+  db.query(currentUserEmail)
     .then((data) => {
       res.locals.userid = data.rows[0].user_id;
       next();
