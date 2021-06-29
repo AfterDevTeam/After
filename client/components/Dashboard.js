@@ -18,6 +18,7 @@ const Dashboard = () => {
     futureChecklist: false
   })
   const userId = state.userInfo.userId; 
+  console.log('userId', userId);
 
   //check database using userID to see if dashboard square is rendered or not
   fetch('/api/dashboard-check', {
