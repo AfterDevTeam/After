@@ -65,23 +65,21 @@ userController.createUser = async (req, res, next) => {
 userController.updateUser = async (req, res, next) => {
   try {
     console.log('Hello from update user');
-    console.log('Req.body', req.body.body);
-    const queryText = `SELECT * FROM userinfo WHERE email = ${req.body.body.email}`;
-    const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.body.firstName} `;
-    const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.body.lastName} `;
-    const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.body.email} `;
+    console.log('Req.body', req.body);
+    let keyValueList = [];
+    Object.keys(req.body.userInfo).forEach((key) => {
+      if (key !== 'userId' || key !== showPassword)
+        keyValueList.push(`${key}='${req.body.userInfo[key]}'`);
+    });
+    console.log('this is the keyValueList for Update function', keyValueList);
+    const stringList = keyValueList.toString();
 
-    const queryResult = await db.query(queryText);
-
-    if (queryResult) {
-      if (updateFirstName) await db.query(updateFirstName);
-      if (updateFirstName) await db.query(updateFirstName);
-      if (updateLastName) await db.query(updateLastName);
-      if (updateEmail) await db.query(updateEmail);
-      return next();
-    }
-  } catch (err) {
-    return next(err);
+    const userQuery = `UPDATE userinfo SET ${stringList} WHERE 'user_id' = '${req.body.userInfo.userId}'`;
+    console.log('userQuery', userQuery);
+    await db.query(userQuery);
+    return next();
+  } catch (error) {
+    return next(error);
   }
 };
 
