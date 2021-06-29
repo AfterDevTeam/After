@@ -1,9 +1,11 @@
+/** @format */
+
 const express = require('express');
 const router = express.Router();
 
 const createTableController = require('../controllers/createTableController');
 
-router.put(
+router.post(
   '/userinfo',
   createTableController.userInfoCreateTable,
   createTableController.userInfoAddUnique,
@@ -12,7 +14,7 @@ router.put(
   }
 );
 
-router.put(
+router.post(
   `/burialplan`,
   createTableController.createBurialPlanTable,
   (req, res) => {
@@ -20,7 +22,7 @@ router.put(
   }
 );
 
-router.put(
+router.post(
   '/checklist',
   createTableController.createChecklistTable,
   (req, res) => {
@@ -28,7 +30,15 @@ router.put(
   }
 );
 
-router.put('/serviceplan', (req, res) => {
+router.post(
+  '/service',
+  createTableController.createServiceTable,
+  (req, res) => {
+    res.status(200).send('service Created');
+  }
+);
+
+router.post('/serviceplan', (req, res) => {
   res.status(200).send('service plan Created');
 });
 

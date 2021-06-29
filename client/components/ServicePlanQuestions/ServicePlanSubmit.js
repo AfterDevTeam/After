@@ -10,12 +10,12 @@ const ServicePlanSubmit = () => {
   const history = useHistory();
   console.log('state in submit component', state);
   const submitToDb = () => {
-    fetch('/api/plan', {
+    fetch('/api/service', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',
       },
-      body: JSON.stringify(state.service),
+      body: JSON.stringify(state),
     });
     history.push('/dashboard');
   };

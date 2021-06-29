@@ -26,10 +26,22 @@ export const checklist = createSlice({
       console.log('action.payload in extrasReducer', action.payload);
       state.extras = action.payload;
     },
+    updateChecklistSummaryReducer: (state, action) => {
+      state.petsBool = action.payload.petsBool;
+      state.pets = action.payload.pets;
+      state.billsBool = action.payload.billsBool;
+      state.bills = action.payload.bills;
+      state.extras = action.payload.extras;
+    },
   },
 });
 
-export const { petsReducer, billsReducer, extrasReducer } = checklist.actions;
+export const {
+  petsReducer,
+  billsReducer,
+  extrasReducer,
+  updateChecklistSummaryReducer,
+} = checklist.actions;
 
 export default checklist.reducer;
 
