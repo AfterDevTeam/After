@@ -156,15 +156,15 @@ afterController.deleteFuture = async (req, res, next) => {
 //  need update functionality
 afterController.updatePlan = async (req, res, next) => {
   try {
-    const planQuery = `UPDATE burialPlan SET (column1=value1, column2=value2) WHERE _id = '${req.body.userInfo.userId}'`;
+    let keyValueList = [];
+    Object.keys(req.body.plan).forEach((key) =>
+      keyValueList.push(`${key}='${req.body.plan[key]}'`)
+    );
+    console.log('this is the keyValueList for Update function', keyValueList);
+    const stringList = keyValueList.toString();
 
-    /*
-      iterate through req.body.plan and create the column = value template
-      var set = []
-      Object.keys(req.body).forEach(function(key,i) {
-        set.push(key + ' = ($ + (i+1) + ')');
-      })
-      */
+    const planQuery = `UPDATE burialPlan SET _id='${req.body.userInfo.userId}', ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    console.log('planQuery', planQuery);
     await db.query(planQuery);
     return next();
   } catch (error) {
