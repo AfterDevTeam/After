@@ -17,16 +17,26 @@ userController.getAllUsers = async (req, res, next) => {
 
 userController.verifyUser = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const userQuery = `SELECT * FROM userinfo WHERE email = ${email}`;
+    const userQuery = `SELECT * FROM userinfo WHERE email = '${req.body.email}'`;
     const userValid = await db.query(userQuery);
 
-    if (userValid) {
-      if (userValid.password === password) {
-        res.redirect('/dashboard');
-      }
+    if (userValid.rows.length === 0) {
+      return next();
     } else {
-      res.redirect('/signup');
+      const { firstname, lastname, email, password, user_id } =
+        userValid.rows[0];
+
+      if (password === req.body.password) {
+        res.locals.userInfo = {
+          firstName: firstname,
+          lastName: lastname,
+          email: email,
+          userId: user_id,
+        };
+        return next();
+      } else {
+        return next();
+      }
     }
   } catch (error) {
     return next(error);
@@ -37,41 +47,42 @@ userController.createUser = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const value = [firstName, lastName, email, password];
-    // console.log('value: ', value);
-
-    // added '' to ${email}
     const queryText = `SELECT * FROM userinfo WHERE email = '${email}'`;
-    // console.log('queryText: ', queryText);
-
     const queryResult = await db.query(queryText);
-    // console.log('queryResult: ', queryResult);
-    // db.query will always return something...therefore, !userValid will never be null
-
     if (queryResult.rowCount === 0) {
       const addText =
-        // added an 's' to value
         'INSERT INTO userinfo (firstName, lastName, email, password) values($1,$2,$3,$4)';
       await db.query(addText, value);
       res.send('Success');
-      // res.redirect('/dashboard');
     } else {
       res.send('User already exists');
-      // res.redirect('/login');
     }
   } catch (error) {
     return next(error);
   }
 };
 
-userController.getLoggedInUser = async (req, res, next) => {};
-
 userController.updateUser = async (req, res, next) => {
-  console.log('Hello from update user');
-  console.log('Req.body', req.body);
-  const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
-  const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.firstName} `;
-  const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.lastName} `;
-  const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.email} `;
+  try {
+    console.log('Hello from update user');
+    console.log('Req.body', req.body.body);
+    const queryText = `SELECT * FROM userinfo WHERE email = ${req.body.body.email}`;
+    const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.body.firstName} `;
+    const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.body.lastName} `;
+    const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.body.email} `;
+
+    const queryResult = await db.query(queryText);
+
+    if (queryResult) {
+      if (updateFirstName) await db.query(updateFirstName);
+      if (updateFirstName) await db.query(updateFirstName);
+      if (updateLastName) await db.query(updateLastName);
+      if (updateEmail) await db.query(updateEmail);
+      return next();
+    }
+  } catch (err) {
+    return next(err);
+  }
 };
 
 module.exports = userController;
