@@ -15,7 +15,7 @@ const BurialPlanSubmit = () => {
       headers: {
         'Content-type': 'Application/JSON',
       },
-      body: JSON.stringify(state.plan),
+      body: JSON.stringify(state),
     });
 
     history.push('/dashboard');

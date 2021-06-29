@@ -1,3 +1,5 @@
+/** @format */
+
 import { HistorySharp } from '@material-ui/icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +16,7 @@ const ChecklistSubmit = () => {
       headers: {
         'Content-type': 'Application/JSON',
       },
-      body: JSON.stringify(state.checklist),
+      body: JSON.stringify(state),
     });
 
     history.push('/dashboard');

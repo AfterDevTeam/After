@@ -15,7 +15,7 @@ const ServicePlanSubmit = () => {
       headers: {
         'Content-type': 'Application/JSON',
       },
-      body: JSON.stringify(state.service),
+      body: JSON.stringify(state),
     });
     history.push('/dashboard');
   };

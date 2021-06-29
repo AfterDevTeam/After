@@ -18,14 +18,11 @@ router.post(
   }
 );
 
-router.post(
-  '/login',
-  userController.getAllUsers,
-  userController.verifyUser,
-  (req, res) => {
-    res.status(200).send('user verified');
-  }
-);
+router.post('/login', userController.verifyUser, (req, res) => {
+  res
+    .status(200)
+    .send(res.locals.userInfo || JSON.stringify('Failed to login'));
+});
 
 router.put('/update', userController.updateUser, (req, res) =>
   res.status(200).send('User Info Updated')

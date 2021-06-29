@@ -12,9 +12,14 @@ export const userInfo = createSlice({
     firstName: '',
     lastName: '',
     email: '',
+    userId: '',
     showPassword: false,
   },
   reducers: {
+    userIdReducer: (state, action) => {
+      console.log('action.payload in userId reducer', action.payload);
+      state.userId = action.payload;
+    },
     firstNameReducer: (state, action) => {
       console.log('action.payload in firstName reducer', action.payload);
       state.firstName = action.payload;
@@ -40,6 +45,7 @@ export const userInfo = createSlice({
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
       state.showPassword = action.payload.showPassword;
+      state.userId = action.payload.userId;
     },
   },
 });
@@ -51,6 +57,7 @@ export const {
   emailReducer,
   showPasswordReducer,
   updateUserInfoSummaryReducer,
+  userIdReducer,
 } = userInfo.actions;
 
 // export reducer

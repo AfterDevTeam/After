@@ -1,3 +1,5 @@
+/** @format */
+
 const db = require('../models/afterModels.js');
 
 const createTableController = {};
@@ -57,9 +59,9 @@ createTableController.createChecklistTable = (req, res, next) => {
   const createChecklistTable = {
     text: `CREATE TABLE IF NOT EXISTS checklist (
             _id UUID,
-            petsBool BOOLEAN,
+            petsBool BOOLEAN DEFAULT false,
             pets VARCHAR(1000),
-            billsBool BOOLEAN,
+            billsBool BOOLEAN DEFAULT false,
             bills VARCHAR(1000),
             extras VARCHAR(1000),
             PRIMARY KEY (_id));`,
@@ -76,11 +78,11 @@ createTableController.createServiceTable = (req, res, next) => {
       _id UUID,
       guestlist VARCHAR,
       participants VARCHAR,
-      musicBool BOOLEAN,
+      musicBool BOOLEAN DEFAULT false,
       musicPlayed VARCHAR,
-      prayersBool BOOLEAN,
+      prayersBool BOOLEAN DEFAULT false,
       prayersRead VARCHAR,
-      cateringBool BOOLEAN,
+      cateringBool BOOLEAN DEFAULT false,
       cateringService VARCHAR,
       extras VARCHAR,
       PRIMARY KEY (_id)
