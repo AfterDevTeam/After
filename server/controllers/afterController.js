@@ -172,6 +172,7 @@ afterController.updatePlan = async (req, res, next) => {
   }
 };
 
+//check database for dashboard information
 afterController.dashboardCheck = async (req, res, next) => {
   console.log('dashboardcheck middleware triggered');
   console.log(req.body);

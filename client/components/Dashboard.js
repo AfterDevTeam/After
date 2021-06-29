@@ -20,8 +20,11 @@ const Dashboard = () => {
   const userId = state.userInfo.userId; 
 
   //check database using userID to see if dashboard square is rendered or not
-  fetch('api/dashboard-check', {
+  fetch('/api/dashboard-check', {
     method: 'POST',
+    headers: {
+      'Content-type': 'Application/JSON',
+    },
     body: JSON.stringify({
       userId: userId
     })
