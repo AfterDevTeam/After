@@ -47,7 +47,7 @@ userController.createUser = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const value = [firstName, lastName, email, password];
-    const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
+    const queryText = `SELECT * FROM userinfo WHERE email = '${email}'`;
     const queryResult = await db.query(queryText);
     if (queryResult.rowCount === 0) {
       const addText =
