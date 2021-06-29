@@ -66,12 +66,26 @@ userController.createUser = async (req, res, next) => {
 userController.getLoggedInUser = async (req, res, next) => {};
 
 userController.updateUser = async (req, res, next) => {
-  console.log('Hello from update user');
-  console.log('Req.body', req.body);
-  const queryText = `SELECT * FROM userinfo WHERE email = ${email}`;
-  const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.firstName} `;
-  const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.lastName} `;
-  const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.email} `;
+  try {
+    console.log('Hello from update user');
+    console.log('Req.body', req.body.body);
+    const queryText = `SELECT * FROM userinfo WHERE email = ${req.body.body.email}`;
+    const updateFirstName = `ALTER USER ${firstName} RENAME TO ${req.body.body.firstName} `;
+    const updateLastName = `ALTER USER ${lastName} RENAME TO ${req.body.body.lastName} `;
+    const updateEmail = `ALTER USER ${email} RENAME TO ${req.body.body.email} `;
+
+    const queryResult = await db.query(queryText);
+
+    if (queryResult) {
+      if (updateFirstName) await db.query(updateFirstName);
+      if (updateFirstName) await db.query(updateFirstName);
+      if (updateLastName) await db.query(updateLastName);
+      if (updateEmail) await db.query(updateEmail);
+      return next();
+    }
+  } catch (err) {
+    return next(err);
+  }
 };
 
 module.exports = userController;
