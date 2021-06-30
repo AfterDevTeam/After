@@ -1,5 +1,5 @@
 /** @format */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -32,6 +32,18 @@ const Summary = () => {
   const classes = useStyles();
   const regex = /\w/g;
 
+  console.log('guestlist', state.service.guestlist);
+  console.log('part', state.service.participants);
+  console.log('part', state.service.prayersread);
+  console.log('part', state.service.musicplayed);
+
+  console.log('part', state.checklist.pets);
+  console.log('part', state.checklist.bills);
+
+  // const readings = parse(state.service.prayersread);
+  // const music = parse(state.service.musicplayed);
+  // const pets = parse(state.checklist.pets);
+  // const bills = parse(state.checklist.bills);
   const parse = (str) => {
     console.log('str', str);
     if (str === undefined || str === null || str.length === 0 || str === []) {
@@ -64,6 +76,22 @@ const Summary = () => {
 
   const { checklistExtras } = state.checklist;
 
+  // let guestList;
+  // let participants;
+  // let readings;
+  // let music;
+  // let pets;
+  // let bills;
+
+  // useEffect(() => {
+  //   guestList = parse(state.service.guestlist);
+  //   participants = parse(state.service.participants);
+  //   readings = parse(state.service.prayersread);
+  //   music = parse(state.service.musicplayed);
+  //   pets = parse(state.checklist.pets);
+  //   bills = parse(state.checklist.bills);
+  // }, []);
+
   // const guestList = parse(state.service.guestlist);
   // const participants = parse(state.service.participants);
   // const readings = parse(state.service.prayersread);
@@ -78,7 +106,7 @@ const Summary = () => {
   const pets = 'pets';
   const bills = 'bills';
 
-  console.log('parsed?', parse(state.checklist.pets));
+  // console.log('parsed?', parse(state.checklist.pets));
 
   console.log('User Info State in Summary: ', state);
   return (
