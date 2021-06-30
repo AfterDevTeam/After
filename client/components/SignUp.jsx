@@ -63,7 +63,7 @@ const SignUp = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 onChange={handleChangeSignUp('firstName')}
-                firstName='firstName'
+                firstname='firstName'
                 id='firstName'
                 label='First Name'
                 value={signUpInputs.firstName}
@@ -75,7 +75,7 @@ const SignUp = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 onChange={handleChangeSignUp('lastName')}
-                lastName='lastName'
+                lastname='lastName'
                 id='lastName'
                 label='Last Name'
                 value={signUpInputs.lastName}
