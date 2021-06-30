@@ -38,8 +38,5 @@ router.post(
   }
 );
 
-router.post('/serviceplan', (req, res) => {
-  res.status(200).send('service plan Created');
-});
 
 module.exports = router;
