@@ -33,8 +33,11 @@ const Summary = () => {
   const regex = /\w/g;
 
   const parse = (str) => {
-    if (str === undefined || str === null || str.length === 0) return null;
-    else {
+    console.log('str', str);
+    if (str === undefined || str === null || str.length === 0 || str === []) {
+      console.log('will return null');
+      return null;
+    } else {
       const result = [];
       str.split('').forEach((char) => {
         if (char !== '{' && char !== '}' && char !== '"') {
@@ -51,20 +54,20 @@ const Summary = () => {
 
   const {
     rite,
-    funeralHome,
-    funeralLocation,
-    graveSideLocation,
-    memorialLocation,
+    funeralhome,
+    funerallocation,
+    gravesidelocation,
+    memoriallocation,
   } = state.plan;
 
   const { cateringService, serviceExtras } = state.service;
 
   const { checklistExtras } = state.checklist;
 
-  const guestList = parse(state.service.guestList);
+  const guestList = parse(state.service.guestlist);
   const participants = parse(state.service.participants);
-  const readings = parse(state.service.readings);
-  const music = parse(state.service.musicPlayed);
+  const readings = parse(state.service.prayersread);
+  const music = parse(state.service.musicplayed);
   const pets = parse(state.checklist.pets);
   const bills = parse(state.checklist.bills);
 
@@ -87,13 +90,13 @@ const Summary = () => {
               <Typography>Burial/Rites Plan</Typography>
               <br></br>
               <Typography>Rite: {rite}</Typography>
-              <Typography>Funeral Home: {funeralHome}</Typography>
-              <Typography>Funeral Location: {funeralLocation}</Typography>
+              <Typography>Funeral Home: {funeralhome}</Typography>
+              <Typography>Funeral Location: {funerallocation}</Typography>
               <Typography>
-                Graveside Service Location: {graveSideLocation}
+                Graveside Service Location: {gravesidelocation}
               </Typography>
               <Typography>
-                Memorial Service Location: {memorialLocation}
+                Memorial Service Location: {memoriallocation}
               </Typography>
             </Paper>
           </Grid>

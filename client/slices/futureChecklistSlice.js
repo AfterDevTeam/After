@@ -15,12 +15,12 @@ export const checklist = createSlice({
     petsReducer: (state, action) => {
       console.log('action.payload in petsReducer', action.payload);
       state.petsBool = true;
-      state.pets.push(action.payload);
+      state.pets = action.payload;
     },
     billsReducer: (state, action) => {
       console.log('action.payload in billsReducer', action.payload);
       state.billsBool = true;
-      state.bills.push(action.payload);
+      state.bills = action.payload;
     },
     extrasReducer: (state, action) => {
       console.log('action.payload in extrasReducer', action.payload);
