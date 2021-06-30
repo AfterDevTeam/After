@@ -1,5 +1,5 @@
 /** @format */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -7,6 +7,7 @@ import {
   Button,
   Link,
 } from '@material-ui/core';
+import axios from 'axios';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -31,6 +32,19 @@ const Summary = () => {
   const state = useSelector(userInfoState);
   const state2 = useSelector(planState);
   const classes = useStyles();
+
+  useEffect(() => {
+    getPlanInfo();
+  }, []);
+
+  const getPlanInfo = () => {
+    return axios
+      .post('/api/planSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => res.json())
+      .then((data) => console.log('burialPlan data in summary', data));
+  };
   console.log('User Info State in Summary: ', state2);
   return (
     <Container>

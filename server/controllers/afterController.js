@@ -271,6 +271,24 @@ afterController.dashboardCheck = async (req, res, next) => {
   }
 };
 
+afterController.getPlanSummary = async (req, res, next) => {
+  if (Object.keys(req.body).length > 0) {
+    console.log('made it');
+    try {
+      console.log(req.body);
+      const planQuery = 'SELECT * FROM burialPlan WHERE _id = ($1)';
+      const value = [req.body.userInfo.userId];
+      const data = await db.query(planQuery, value);
+      res.locals.burialPlan = data.rows[0];
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  } else {
+    return next();
+  }
+};
+
 /*
 prefController.fetchPreferences = (req, res, next) => {
   const user_id = req.params.id;
