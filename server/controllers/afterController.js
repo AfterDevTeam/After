@@ -172,6 +172,36 @@ afterController.updatePlan = async (req, res, next) => {
   }
 };
 
+//check database for dashboard information
+afterController.dashboardCheck = async (req, res, next) => {
+  try {
+    //set up res.locals object that will determine dashboard state
+    res.locals.dashboardState = {
+      burialPlan: false,
+      service: false,
+      futureChecklist: false
+    }
+    //retrieve userID from request
+    const userId = req.body.userId
+    //use userID to query all databases for data
+    const planDashboardQuery = `SELECT * FROM burialPlan WHERE _id = $1`
+    const planDashboardData = await db.query(planDashboardQuery, [userId])
+    if (planDashboardData.rowCount > 0) res.locals.dashboardState.burialPlan = true;
+    
+    const serviceDashboardQuery = `SELECT * FROM service WHERE _id = $1`
+    const serviceDashboardQueryData = await db.query(serviceDashboardQuery, [userId])
+    if (serviceDashboardQueryData.rowCount > 0) res.locals.dashboardState.service = true;
+
+    const checklistDashboardQuery = `SELECT * FROM checklist WHERE _id = $1`
+    const checklistDashboardQueryData = await db.query(checklistDashboardQuery, [userId])
+    if (checklistDashboardQueryData.rowCount > 0) res.locals.dashboardState.futureChecklist = true;
+    
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+}
+
 /*
 prefController.fetchPreferences = (req, res, next) => {
   const user_id = req.params.id;

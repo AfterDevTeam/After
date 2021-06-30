@@ -34,6 +34,9 @@ router.post('/service', afterController.addService, (req, res) => {
 router.post('/future', afterController.addFuture, (req, res) => {
   res.status(200).send('Successfully added to future');
 });
+router.post('/dashboard-check', afterController.dashboardCheck, (req, res) => {
+  res.status(200).send(res.locals.dashboardState);
+});
 
 // delete routes
 router.delete('/plan', afterController.deletePlan, (req, res) => {
