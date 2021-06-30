@@ -3,14 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import DashboardSquare from './DashboardSquare';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 import '../css/Dashboard.css';
 import { userInfoState } from '../slices/userInfoSlice';
 
 const Dashboard = () => {
   const state = useSelector(userInfoState);
-  const history = useHistory();
 
   const [squareHidden, toggleSquareHidden] = useState({
     burialPlan: null,
