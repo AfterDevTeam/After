@@ -9,21 +9,24 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import '../App.css';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-
 import { MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: '#E7ECEF',
+    color: '#274C77',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    textAlign: 'center',
+    fontFamily: ['Sacramento', 'cursive'],
+    margin: '20px',
   },
 }));
 
@@ -43,7 +46,7 @@ const Navbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='static' className={classes.root}>
         <Toolbar>
           <IconButton
             edge='start'
@@ -61,19 +64,22 @@ const Navbar = () => {
             </Button>
             <Menu
               id='simple-menu'
+              classes={{ paper: classes.root }}
               anchorEl={anchorEl}
               keepMounted
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={() => history.push('/summary')}>
+              <MenuItem 
+                onClick={() => history.push('/summary')}
+              >
                 Profile
               </MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
           </div>
-          <Typography variant='h6' className='title'>
+          <Typography variant='h3' className={ classes.title }>
             After
           </Typography>
           <Link to='/login'>
