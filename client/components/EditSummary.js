@@ -313,10 +313,10 @@ const EditSummary = () => {
               dispatch(updateRitesPlanSummaryReducer(planSummary));
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
-              updateUserInfo();
+              //updateUserInfo();
               updatePlanInfo();
-              // updateServiceInfo();
-              // updateChecklistInfo();
+              updateServiceInfo();
+              updateChecklistInfo();
               history.push('/summary');
             }}
           >
