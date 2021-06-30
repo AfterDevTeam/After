@@ -2,9 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import DashboardSquare from './DashboardSquare';
+<<<<<<< HEAD
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+=======
+import { useSelector } from 'react-redux';
+>>>>>>> 7703406102c1dfdfd4d5bdbd96b477a186648e5b
 import '../css/Dashboard.css';
 import { userInfoState } from '../slices/userInfoSlice';
 import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
@@ -13,9 +17,6 @@ import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
 
 const Dashboard = () => {
   const state = useSelector(userInfoState);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  console.log('state', state);
 
   const [squareHidden, toggleSquareHidden] = useState({
     burialPlan: null,
@@ -52,14 +53,11 @@ const Dashboard = () => {
     <div id='dashboard-container'>
       <h1>Your Journey</h1>
       <div id='dashboard-squares-container'>
-        {squareHidden.burialPlan === false && (
-          <DashboardSquare
-            title='Select Your Burial Plan'
-            route='/burial-plan'
-          />
+        { squareHidden.burialPlan === false && (
+          <DashboardSquare title='Select Your Burial/Rites Plan' route='/burial-plan' />
         )}
-        {squareHidden.burialPlan === true && (
-          <DashboardSquare title='Edit Burial Plan' route='/summary' />
+        { squareHidden.burialPlan === true && (
+          <DashboardSquare title='Edit Burial/Rites Plan' route='/summary' />
         )}
         {squareHidden.service === false && (
           <DashboardSquare title='Plan Your Service' route='/service-plan' />
@@ -73,9 +71,8 @@ const Dashboard = () => {
         {squareHidden.futureChecklist === true && (
           <DashboardSquare title='Edit Future Checklist' route='/summary' />
         )}
-        </div>
-          <Button id='export-button'>Export</Button>
-      </div>  
+      </div>
+    </div>
   );
 };
 

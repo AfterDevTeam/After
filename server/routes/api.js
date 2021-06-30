@@ -38,6 +38,28 @@ router.post('/dashboard-check', afterController.dashboardCheck, (req, res) => {
   res.status(200).send(res.locals.dashboardState);
 });
 
+router.post('/planSummary', afterController.getPlanSummary, (req, res) => {
+  // console.log('res.locals in planSummary', res.locals);
+  res.status(200).json(res.locals);
+});
+
+router.post(
+  '/serviceSummary',
+  afterController.getServiceSummary,
+  (req, res) => {
+    console.log('res.locals in serviceSummary', res.locals);
+    res.status(200).json(res.locals);
+  }
+);
+router.post(
+  '/checklistSummary',
+  afterController.getChecklistSummary,
+  (req, res) => {
+    console.log('res.locals in serviceSummary', res.locals);
+    res.status(200).json(res.locals);
+  }
+);
+
 // delete routes
 router.delete('/plan', afterController.deletePlan, (req, res) => {
   res.status(200).send('Entry was deleted Successfully');

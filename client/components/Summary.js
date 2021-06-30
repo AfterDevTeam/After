@@ -1,23 +1,29 @@
 /** @format */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
-  TextField,
   Typography,
   Button,
-  Link,
+  Box
 } from '@material-ui/core';
+import axios from 'axios';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { userInfoState } from '../slices/userInfoSlice';
-import { planState } from '../slices/selectPlanSlice';
+import {
+  planState,
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: '20px',
   },
   paper: {
     padding: theme.spacing(2),
@@ -27,62 +33,61 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Summary = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const state = useSelector(userInfoState);
   const classes = useStyles();
-  const regex = /\w/g;
 
-  const parse = (str) => {
-    console.log('str', str);
-    if (str === undefined || str === null || str.length === 0 || str === []) {
-      console.log('will return null');
-      return null;
-    } else {
-      const result = [];
-      str.split('').forEach((char) => {
-        if (char !== '{' && char !== '}' && char !== '"') {
-          if (char === ',') char = ', ';
-          result.push(char);
-        }
+  useEffect(() => {
+    getPlanInfo();
+    getServiceInfo();
+    getChecklistInfo();
+  }, []);
+
+  const getPlanInfo = () => {
+    return axios
+      .post('/api/planSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateRitesPlanSummaryReducer(res.data.burialPlan));
       });
-      console.log(result);
-      return result.join('');
-    }
   };
 
-  const { firstName, lastName, email } = state.userInfo;
+  const getServiceInfo = () => {
+    return axios
+      .post('/api/serviceSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateServiceSummaryReducer(res.data.service));
+      });
+  };
 
-  const {
-    rite,
-    funeralhome,
-    funerallocation,
-    gravesidelocation,
-    memoriallocation,
-  } = state.plan;
+  const getChecklistInfo = () => {
+    return axios
+      .post('/api/checklistSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateChecklistSummaryReducer(res.data.checklist));
+      })
+      .then(() => {});
+  };
 
-  const { cateringService, serviceExtras } = state.service;
-
-  const { checklistExtras } = state.checklist;
-
-  const guestList = parse(state.service.guestlist);
-  const participants = parse(state.service.participants);
-  const readings = parse(state.service.prayersread);
-  const music = parse(state.service.musicplayed);
-  const pets = parse(state.checklist.pets);
-  const bills = parse(state.checklist.bills);
-
-  console.log('parsed?', parse(state.checklist.pets));
-
-  console.log('User Info State in Summary: ', state);
+  console.log('User Info State in Summary: ', state2);
   return (
     <Container>
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography>First Name: {firstName}</Typography>
-              <Typography>Last Name: {lastName}</Typography>
-              <Typography>email: {email}</Typography>
+              <Typography>First Name: {state.userInfo.firstName}</Typography>
+              <Typography>Last Name: {state.userInfo.lastName}</Typography>
+              <Typography>Email: {state.userInfo.email}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -104,12 +109,18 @@ const Summary = () => {
             <Paper className={classes.paper}>
               <Typography>Service Plan</Typography>
               <br></br>
-              <Typography>Guest List: {guestList}</Typography>
-              <Typography>participants: {participants}</Typography>
-              <Typography>Prayers/Readings: {readings}</Typography>
-              <Typography>Music: {music}</Typography>
-              <Typography>Catering Service: {cateringService}</Typography>
-              <Typography>Extras {serviceExtras}</Typography>
+              <Typography>Guest List: {state.service.guestList}</Typography>
+              <Typography>
+                Participants: {state.service.participants}
+              </Typography>
+              <Typography>
+                Prayers/Readings: {state.service.prayersRead}
+              </Typography>
+              <Typography>Music: {state.service.musicPlayed}</Typography>
+              <Typography>
+                Catering Service: {state.service.cateringService}
+              </Typography>
+              <Typography>Extras {state.service.extras}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -123,7 +134,12 @@ const Summary = () => {
               <Typography>Extras {checklistExtras}</Typography>
             </Paper>
           </Grid>
-          <Button onClick={() => history.push('/edit')}>Edit</Button>
+          <Box style={{margin: '0 auto', display: 'flex'}}>
+            <Button 
+              onClick={() => history.push('/edit')}>Edit</Button>
+            <Button 
+              onClick={() => window.print()}>Print</Button>
+          </Box>
         </Grid>
       </div>
     </Container>

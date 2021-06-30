@@ -114,7 +114,7 @@ const Login = (props) => {
         <div className='input-container'>
           <label htmlFor='password'>Password</label>
           <input
-            type='text'
+            type='password'
             value={inputPassword}
             placeholder='password'
             onChange={(event) => handleChangeLoginPassword(event)}

@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Slide } from '@material-ui/core';
 import GuestList from './ServicePlanQuestions/GuestList';
 import Participants from './ServicePlanQuestions/Participants';
 import Music from './ServicePlanQuestions/Music';
@@ -19,6 +18,8 @@ import {
 } from '../slices/chooseServiceSlice';
 import ServicePlanSubmit from './ServicePlanQuestions/ServicePlanSubmit';
 import ExtrasServiceQuestion from './ServicePlanQuestions/ExtrasServiceQuestion';
+
+import '../css/Carousel.css';
 
 const ServicePlan = () => {
   const dispatch = useDispatch();
@@ -57,39 +58,41 @@ const ServicePlan = () => {
   ];
 
   return (
-    <div id='service-plan-container'>
-      <Slide in={true} direction='left'>
-        <div>{ServicePlanQuestions[SPQuestionIdx]}</div>
-      </Slide>
-      <button
-        onClick={() =>
-          setSPQuestionIdx(SPQuestionIdx > 0 ? SPQuestionIdx - 1 : 0)
-        }
-      >
-        Previous
-      </button>
-      <button
-        onClick={() => {
-          if (SPQuestionIdx === 0)
-            dispatch(guestListReducer(serviceItems.guestList));
-          if (SPQuestionIdx === 1)
-            dispatch(participantsReducer(serviceItems.participants));
-          if (SPQuestionIdx === 2 && serviceItems.musicBool === true)
-            dispatch(musicPlayedReducer(serviceItems.musicPlayed));
-          if (SPQuestionIdx === 3 && serviceItems.prayersBool === true)
-            dispatch(prayersReadReducer(serviceItems.prayersRead));
-          if (SPQuestionIdx === 4 && serviceItems.cateringBool === true)
-            dispatch(cateringServiceReducer(serviceItems.cateringService));
-          if (SPQuestionIdx === 5) dispatch(extrasReducer(serviceItems.extras));
-          setSPQuestionIdx(
-            SPQuestionIdx < ServicePlanQuestions.length - 1
-              ? SPQuestionIdx + 1
-              : ServicePlanQuestions.length - 1
-          );
-        }}
-      >
-        Next
-      </button>
+    <div className="carousel-container">
+      <div>{ServicePlanQuestions[SPQuestionIdx]}</div>
+      <div className="carousel-buttons">
+        <button
+          disabled={SPQuestionIdx === 0}
+          onClick={() =>
+            setSPQuestionIdx(SPQuestionIdx > 0 ? SPQuestionIdx - 1 : 0)
+          }
+        >
+          Previous
+        </button>
+        <button
+          disabled={SPQuestionIdx === 6}
+          onClick={() => {
+            if (SPQuestionIdx === 0)
+              dispatch(guestListReducer(serviceItems.guestList));
+            if (SPQuestionIdx === 1)
+              dispatch(participantsReducer(serviceItems.participants));
+            if (SPQuestionIdx === 2 && serviceItems.musicBool === true)
+              dispatch(musicPlayedReducer(serviceItems.musicPlayed));
+            if (SPQuestionIdx === 3 && serviceItems.prayersBool === true)
+              dispatch(prayersReadReducer(serviceItems.prayersRead));
+            if (SPQuestionIdx === 4 && serviceItems.cateringBool === true)
+              dispatch(cateringServiceReducer(serviceItems.cateringService));
+            if (SPQuestionIdx === 5) dispatch(extrasReducer(serviceItems.extras));
+            setSPQuestionIdx(
+              SPQuestionIdx < ServicePlanQuestions.length - 1
+                ? SPQuestionIdx + 1
+                : ServicePlanQuestions.length - 1
+            );
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
