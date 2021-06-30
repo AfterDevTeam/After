@@ -17,12 +17,22 @@ import {
   planCompleteReducer,
   serviceCompleteReducer,
   checklistCompleteReducer,
-} from '../checkDataSlice';
+} from '../slices/checkDataSlice';
+import  {
+  updateServiceSummaryReducer,
+} from '../slices/chooseServiceSlice';
+import {
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import {
+  updateChecklistSummaryReducer,
+} from '../slices/futureChecklistSlice';
+
+
 
 const Login = (props) => {
   //history for routing
   const history = useHistory();
-
   // dispatch for redux state
   const dispatch = useDispatch();
 
@@ -46,7 +56,6 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
-<<<<<<< HEAD
         console.log(data);
         if (typeof data === 'object') {
           //save the data in the Redux store
@@ -59,37 +68,21 @@ const Login = (props) => {
                 dispatch(userIdReducer(userId));
           }
           // check for value
-          if (typeof date.checklist === 'object')  
+          if (typeof data.checklist === 'object') { 
             const { petsBool, pets, billsBool, bills, extras } = data.checklist;
+              dispatch(updateChecklistSummaryReducer(data.checklist));
+              dispatch(checklistCompleteReducer());
+          }
           // check for value
-          if (typeof date.plan === 'object')  
-            const { rite, funeralHome, funeralBeforeRites, funeralLocation, graveSideServices } = plan.service;
+          if (typeof data.plan === 'object') { 
+            dispatch(updateRitesPlanSummaryReducer(data.plan));
+            dispatch(planCompleteReducer());
           // check for value
-          if (typeof date.service === 'object')  
-            const { guestList, participants, prayersBool, prayersRead, musicBool } = data.service;
-
-
-=======
-        if (typeof data.userInfo === 'object') {
-          //save the data in the Redux store
-          const { firstName, lastName, email, userId } = data.userInfo;
-
-          console.log(data)
->>>>>>> 7a7ab89ae966f7a6f417979257e54d024f93d404
-
-          // dispatch(serviceCompleteReducer(burialPlan));
-          // dispatch(checklistCompleteReducer(service));
-          // dispatch(planCompleteReducer(futureChecklist));
-          // reset the inputs to empty strings
-          
-          // fetch request service
-            // update everything in redux
-          // fetch request for checklist
-            // update everything in redux
-          // fetch request for plan
-            // update everything in redux
-
-
+          }
+          if (typeof data.service === 'object')  { 
+            dispatch(updateServiceSummaryReducer(data.service));
+            dispatch(serviceCompleteReducer());
+          }
           setInputUsername('');
           setInputPassword('');
           //redirect to dashboard
