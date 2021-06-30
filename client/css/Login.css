@@ -18,6 +18,7 @@
 .input-container > input {
   border-width: 0 0 2px;
   border-color: #274C77; 
+  color: #274C77;
   background: transparent;
 }
 
