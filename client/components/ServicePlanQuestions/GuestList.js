@@ -25,7 +25,7 @@ const GuestList = ({ serviceItems, setServiceItems }) => {
             onChange={(e) => {
               setServiceItems({
                 ...serviceItems,
-                guestList: e.target.value.split(',').map((elem) => elem.trim()),
+                guestlist: e.target.value.split(',').map((elem) => elem.trim()),
               });
             }}
           />

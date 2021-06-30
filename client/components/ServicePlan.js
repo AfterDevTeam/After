@@ -28,14 +28,14 @@ const ServicePlan = () => {
   const [participants, setParticipants] = useState(null);
 
   const [serviceItems, setServiceItems] = useState({
-    guestList: [],
+    guestlist: [],
     participants: [],
-    prayersBool: false,
-    prayersRead: [],
-    musicBool: false,
-    musicPlayed: [],
-    cateringBool: false,
-    cateringService: '',
+    prayersbool: false,
+    prayersread: [],
+    musicbool: false,
+    musicplayed: [],
+    cateringbool: false,
+    cateringservice: '',
     extras: '',
   });
   // console.log('guestList', guestList);
@@ -71,15 +71,15 @@ const ServicePlan = () => {
       <button
         onClick={() => {
           if (SPQuestionIdx === 0)
-            dispatch(guestListReducer(serviceItems.guestList));
+            dispatch(guestListReducer(serviceItems.guestlist));
           if (SPQuestionIdx === 1)
             dispatch(participantsReducer(serviceItems.participants));
-          if (SPQuestionIdx === 2 && serviceItems.musicBool === true)
-            dispatch(musicPlayedReducer(serviceItems.musicPlayed));
-          if (SPQuestionIdx === 3 && serviceItems.prayersBool === true)
-            dispatch(prayersReadReducer(serviceItems.prayersRead));
-          if (SPQuestionIdx === 4 && serviceItems.cateringBool === true)
-            dispatch(cateringServiceReducer(serviceItems.cateringService));
+          if (SPQuestionIdx === 2 && serviceItems.musicbool === true)
+            dispatch(musicPlayedReducer(serviceItems.musicplayed));
+          if (SPQuestionIdx === 3 && serviceItems.prayersbool === true)
+            dispatch(prayersReadReducer(serviceItems.prayersread));
+          if (SPQuestionIdx === 4 && serviceItems.cateringbool === true)
+            dispatch(cateringServiceReducer(serviceItems.cateringservice));
           if (SPQuestionIdx === 5) dispatch(extrasReducer(serviceItems.extras));
           setSPQuestionIdx(
             SPQuestionIdx < ServicePlanQuestions.length - 1

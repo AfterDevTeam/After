@@ -15,7 +15,6 @@ const Dashboard = () => {
   const state = useSelector(userInfoState);
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log('state', state);
 
   const [squareHidden, toggleSquareHidden] = useState({
     burialPlan: null,
@@ -47,7 +46,8 @@ const Dashboard = () => {
     dispatch(updateRitesPlanSummaryReducer(state.plan));
     dispatch(updateServiceSummaryReducer(state.service));
   }, []);
-  console.log('squareHidden', squareHidden);
+  console.log('state after useEffect in Dashboard: ', state);
+  // console.log('squareHidden', squareHidden);
   return (
     <div id='dashboard-container'>
       <h1>Your Journey</h1>

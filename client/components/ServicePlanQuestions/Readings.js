@@ -13,7 +13,7 @@ import {
 import { service } from '../../slices/chooseServiceSlice';
 
 const Readings = ({ serviceItems, setServiceItems }) => {
-  const { prayersBool } = serviceItems;
+  const { prayersbool } = serviceItems;
   const prayersHidden = !serviceItems.prayersBool;
 
   const handleChange = (event) => {
@@ -32,20 +32,20 @@ const Readings = ({ serviceItems, setServiceItems }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={prayersBool}
+                checked={prayersbool}
                 onChange={handleChange}
-                name='prayersBool'
+                name='prayersbool'
               />
             }
             label='I want some prayers or readings performed at my service'
           />
-          {prayersBool === true && (
+          {prayersbool === true && (
             <TextField
               placeholder='Prayers'
               onChange={(e) => {
                 setServiceItems({
                   ...serviceItems,
-                  prayersRead: e.target.value,
+                  prayersread: e.target.value,
                 });
               }}
             />

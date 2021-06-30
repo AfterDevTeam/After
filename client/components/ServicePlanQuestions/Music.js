@@ -13,8 +13,8 @@ import {
 import { service } from '../../slices/chooseServiceSlice';
 
 const Music = ({ serviceItems, setServiceItems }) => {
-  const { musicBool } = serviceItems;
-  const musicHidden = !serviceItems.musicBool;
+  const { musicbool } = serviceItems;
+  const musicHidden = !serviceItems.musicbool;
 
   const handleChange = (event) => {
     setServiceItems({
@@ -32,20 +32,20 @@ const Music = ({ serviceItems, setServiceItems }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={musicBool}
+                checked={musicbool}
                 onChange={handleChange}
-                name='musicBool'
+                name='musicbool'
               />
             }
             label='I want some special music played at my service'
           />
-          {musicBool === true && (
+          {musicbool === true && (
             <TextField
               placeholder='Music'
               onChange={(e) => {
                 setServiceItems({
                   ...serviceItems,
-                  musicPlayed: e.target.value,
+                  musicplayed: e.target.value,
                 });
               }}
             />

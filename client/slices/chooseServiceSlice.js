@@ -18,35 +18,36 @@ export const service = createSlice({
   },
   reducers: {
     guestListReducer: (state, action) => {
-      console.log('action.payload in guestListReducer', action.payload);
+      // console.log('action.payload in guestListReducer', action.payload);
       if (action.payload === []) return;
-      state.guestList = action.payload;
+      state.guestlist = action.payload;
       return;
     },
     participantsReducer: (state, action) => {
-      console.log('action.payload in participantsReducer', action.payload);
+      // console.log('action.payload in participantsReducer', action.payload);
       state.participants = action.payload;
     },
     prayersReadReducer: (state, action) => {
-      console.log('action.payload in prayersReadReducer', action.payload);
-      state.prayersBool = true;
-      state.prayersRead = action.payload;
+      // console.log('action.payload in prayersReadReducer', action.payload);
+      state.prayersbool = true;
+      state.prayersread = action.payload;
     },
     musicPlayedReducer: (state, action) => {
-      console.log('action.payload in musicPlayedReducer', action.payload);
-      state.musicBool = true;
-      state.musicPlayed = action.payload;
+      // console.log('action.payload in musicPlayedReducer', action.payload);
+      state.musicbool = true;
+      state.musicplayed = action.payload;
     },
     cateringServiceReducer: (state, action) => {
-      console.log('action.payload in cateringServiceReducer', action.payload);
-      state.cateringBool = true;
-      state.cateringService = action.payload;
+      // console.log('action.payload in cateringServiceReducer', action.payload);
+      state.cateringbool = true;
+      state.cateringservice = action.payload;
     },
     extrasReducer: (state, action) => {
-      console.log('action.payload in extrasReducer', action.payload);
+      // console.log('action.payload in extrasReducer', action.payload);
       state.extras = action.payload;
     },
     updateServiceSummaryReducer: (state, action) => {
+      console.log('Service Summary Reducer State', action.payload);
       state.guestlist = action.payload.guestlist;
       state.participants = action.payload.participants;
       state.prayersbool = action.payload.prayersbool;

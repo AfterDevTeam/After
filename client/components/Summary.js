@@ -64,12 +64,19 @@ const Summary = () => {
 
   const { checklistExtras } = state.checklist;
 
-  const guestList = parse(state.service.guestlist);
-  const participants = parse(state.service.participants);
-  const readings = parse(state.service.prayersread);
-  const music = parse(state.service.musicplayed);
-  const pets = parse(state.checklist.pets);
-  const bills = parse(state.checklist.bills);
+  // const guestList = parse(state.service.guestlist);
+  // const participants = parse(state.service.participants);
+  // const readings = parse(state.service.prayersread);
+  // const music = parse(state.service.musicplayed);
+  // const pets = parse(state.checklist.pets);
+  // const bills = parse(state.checklist.bills);
+
+  const guestList = 'Guests';
+  const participants = 'Parts';
+  const readings = 'readings';
+  const music = 'music';
+  const pets = 'pets';
+  const bills = 'bills';
 
   console.log('parsed?', parse(state.checklist.pets));
 
