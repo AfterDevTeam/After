@@ -12,9 +12,13 @@ import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { userInfoState } from '../slices/userInfoSlice';
-import { planState } from '../slices/selectPlanSlice';
+import {
+  planState,
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Summary = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const state = useSelector(userInfoState);
   const state2 = useSelector(planState);
@@ -35,6 +40,7 @@ const Summary = () => {
 
   useEffect(() => {
     getPlanInfo();
+    getServiceInfo();
   }, []);
 
   const getPlanInfo = () => {
@@ -42,8 +48,21 @@ const Summary = () => {
       .post('/api/planSummary', {
         userInfo: state.userInfo,
       })
-      .then((res) => res.json())
-      .then((data) => console.log('burialPlan data in summary', data));
+      .then((res) => {
+        console.log(res);
+        dispatch(updateRitesPlanSummaryReducer(res.data.burialPlan));
+      });
+  };
+
+  const getServiceInfo = () => {
+    return axios
+      .post('/api/serviceSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateServiceSummaryReducer(res.data.service));
+      });
   };
   console.log('User Info State in Summary: ', state2);
   return (
