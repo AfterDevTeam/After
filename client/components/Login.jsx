@@ -13,6 +13,11 @@ import {
   emailReducer,
   userIdReducer,
 } from '../slices/userInfoSlice';
+import {
+  planCompleteReducer,
+  serviceCompleteReducer,
+  checklistCompleteReducer,
+} from '../checkDataSlice';
 
 const Login = (props) => {
   //history for routing
@@ -41,15 +46,42 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
+        console.log(data);
         if (typeof data === 'object') {
           //save the data in the Redux store
-          const { firstName, lastName, email, userId } = data;
+          // check for value
+          if (typeof data.userInfo === 'object') {
+            const { firstName, lastName, email, userId } = data.userInfo;
+                dispatch(firstNameReducer(firstName));
+                dispatch(lastNameReducer(lastName));
+                dispatch(emailReducer(email));
+                dispatch(userIdReducer(userId));
+          }
+          // check for value
+          if (typeof date.checklist === 'object')  
+            const { petsBool, pets, billsBool, bills, extras } = data.checklist;
+          // check for value
+          if (typeof date.plan === 'object')  
+            const { rite, funeralHome, funeralBeforeRites, funeralLocation, graveSideServices } = plan.service;
+          // check for value
+          if (typeof date.service === 'object')  
+            const { guestList, participants, prayersBool, prayersRead, musicBool } = data.service;
 
-          dispatch(firstNameReducer(firstName));
-          dispatch(lastNameReducer(lastName));
-          dispatch(emailReducer(email));
-          dispatch(userIdReducer(userId));
+
+
+          // dispatch(serviceCompleteReducer(burialPlan));
+          // dispatch(checklistCompleteReducer(service));
+          // dispatch(planCompleteReducer(futureChecklist));
           // reset the inputs to empty strings
+          
+          // fetch request service
+            // update everything in redux
+          // fetch request for checklist
+            // update everything in redux
+          // fetch request for plan
+            // update everything in redux
+
+
           setInputUsername('');
           setInputPassword('');
           //redirect to dashboard
