@@ -25,9 +25,9 @@ afterController.getPlan = async (req, res, next) => {
   if (Object.keys(res.locals.userInfo).length > 0) {
     try {
       const planQuery = 'SELECT * FROM burialPlan WHERE _id = ($1)';
-      const value = [res.locals.userInfo.userId]
-      const data = await db.query(planQuery,value);
-      res.locals.burialPlan = data.rows[0]
+      const value = [res.locals.userInfo.userId];
+      const data = await db.query(planQuery, value);
+      res.locals.burialPlan = data.rows[0];
       return next();
     } catch (error) {
       return next(error);
@@ -42,8 +42,8 @@ afterController.getService = async (req, res, next) => {
   if (Object.keys(res.locals.userInfo).length > 0) {
     try {
       const serviceQuery = 'SELECT * FROM service WHERE _id = ($1)';
-      const value = [res.locals.userInfo.userId]
-      const data =  await db.query(serviceQuery, value)
+      const value = [res.locals.userInfo.userId];
+      const data = await db.query(serviceQuery, value);
       res.locals.service = data.rows[0];
       return next();
     } catch (error) {
@@ -59,14 +59,14 @@ afterController.getFuture = async (req, res, next) => {
   if (Object.keys(res.locals.userInfo).length > 0) {
     try {
       const futureQuery = 'SELECT * FROM checklist WHERE _id = ($1)';
-      const value = [res.locals.userInfo.userId]
-      const data =  await db.query(futureQuery, value)
+      const value = [res.locals.userInfo.userId];
+      const data = await db.query(futureQuery, value);
       res.locals.checklist = data.rows[0];
       return next();
     } catch (error) {
       return next(error);
     }
-  }else{
+  } else {
     return next();
   }
 };
@@ -179,11 +179,11 @@ afterController.updatePlan = async (req, res, next) => {
     Object.keys(req.body.plan).forEach((key) =>
       keyValueList.push(`${key}='${req.body.plan[key]}'`)
     );
-    console.log('this is the keyValueList for Update function', keyValueList);
+    //console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
     const planQuery = `UPDATE burialPlan SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
-    console.log('planQuery', planQuery);
+    //console.log('planQuery', planQuery);
     await db.query(planQuery);
     return next();
   } catch (error) {
@@ -193,16 +193,16 @@ afterController.updatePlan = async (req, res, next) => {
 
 afterController.updateService = async (req, res, next) => {
   try {
-    console.log(req.body.service);
+    //console.log(req.body.service);
     const keyValueList = [];
     Object.keys(req.body.service).forEach((key) =>
       keyValueList.push(`${key}='${req.body.service[key]}'`)
     );
-    console.log('this is the keyValueList for Update function', keyValueList);
+    //console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
     const serviceQuery = `UPDATE service SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
-    console.log('serviceQuery', serviceQuery);
+    //console.log('serviceQuery', serviceQuery);
     await db.query(serviceQuery);
     return next();
   } catch (error) {
@@ -215,11 +215,11 @@ afterController.updateFuture = async (req, res, next) => {
     Object.keys(req.body.checklist).forEach((key) =>
       keyValueList.push(`${key}='${req.body.checklist[key]}'`)
     );
-    console.log('this is the keyValueList for Update function', keyValueList);
+    //console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
     const futureQuery = `UPDATE checklist SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
-    console.log('futureQuery', futureQuery);
+    //console.log('futureQuery', futureQuery);
     await db.query(futureQuery);
     return next();
   } catch (error) {

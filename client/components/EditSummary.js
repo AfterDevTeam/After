@@ -336,9 +336,9 @@ const EditSummary = () => {
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
               //updateUserInfo();
-              //updatePlanInfo();
+              updatePlanInfo();
               updateServiceInfo();
-              //updateChecklistInfo();
+              updateChecklistInfo();
               history.push('/summary');
             }}
           >
