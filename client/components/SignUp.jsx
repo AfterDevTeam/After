@@ -3,14 +3,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, Grid, TextField, Button, Link } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { Container, Grid, TextField, Button } from '@material-ui/core';
+import { useHistory, Link } from 'react-router-dom';
 import {
   firstNameReducer,
   lastNameReducer,
   emailReducer,
   showPasswordReducer,
 } from '../slices/userInfoSlice';
+import '../css/SignUp.css';
 
 const SignUp = () => {
   const history = useHistory();
@@ -55,9 +56,10 @@ const SignUp = () => {
   };
 
   return (
-    <Container maxWidth='xs'>
-      <div>
-        <h2>Sign up to start planning for what comes after.</h2>
+    <Container 
+      maxWidth='xs'>
+      <div id="signup-container">
+        <h2>Start planning for what comes <span id="signup-after">after</span>.</h2>
         <form className='signUpForm'>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -108,22 +110,24 @@ const SignUp = () => {
                 fullWidth
               />
             </Grid>
-            <Button
-              type='button'
-              variant='contained'
-              fullWidth
-              onClick={() => {
-                dispatch(firstNameReducer(signUpInputs.firstName));
-                dispatch(lastNameReducer(signUpInputs.lastName));
-                dispatch(emailReducer(signUpInputs.email));
-                history.push('/login');
-                addUserToDatabase();
-              }}
-            >
-              Sign Up
-            </Button>
-            <Grid item>
-              <Link to='/login'>Already have an account? Sign in</Link>
+            <Grid item xs={12} sm={6}>
+              <Button
+                type='button'
+                variant='contained'
+                width='75%'
+                onClick={() => {
+                  dispatch(firstNameReducer(signUpInputs.firstName));
+                  dispatch(lastNameReducer(signUpInputs.lastName));
+                  dispatch(emailReducer(signUpInputs.email));
+                  history.push('/login');
+                  addUserToDatabase();
+                }}
+              >
+                Sign Up
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Link to='/login' className="login-link">Already have an account? Sign in.</Link>
             </Grid>
           </Grid>
         </form>

@@ -1,6 +1,11 @@
 .dashboard-square {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 125px;
+  width: 125px;
   border: 2px solid;
-  border-radius: 2px;
   border-color: #A3CEF1;
   margin: 20px;
   padding: 10px;
@@ -12,10 +17,11 @@
   background-repeat: repeat-x;
   background-size: 4px 4px;
   transition: background-size .2s;
+  text-align: center;
 }
 
 .dashboard-square:hover {
-  background-size: 4px 50px;
+  background-size: 4px 200px;
 }
 
 .dashboard-square:active {
