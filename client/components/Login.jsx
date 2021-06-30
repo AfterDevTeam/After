@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import '../css/login.css';
+import '../css/Login.css';
 import { useDispatch } from 'react-redux';
 import {
   firstNameReducer,
@@ -110,32 +110,32 @@ const Login = (props) => {
     <div className='loginContainer'>
       <h2>Log In</h2>
       <form onSubmit={handleSubmitLogin}>
-        <div>
-          <label>
-            Email
+          <div className="input-container">
+            <label htmlFor="email">
+              Email
+            </label>
             <input
-              type='email'
-              value={inputUsername}
-              placeholder='username'
-              onChange={(event) => handleChangeLoginUserName(event)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
+                type='email'
+                value={inputUsername}
+                placeholder='username'
+                onChange={(event) => handleChangeLoginUserName(event)}
+              />
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">
+              Password
+            </label>
             <input
-              type='text'
-              value={inputPassword}
-              placeholder='password'
-              onChange={(event) => handleChangeLoginPassword(event)}
-            />
-          </label>
+                type='text'
+                value={inputPassword}
+                placeholder='password'
+                onChange={(event) => handleChangeLoginPassword(event)}
+              />
+          </div>
+        <div id="login-buttons">
+          <button type="submit">Log In</button>
+          <button onClick={() => history.push('/signup')}>Create An Account</button>
         </div>
-        <div>
-          <Button type='submit'>Log in</Button>
-        </div>
-        <Link to='/SignUp'>Click here to make an account.</Link>
       </form>
     </div>
   );
