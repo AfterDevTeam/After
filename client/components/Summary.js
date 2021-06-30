@@ -77,21 +77,14 @@ const Summary = () => {
             </Paper>
           </Grid>
           <Grid item xs={4}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper2}>
               <Typography>Future Checklist</Typography>
               <br></br>
-              <Typography>Guest List: {state.service.guestList}</Typography>
-              <Typography>
-                participants: {state.service.participants}
-              </Typography>
-              <Typography>
-                Prayers/Readings: {state.service.prayersRead}
-              </Typography>
-              <Typography>Music: {state.service.musicPlayed}</Typography>
-              <Typography>
-                Catering Service: {state.service.cateringService}
-              </Typography>
-              <Typography>Extras {state.service.extras}</Typography>
+              <Typography>Pets: {state.checklist.pets}</Typography>
+
+              <Typography>Bills: {state.checklist.bills}</Typography>
+
+              <Typography>Extras {state.checklist.extras}</Typography>
             </Paper>
           </Grid>
           <Button onClick={() => history.push('/edit')}>Edit</Button>
