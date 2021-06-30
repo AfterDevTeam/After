@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useSelector } from 'react-redux';
 import { userInfoState } from '../slices/userInfoSlice';
-import '../css/Summary.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
