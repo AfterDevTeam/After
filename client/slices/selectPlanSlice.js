@@ -21,28 +21,28 @@ export const plan = createSlice({
     },
     funeralHomeReducer: (state, action) => {
       // console.log('action.payload in funeralHomeReducer', action.payload);
-      state.funeralHome = action.payload;
+      state.funeralhome = action.payload;
     },
     funeralLocationReducer: (state, action) => {
       // console.log('action.payload in funeralLocationReducer', action.payload);
-      state.funeralBeforeRites = true;
-      state.funeralLocation = action.payload;
+      state.funeralbeforerites = true;
+      state.funerallocation = action.payload;
     },
     graveSideServiceReducer: (state, action) => {
       // console.log('action.payload in graveSideServiceReducer', action.payload);
     },
     graveSideLocationReducer: (state, action) => {
       // console.log('action.payload in graveSideLocationReducer', action.payload);
-      state.graveSideService = true;
-      state.graveSideLocation = action.payload;
+      state.gravesideservice = true;
+      state.gravesidelocation = action.payload;
     },
     memorialServiceReducer: (state, action) => {
       // console.log('action.payload in memorialServiceReducer', action.payload);
     },
     memorialLocationReducer: (state, action) => {
       // console.log('action.payload in memorialLocationReducer', action.payload);
-      state.memorialService = true;
-      state.memorialLocation = action.payload;
+      state.memorialservice = true;
+      state.memoriallocation = action.payload;
     },
     updateRitesPlanSummaryReducer: (state, action) => {
       console.log('UpdateRitesPlanReducer State', action.payload);
@@ -51,7 +51,7 @@ export const plan = createSlice({
       state.funeralbeforerites = action.payload.funeralbeforerites;
       state.funerallocation = action.payload.funerallocation;
       state.gravesideservice = action.payload.gravesideservice;
-      state.graveSidelocation = action.payload.gravesidelocation;
+      state.gravesidelocation = action.payload.gravesidelocation;
       state.memorialservice = action.payload.memorialservice;
       state.memoriallocation = action.payload.memoriallocation;
     },
