@@ -46,14 +46,14 @@ export const service = createSlice({
       state.extras = action.payload;
     },
     updateServiceSummaryReducer: (state, action) => {
-      state.guestList = action.payload.guestList;
+      state.guestList = action.payload.guestlist;
       state.participants = action.payload.participants;
-      state.prayersBool = action.payload.prayersBool;
-      state.prayersRead = action.payload.prayersRead;
-      state.musicBool = action.payload.musicBool;
-      state.musicPlayed = action.payload.musicPlayed;
-      state.cateringBool = action.payload.cateringBool;
-      state.cateringService = action.payload.cateringService;
+      state.prayersBool = action.payload.prayersbool;
+      state.prayersRead = action.payload.prayersread;
+      state.musicBool = action.payload.musicbool;
+      state.musicPlayed = action.payload.musicplayed;
+      state.cateringBool = action.payload.cateringbool;
+      state.cateringService = action.payload.cateringservice;
       state.extras = action.payload.extras;
     },
   },

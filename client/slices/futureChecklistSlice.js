@@ -27,9 +27,9 @@ export const checklist = createSlice({
       state.extras = action.payload;
     },
     updateChecklistSummaryReducer: (state, action) => {
-      state.petsBool = action.payload.petsBool;
+      state.petsBool = action.payload.petsbool;
       state.pets = action.payload.pets;
-      state.billsBool = action.payload.billsBool;
+      state.billsBool = action.payload.billsbool;
       state.bills = action.payload.bills;
       state.extras = action.payload.extras;
     },
