@@ -2,10 +2,9 @@
 import React from 'react';
 import {
   Container,
-  TextField,
   Typography,
   Button,
-  Link,
+  Box
 } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,10 +12,12 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useSelector } from 'react-redux';
 import { userInfoState } from '../slices/userInfoSlice';
+import '../css/Summary.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: '20px',
   },
   paper: {
     padding: theme.spacing(2),
@@ -38,7 +39,7 @@ const Summary = () => {
             <Paper className={classes.paper}>
               <Typography>First Name: {state.userInfo.firstName}</Typography>
               <Typography>Last Name: {state.userInfo.lastName}</Typography>
-              <Typography>email: {state.userInfo.email}</Typography>
+              <Typography>Email: {state.userInfo.email}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -64,7 +65,7 @@ const Summary = () => {
               <br></br>
               <Typography>Guest List: {state.service.guestList}</Typography>
               <Typography>
-                participants: {state.service.participants}
+                Participants: {state.service.participants}
               </Typography>
               <Typography>
                 Prayers/Readings: {state.service.prayersRead}
@@ -87,7 +88,12 @@ const Summary = () => {
               <Typography>Extras {state.checklist.extras}</Typography>
             </Paper>
           </Grid>
-          <Button onClick={() => history.push('/edit')}>Edit</Button>
+          <Box style={{margin: '0 auto', display: 'flex'}}>
+            <Button 
+              onClick={() => history.push('/edit')}>Edit</Button>
+            <Button 
+              onClick={() => window.print()}>Print</Button>
+          </Box>
         </Grid>
       </div>
     </Container>

@@ -32,6 +32,7 @@ import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 const useStyles = makeStyles((theme) => ({
   root2: {
     flexGrow: 1,
+    marginTop: '20px',
   },
   paper2: {
     padding: theme.spacing(2),
@@ -154,7 +155,7 @@ const EditSummary = () => {
                     control={<Radio />}
                     label={
                       <TextField
-                        placeholder='Other: Write your wishes here.'
+                        placeholder='Other'
                         onChange={(e) => {
                           handlePlanSummaryChange('Other: ' + e.target.value);
                         }}
@@ -190,7 +191,7 @@ const EditSummary = () => {
                 onChange={handlePlanSummaryChange('graveSideLocation')}
                 graveSideService='graveSideLocation'
                 id='graveSideLocation'
-                label='Graveside Service Location'
+                label='Location'
                 value={planSummary.graveSideLocation}
                 variant='outlined'
               />
@@ -201,7 +202,7 @@ const EditSummary = () => {
                 onChange={handlePlanSummaryChange('memorialLocation')}
                 memorialLocation='memorialLocation'
                 id='memorialLocation'
-                label='Memorial Service Location'
+                label='Location'
                 value={planSummary.memorialLocation}
                 variant='outlined'
               />
@@ -238,7 +239,7 @@ const EditSummary = () => {
                 onChange={handleServiceSummaryChange('prayersRead')}
                 prayersRead='prayersRead'
                 id='prayersRead'
-                label='Paryers/Readings'
+                label='Prayers/Readings'
                 value={serviceSummary.prayersRead}
                 variant='outlined'
               />
@@ -319,6 +320,7 @@ const EditSummary = () => {
               updateChecklistInfo();
               history.push('/summary');
             }}
+            style={{margin: '0 auto', display: 'flex'}}
           >
             Submit
           </Button>
