@@ -14,10 +14,10 @@ export const checkData = createSlice({
       state.planComplete = true;
     },
     serviceCompleteReducer: (state, action) => {
-      state.planComplete = true;
+      state.serviceComplete = true;
     },
     checklistCompleteReducer: (state, action) => {
-      state.planComplete = true;
+      state.checklistComplete = true;
     },
   },
 });
