@@ -37,7 +37,7 @@ const Catering = ({ serviceItems, setServiceItems }) => {
                 name='cateringBool'
               />
             }
-            label='I would like someone to cater my service'
+            label='I would like someone to cater my service.'
           />
           {cateringBool === true && (
             <TextField

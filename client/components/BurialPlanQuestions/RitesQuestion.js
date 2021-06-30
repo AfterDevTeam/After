@@ -32,6 +32,7 @@ const RitesQuestion = ({ setRite }) => {
             control={<Radio />}
             label={
               <TextField
+                style={{width: 250}}
                 placeholder='Other: Write your wishes here.'
                 onChange={(e) => {
                   setRite('Other: ' + e.target.value);
