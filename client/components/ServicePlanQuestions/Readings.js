@@ -37,7 +37,7 @@ const Readings = ({ serviceItems, setServiceItems }) => {
                 name='prayersBool'
               />
             }
-            label='I want some prayers or readings performed at my service'
+            label='I want some prayers or readings performed at my service.'
           />
           {prayersBool === true && (
             <TextField

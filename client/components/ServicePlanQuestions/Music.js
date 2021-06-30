@@ -37,7 +37,7 @@ const Music = ({ serviceItems, setServiceItems }) => {
                 name='musicBool'
               />
             }
-            label='I want some special music played at my service'
+            label='I want some special music played at my service.'
           />
           {musicBool === true && (
             <TextField
