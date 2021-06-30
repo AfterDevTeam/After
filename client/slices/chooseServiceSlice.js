@@ -19,22 +19,22 @@ export const service = createSlice({
   reducers: {
     guestListReducer: (state, action) => {
       console.log('action.payload in guestListReducer', action.payload);
-      state.guestList.push(action.payload);
+      state.guestList = action.payload;
       return;
     },
     participantsReducer: (state, action) => {
       console.log('action.payload in participantsReducer', action.payload);
-      state.participants.push(action.payload);
+      state.participants = action.payload;
     },
     prayersReadReducer: (state, action) => {
       console.log('action.payload in prayersReadReducer', action.payload);
       state.prayersBool = true;
-      state.prayersRead.push(action.payload);
+      state.prayersRead = action.payload;
     },
     musicPlayedReducer: (state, action) => {
       console.log('action.payload in musicPlayedReducer', action.payload);
       state.musicBool = true;
-      state.musicPlayed.push(action.payload);
+      state.musicPlayed = action.payload;
     },
     cateringServiceReducer: (state, action) => {
       console.log('action.payload in cateringServiceReducer', action.payload);
@@ -46,14 +46,14 @@ export const service = createSlice({
       state.extras = action.payload;
     },
     updateServiceSummaryReducer: (state, action) => {
-      state.guestList = action.payload.guestList;
+      state.guestList = action.payload.guestlist;
       state.participants = action.payload.participants;
-      state.prayersBool = action.payload.prayersBool;
-      state.prayersRead = action.payload.prayersRead;
-      state.musicBool = action.payload.musicBool;
-      state.musicPlayed = action.payload.musicPlayed;
-      state.cateringBool = action.payload.cateringBool;
-      state.cateringService = action.payload.cateringService;
+      state.prayersBool = action.payload.prayersbool;
+      state.prayersRead = action.payload.prayersread;
+      state.musicBool = action.payload.musicbool;
+      state.musicPlayed = action.payload.musicplayed;
+      state.cateringBool = action.payload.cateringbool;
+      state.cateringService = action.payload.cateringservice;
       state.extras = action.payload.extras;
     },
   },

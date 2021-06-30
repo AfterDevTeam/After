@@ -2,19 +2,23 @@
 
 import React, { useState, useEffect } from 'react';
 import DashboardSquare from './DashboardSquare';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import '../css/Dashboard.css';
 import { userInfoState } from '../slices/userInfoSlice';
+import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
 const Dashboard = () => {
   const state = useSelector(userInfoState);
+  const dispatch = useDispatch();
 
   const [squareHidden, toggleSquareHidden] = useState({
     burialPlan: null,
     service: null,
-    futureChecklist: null
-  })
-  const userId = state.userInfo.userId; 
+    futureChecklist: null,
+  });
+  const userId = state.userInfo.userId;
 
   //check database using userID to see if dashboard square is rendered or not
   useEffect(() => {
@@ -24,37 +28,45 @@ const Dashboard = () => {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify({
-        userId: userId
-      })
+        userId: userId,
+      }),
     })
-    .then((res) => res.json())
-    .then((dashboardStatus) => toggleSquareHidden({
-      burialPlan: dashboardStatus.burialPlan,
-      service: dashboardStatus.service,
-      futureChecklist: dashboardStatus.futureChecklist,
-    }))
-  });
+      .then((res) => res.json())
+      .then((dashboardStatus) =>
+        toggleSquareHidden({
+          burialPlan: dashboardStatus.burialPlan,
+          service: dashboardStatus.service,
+          futureChecklist: dashboardStatus.futureChecklist,
+        })
+      );
+    dispatch(updateRitesPlanSummaryReducer(state.plan));
+    dispatch(updateServiceSummaryReducer(state.service));
+    dispatch(updateChecklistSummaryReducer(state.checklist));
+  }, []);
 
   return (
     <div id='dashboard-container'>
       <h1>Your Journey</h1>
       <div id='dashboard-squares-container'>
-        { squareHidden.burialPlan === false && (
-          <DashboardSquare title='Select Your Burial/Rites Plan' route='/burial-plan' />
+        {squareHidden.burialPlan === false && (
+          <DashboardSquare
+            title='Select Your Burial/Rites Plan'
+            route='/burial-plan'
+          />
         )}
-        { squareHidden.burialPlan === true && (
+        {squareHidden.burialPlan === true && (
           <DashboardSquare title='Edit Burial/Rites Plan' route='/summary' />
         )}
-        { squareHidden.service === false && (
+        {squareHidden.service === false && (
           <DashboardSquare title='Plan Your Service' route='/service-plan' />
         )}
-        { squareHidden.service === true && (
+        {squareHidden.service === true && (
           <DashboardSquare title='Edit Service Plan' route='/summary' />
         )}
-        { squareHidden.futureChecklist === false && (
+        {squareHidden.futureChecklist === false && (
           <DashboardSquare title='Notes For The Future' route='/checklist' />
         )}
-        { squareHidden.futureChecklist === true && (
+        {squareHidden.futureChecklist === true && (
           <DashboardSquare title='Edit Future Checklist' route='/summary' />
         )}
       </div>
