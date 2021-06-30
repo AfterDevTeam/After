@@ -60,9 +60,9 @@ const Dashboard = () => {
         { squareHidden.futureChecklist === true && (
           <DashboardSquare title='Edit Future Checklist' route='/summary' />
         )}
-      </div>
-      <Button id='export-button'>Export</Button>
-    </div>
+        </div>
+          <Button id='export-button'>Export</Button>
+      </div>  
   );
 };
 
