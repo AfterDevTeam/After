@@ -275,7 +275,7 @@ afterController.getPlanSummary = async (req, res, next) => {
   if (Object.keys(req.body).length > 0) {
     console.log('made it');
     try {
-      console.log(req.body);
+      // console.log(req.body);
       const planQuery = 'SELECT * FROM burialPlan WHERE _id = ($1)';
       const value = [req.body.userInfo.userId];
       const data = await db.query(planQuery, value);
@@ -293,7 +293,7 @@ afterController.getServiceSummary = async (req, res, next) => {
   if (Object.keys(req.body).length > 0) {
     console.log('made it');
     try {
-      console.log(req.body);
+      // console.log(req.body);
       const planQuery = 'SELECT * FROM service WHERE _id = ($1)';
       const value = [req.body.userInfo.userId];
       const data = await db.query(planQuery, value);
@@ -311,7 +311,7 @@ afterController.getChecklistSummary = async (req, res, next) => {
   if (Object.keys(req.body).length > 0) {
     console.log('made it');
     try {
-      console.log(req.body);
+      // console.log(req.body);
       const planQuery = 'SELECT * FROM checklist WHERE _id = ($1)';
       const value = [req.body.userInfo.userId];
       const data = await db.query(planQuery, value);

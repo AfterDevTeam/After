@@ -39,7 +39,7 @@ router.post('/dashboard-check', afterController.dashboardCheck, (req, res) => {
 });
 
 router.post('/planSummary', afterController.getPlanSummary, (req, res) => {
-  // console.log('res.locals in planSummary', res.locals);
+  console.log('res.locals in planSummary', res.locals);
   res.status(200).json(res.locals);
 });
 
@@ -55,7 +55,7 @@ router.post(
   '/checklistSummary',
   afterController.getChecklistSummary,
   (req, res) => {
-    console.log('res.locals in serviceSummary', res.locals);
+    console.log('res.locals in checklistSummary', res.locals);
     res.status(200).json(res.locals);
   }
 );
