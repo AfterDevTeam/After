@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textAlign: 'center',
     fontFamily: ['Sacramento', 'cursive'],
-    margin: '20px',
+    marginTop: '20px',
+    marginBottom: '20px',
+    marginRight: '100px',
   },
 }));
 
@@ -70,11 +72,14 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              <MenuItem onClick={() => history.push('/')}>Home</MenuItem>
+              <MenuItem onClick={() => history.push('/login')}>Login</MenuItem>
+              <MenuItem onClick={() => history.push('/signup')}>Signup</MenuItem>
               <MenuItem onClick={() => history.push('/summary')}>
-                Profile
+                My Account
               </MenuItem>
               <MenuItem onClick={() => history.push('/dashboard')}>
-                Dashboard
+                Your Journey
               </MenuItem>
               <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
             </Menu>
@@ -82,9 +87,6 @@ const Navbar = () => {
           <Typography variant='h3' className={classes.title}>
             After
           </Typography>
-          <Link to='/login'>
-            <Button color='inherit'>Login</Button>
-          </Link>
         </Toolbar>
       </AppBar>
     </div>

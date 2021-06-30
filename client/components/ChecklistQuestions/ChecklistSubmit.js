@@ -23,8 +23,8 @@ const ChecklistSubmit = () => {
   };
 
   return (
-    <div>
-      Are you ready to submit your checklist?
+    <div id="submit-carousel"> 
+      <span>Are you ready to submit your checklist?</span>
       <button onClick={submitToDb}>Submit</button>
     </div>
   );

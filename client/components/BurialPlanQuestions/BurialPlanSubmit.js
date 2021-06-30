@@ -22,8 +22,8 @@ const BurialPlanSubmit = () => {
   };
 
   return (
-    <div>
-      Are you ready to submit your arrangements?
+    <div id="submit-carousel">
+      <span>Are you ready to submit your arrangements?</span>
       <button onClick={submitToDb}>Submit</button>
     </div>
   );
