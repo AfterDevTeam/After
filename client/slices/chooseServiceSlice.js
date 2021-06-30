@@ -57,9 +57,6 @@ export const service = createSlice({
       state.cateringService = action.payload.cateringService;
       state.extras = action.payload.extras;
     },
-    serviceCompleteReducer: (state, action) => {
-      state.serviceComplete = true;
-    },
   },
 });
 
@@ -71,7 +68,6 @@ export const {
   cateringServiceReducer,
   extrasReducer,
   updateServiceSummaryReducer,
-  serviceCompleteReducer,
 } = service.actions;
 
 export default service.reducer;
