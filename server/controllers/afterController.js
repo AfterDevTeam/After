@@ -1,6 +1,7 @@
 /** @format */
 
 const db = require('../models/afterModels.js');
+const userController = require('./userController.js');
 // const service = require(model for service)
 // const future = require(model for future)
 // const db = require('../models/afterModels');
@@ -21,34 +22,52 @@ afterController.installUUID = (req, res, next) => {
 // these are the get request for each box
 // retrieve information from the database for plan
 afterController.getPlan = async (req, res, next) => {
-  try {
-    const planQuery = 'SELECT * FROM burialPlan';
-    res.locals = await db.query(planQuery);
+  if (Object.keys(res.locals.userInfo).length > 0) {
+    try {
+      const planQuery = 'SELECT * FROM burialPlan WHERE _id = ($1)';
+      const value = [res.locals.userInfo.userId]
+      const data = await db.query(planQuery,value);
+      res.locals.burialPlan = data.rows[0]
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  } else {
     return next();
-  } catch (error) {
-    return next(error);
   }
 };
 
 // retrieve information from the database for service
 afterController.getService = async (req, res, next) => {
-  try {
-    const serviceQuery = 'SELECT * FROM serviceplan';
-    res.locals = await db.query(serviceQuery);
+  if (Object.keys(res.locals.userInfo).length > 0) {
+    try {
+      const serviceQuery = 'SELECT * FROM service WHERE _id = ($1)';
+      const value = [res.locals.userInfo.userId]
+      const data =  await db.query(serviceQuery, value)
+      res.locals.service = data.rows[0];
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  } else {
     return next();
-  } catch (error) {
-    return next(error);
   }
 };
 
 // retrieve information from the database for future
 afterController.getFuture = async (req, res, next) => {
-  try {
-    const futureQuery = 'SELECT * FROM checklist';
-    res.locals = await db.query(futureQuery);
+  if (Object.keys(res.locals.userInfo).length > 0) {
+    try {
+      const futureQuery = 'SELECT * FROM checklist WHERE _id = ($1)';
+      const value = [res.locals.userInfo.userId]
+      const data =  await db.query(futureQuery, value)
+      res.locals.checklist = data.rows[0];
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  }else{
     return next();
-  } catch (error) {
-    return next(error);
   }
 };
 
@@ -179,28 +198,36 @@ afterController.dashboardCheck = async (req, res, next) => {
     res.locals.dashboardState = {
       burialPlan: false,
       service: false,
-      futureChecklist: false
-    }
+      futureChecklist: false,
+    };
     //retrieve userID from request
-    const userId = req.body.userId
+    const userId = req.body.userId;
     //use userID to query all databases for data
-    const planDashboardQuery = `SELECT * FROM burialPlan WHERE _id = $1`
-    const planDashboardData = await db.query(planDashboardQuery, [userId])
-    if (planDashboardData.rowCount > 0) res.locals.dashboardState.burialPlan = true;
-    
-    const serviceDashboardQuery = `SELECT * FROM service WHERE _id = $1`
-    const serviceDashboardQueryData = await db.query(serviceDashboardQuery, [userId])
-    if (serviceDashboardQueryData.rowCount > 0) res.locals.dashboardState.service = true;
+    const planDashboardQuery = `SELECT * FROM burialPlan WHERE _id = $1`;
+    const planDashboardData = await db.query(planDashboardQuery, [userId]);
+    if (planDashboardData.rowCount > 0)
+      res.locals.dashboardState.burialPlan = true;
 
-    const checklistDashboardQuery = `SELECT * FROM checklist WHERE _id = $1`
-    const checklistDashboardQueryData = await db.query(checklistDashboardQuery, [userId])
-    if (checklistDashboardQueryData.rowCount > 0) res.locals.dashboardState.futureChecklist = true;
-    
+    const serviceDashboardQuery = `SELECT * FROM service WHERE _id = $1`;
+    const serviceDashboardQueryData = await db.query(serviceDashboardQuery, [
+      userId,
+    ]);
+    if (serviceDashboardQueryData.rowCount > 0)
+      res.locals.dashboardState.service = true;
+
+    const checklistDashboardQuery = `SELECT * FROM checklist WHERE _id = $1`;
+    const checklistDashboardQueryData = await db.query(
+      checklistDashboardQuery,
+      [userId]
+    );
+    if (checklistDashboardQueryData.rowCount > 0)
+      res.locals.dashboardState.futureChecklist = true;
+
     return next();
   } catch (error) {
     return next(error);
   }
-}
+};
 
 /*
 prefController.fetchPreferences = (req, res, next) => {

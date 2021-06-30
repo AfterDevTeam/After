@@ -41,9 +41,11 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
-        if (typeof data === 'object') {
+        if (typeof data.userInfo === 'object') {
           //save the data in the Redux store
-          const { firstName, lastName, email, userId } = data;
+          const { firstName, lastName, email, userId } = data.userInfo;
+
+          console.log(data)
 
           dispatch(firstNameReducer(firstName));
           dispatch(lastNameReducer(lastName));
