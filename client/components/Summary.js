@@ -75,7 +75,8 @@ const Summary = () => {
       .then((res) => {
         console.log(res);
         dispatch(updateChecklistSummaryReducer(res.data.checklist));
-      });
+      })
+      .then(() => {});
   };
 
   console.log('User Info State in Summary: ', state2);
