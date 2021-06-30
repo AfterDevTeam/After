@@ -55,6 +55,7 @@ export const service = createSlice({
       state.cateringBool = action.payload.cateringBool;
       state.cateringService = action.payload.cateringService;
       state.extras = action.payload.extras;
+      console.log('hello');
     },
   },
 });
