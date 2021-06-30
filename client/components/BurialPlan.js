@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Slide } from '@material-ui/core';
@@ -20,14 +22,13 @@ const BurialPlan = () => {
   const [rite, setRite] = useState(null);
   const [funeralHome, setFuneralHome] = useState(null);
 
-
   const [service, setService] = useState({
-    funeralService: false,
-    funeralServiceLocation: '',
-    gravesideService: false,
-    gravesideServiceLocation: '',
-    memorialService: false,
-    memorialServiceLocation: '',
+    funeralservice: false,
+    funeralservicelocation: '',
+    gravesideservice: false,
+    gravesideservicelocation: '',
+    memorialservice: false,
+    memorialservicelocation: '',
   });
 
   const BurialPlanQuestions = [
@@ -37,16 +38,14 @@ const BurialPlan = () => {
     <BurialPlanSubmit />,
   ];
 
-
-  return(
-    <div id="burial-plan-container">
-      <Slide in={true} direction="left" mountOnEnter unmountOnExit>
-        <div>
-          {BurialPlanQuestions[BPQuestionIdx]}
-        </div>
+  return (
+    <div id='burial-plan-container'>
+      <Slide in={true} direction='left' mountOnEnter unmountOnExit>
+        <div>{BurialPlanQuestions[BPQuestionIdx]}</div>
       </Slide>
       <button
-        onClick={() => setBPQuestionIdx(BPQuestionIdx > 0 ? BPQuestionIdx - 1 : 0)
+        onClick={() =>
+          setBPQuestionIdx(BPQuestionIdx > 0 ? BPQuestionIdx - 1 : 0)
         }
       >
         Previous
@@ -81,7 +80,7 @@ const BurialPlan = () => {
         Next
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default BurialPlan;

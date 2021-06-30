@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useSelector } from 'react-redux';
 import { userInfoState } from '../slices/userInfoSlice';
+import { planState } from '../slices/selectPlanSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,49 @@ const Summary = () => {
   const history = useHistory();
   const state = useSelector(userInfoState);
   const classes = useStyles();
+  const regex = /\w/g;
+
+  const parse = (str) => {
+    console.log('str', str);
+    if (str === undefined || str === null || str.length === 0 || str === []) {
+      console.log('will return null');
+      return null;
+    } else {
+      const result = [];
+      str.split('').forEach((char) => {
+        if (char !== '{' && char !== '}' && char !== '"') {
+          if (char === ',') char = ', ';
+          result.push(char);
+        }
+      });
+      console.log(result);
+      return result.join('');
+    }
+  };
+
+  const { firstName, lastName, email } = state.userInfo;
+
+  const {
+    rite,
+    funeralhome,
+    funerallocation,
+    gravesidelocation,
+    memoriallocation,
+  } = state.plan;
+
+  const { cateringService, serviceExtras } = state.service;
+
+  const { checklistExtras } = state.checklist;
+
+  const guestList = parse(state.service.guestlist);
+  const participants = parse(state.service.participants);
+  const readings = parse(state.service.prayersread);
+  const music = parse(state.service.musicplayed);
+  const pets = parse(state.checklist.pets);
+  const bills = parse(state.checklist.bills);
+
+  console.log('parsed?', parse(state.checklist.pets));
+
   console.log('User Info State in Summary: ', state);
   return (
     <Container>
@@ -36,25 +80,23 @@ const Summary = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography>First Name: {state.userInfo.firstName}</Typography>
-              <Typography>Last Name: {state.userInfo.lastName}</Typography>
-              <Typography>email: {state.userInfo.email}</Typography>
+              <Typography>First Name: {firstName}</Typography>
+              <Typography>Last Name: {lastName}</Typography>
+              <Typography>email: {email}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>
               <Typography>Burial/Rites Plan</Typography>
               <br></br>
-              <Typography>Rite: {state.plan.rite}</Typography>
-              <Typography>Funeral Home: {state.plan.funeralHome}</Typography>
+              <Typography>Rite: {rite}</Typography>
+              <Typography>Funeral Home: {funeralhome}</Typography>
+              <Typography>Funeral Location: {funerallocation}</Typography>
               <Typography>
-                Funeral Location: {state.plan.funeralLocation}
+                Graveside Service Location: {gravesidelocation}
               </Typography>
               <Typography>
-                Graveside Service Location: {state.plan.graveSideLocation}
-              </Typography>
-              <Typography>
-                Memorial Service Location: {state.plan.memorialLocation}
+                Memorial Service Location: {memoriallocation}
               </Typography>
             </Paper>
           </Grid>
@@ -62,29 +104,23 @@ const Summary = () => {
             <Paper className={classes.paper}>
               <Typography>Service Plan</Typography>
               <br></br>
-              <Typography>Guest List: {state.service.guestList}</Typography>
-              <Typography>
-                participants: {state.service.participants}
-              </Typography>
-              <Typography>
-                Prayers/Readings: {state.service.prayersRead}
-              </Typography>
-              <Typography>Music: {state.service.musicPlayed}</Typography>
-              <Typography>
-                Catering Service: {state.service.cateringService}
-              </Typography>
-              <Typography>Extras {state.service.extras}</Typography>
+              <Typography>Guest List: {guestList}</Typography>
+              <Typography>participants: {participants}</Typography>
+              <Typography>Prayers/Readings: {readings}</Typography>
+              <Typography>Music: {music}</Typography>
+              <Typography>Catering Service: {cateringService}</Typography>
+              <Typography>Extras {serviceExtras}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>
               <Typography>Future Checklist</Typography>
               <br></br>
-              <Typography>Pets: {state.checklist.pets}</Typography>
+              <Typography>Pets: {pets}</Typography>
 
-              <Typography>Bills: {state.checklist.bills}</Typography>
+              <Typography>Bills: {bills}</Typography>
 
-              <Typography>Extras {state.checklist.extras}</Typography>
+              <Typography>Extras {checklistExtras}</Typography>
             </Paper>
           </Grid>
           <Button onClick={() => history.push('/edit')}>Edit</Button>
