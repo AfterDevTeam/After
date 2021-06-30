@@ -77,7 +77,7 @@ const Summary = () => {
             </Paper>
           </Grid>
           <Grid item xs={4}>
-            <Paper className={classes.paper2}>
+            <Paper className={classes.paper}>
               <Typography>Future Checklist</Typography>
               <br></br>
               <Typography>Pets: {state.checklist.pets}</Typography>
