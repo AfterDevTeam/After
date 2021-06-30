@@ -24,7 +24,6 @@ userController.verifyUser = async (req, res, next) => {
     const values = [req.body.email];
     const userValid = await db.query(userQuery, values);
 
-    console.log(values, userValid.rows[0])
     if (userValid.rows.length === 0) {
       return next();
     } else {
