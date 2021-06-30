@@ -154,25 +154,25 @@ const EditSummary = () => {
                 <FormLabel component="legend">Select your rites.</FormLabel>
                 <RadioGroup aria-label="select-your-rites">
                   <FormControlLabel
-                    value='casket'
-                    rite='Casket'
-                    id='rite'
+                    value="casket"
+                    rite="Casket"
+                    id="rite"
                     control={<Radio />}
-                    label='Casket'
+                    label="Casket"
                     onClick={handlePlanSummaryChange('rite')}
                   />
                   <FormControlLabel
-                    value='cremation'
-                    rite='Cremation'
-                    id='rite'
+                    value="cremation"
+                    rite="Cremation"
+                    id="rite"
                     control={<Radio />}
-                    label='Cremation'
+                    label="Cremation"
                     onClick={handlePlanSummaryChange('rite')}
                   />
                   <FormControlLabel
-                    value='other'
-                    id='rite'
-                    rite='rite'
+                    value="other"
+                    id="rite"
+                    rite="rite"
                     control={<Radio />}
                     label={
                       <TextField
@@ -335,10 +335,10 @@ const EditSummary = () => {
               dispatch(updateRitesPlanSummaryReducer(planSummary));
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
-              updateUserInfo();
-              updatePlanInfo();
-              // updateServiceInfo();
-              // updateChecklistInfo();
+              //updateUserInfo();
+              //updatePlanInfo();
+              updateServiceInfo();
+              //updateChecklistInfo();
               history.push('/summary');
             }}
           >

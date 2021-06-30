@@ -156,16 +156,52 @@ afterController.deleteFuture = async (req, res, next) => {
 //  need update functionality
 afterController.updatePlan = async (req, res, next) => {
   try {
-    let keyValueList = [];
+    const keyValueList = [];
     Object.keys(req.body.plan).forEach((key) =>
       keyValueList.push(`${key}='${req.body.plan[key]}'`)
     );
     console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
-    const planQuery = `UPDATE burialPlan SET _id='${req.body.userInfo.userId}', ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    const planQuery = `UPDATE burialPlan SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
     console.log('planQuery', planQuery);
     await db.query(planQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+afterController.updateService = async (req, res, next) => {
+  try {
+    console.log(req.body.service);
+    const keyValueList = [];
+    Object.keys(req.body.service).forEach((key) =>
+      keyValueList.push(`${key}='${req.body.service[key]}'`)
+    );
+    console.log('this is the keyValueList for Update function', keyValueList);
+    const stringList = keyValueList.toString();
+
+    const serviceQuery = `UPDATE service SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    console.log('serviceQuery', serviceQuery);
+    await db.query(serviceQuery);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
+afterController.updateFuture = async (req, res, next) => {
+  try {
+    const keyValueList = [];
+    Object.keys(req.body.checklist).forEach((key) =>
+      keyValueList.push(`${key}='${req.body.checklist[key]}'`)
+    );
+    console.log('this is the keyValueList for Update function', keyValueList);
+    const stringList = keyValueList.toString();
+
+    const futureQuery = `UPDATE checklist SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    console.log('futureQuery', futureQuery);
+    await db.query(futureQuery);
     return next();
   } catch (error) {
     return next(error);
@@ -179,28 +215,36 @@ afterController.dashboardCheck = async (req, res, next) => {
     res.locals.dashboardState = {
       burialPlan: false,
       service: false,
-      futureChecklist: false
-    }
+      futureChecklist: false,
+    };
     //retrieve userID from request
-    const userId = req.body.userId
+    const userId = req.body.userId;
     //use userID to query all databases for data
-    const planDashboardQuery = `SELECT * FROM burialPlan WHERE _id = $1`
-    const planDashboardData = await db.query(planDashboardQuery, [userId])
-    if (planDashboardData.rowCount > 0) res.locals.dashboardState.burialPlan = true;
-    
-    const serviceDashboardQuery = `SELECT * FROM service WHERE _id = $1`
-    const serviceDashboardQueryData = await db.query(serviceDashboardQuery, [userId])
-    if (serviceDashboardQueryData.rowCount > 0) res.locals.dashboardState.service = true;
+    const planDashboardQuery = `SELECT * FROM burialPlan WHERE _id = $1`;
+    const planDashboardData = await db.query(planDashboardQuery, [userId]);
+    if (planDashboardData.rowCount > 0)
+      res.locals.dashboardState.burialPlan = true;
 
-    const checklistDashboardQuery = `SELECT * FROM checklist WHERE _id = $1`
-    const checklistDashboardQueryData = await db.query(checklistDashboardQuery, [userId])
-    if (checklistDashboardQueryData.rowCount > 0) res.locals.dashboardState.futureChecklist = true;
-    
+    const serviceDashboardQuery = `SELECT * FROM service WHERE _id = $1`;
+    const serviceDashboardQueryData = await db.query(serviceDashboardQuery, [
+      userId,
+    ]);
+    if (serviceDashboardQueryData.rowCount > 0)
+      res.locals.dashboardState.service = true;
+
+    const checklistDashboardQuery = `SELECT * FROM checklist WHERE _id = $1`;
+    const checklistDashboardQueryData = await db.query(
+      checklistDashboardQuery,
+      [userId]
+    );
+    if (checklistDashboardQueryData.rowCount > 0)
+      res.locals.dashboardState.futureChecklist = true;
+
     return next();
   } catch (error) {
     return next(error);
   }
-}
+};
 
 /*
 prefController.fetchPreferences = (req, res, next) => {
