@@ -1,17 +1,24 @@
 /** @format */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   Typography,
   Button,
   Box
 } from '@material-ui/core';
+import axios from 'axios';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { userInfoState } from '../slices/userInfoSlice';
+import {
+  planState,
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,10 +33,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Summary = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const state = useSelector(userInfoState);
+  const state2 = useSelector(planState);
   const classes = useStyles();
-  console.log('User Info State in Summary: ', state);
+
+  useEffect(() => {
+    getPlanInfo();
+    getServiceInfo();
+    getChecklistInfo();
+  }, []);
+
+  const getPlanInfo = () => {
+    return axios
+      .post('/api/planSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateRitesPlanSummaryReducer(res.data.burialPlan));
+      });
+  };
+
+  const getServiceInfo = () => {
+    return axios
+      .post('/api/serviceSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateServiceSummaryReducer(res.data.service));
+      });
+  };
+
+  const getChecklistInfo = () => {
+    return axios
+      .post('/api/checklistSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateChecklistSummaryReducer(res.data.checklist));
+      })
+      .then(() => {});
+  };
+
+  console.log('User Info State in Summary: ', state2);
   return (
     <Container>
       <div className={classes.root}>

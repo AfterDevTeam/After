@@ -18,17 +18,9 @@ import {
   serviceCompleteReducer,
   checklistCompleteReducer,
 } from '../slices/checkDataSlice';
-import  {
-  updateServiceSummaryReducer,
-} from '../slices/chooseServiceSlice';
-import {
-  updateRitesPlanSummaryReducer,
-} from '../slices/selectPlanSlice';
-import {
-  updateChecklistSummaryReducer,
-} from '../slices/futureChecklistSlice';
-
-
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
 const Login = (props) => {
   //history for routing
@@ -56,30 +48,30 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
-        console.log(data);
+        console.log('data in login', data);
         if (typeof data === 'object') {
           //save the data in the Redux store
           // check for value
           if (typeof data.userInfo === 'object') {
             const { firstName, lastName, email, userId } = data.userInfo;
-                dispatch(firstNameReducer(firstName));
-                dispatch(lastNameReducer(lastName));
-                dispatch(emailReducer(email));
-                dispatch(userIdReducer(userId));
+            dispatch(firstNameReducer(firstName));
+            dispatch(lastNameReducer(lastName));
+            dispatch(emailReducer(email));
+            dispatch(userIdReducer(userId));
           }
           // check for value
-          if (typeof data.checklist === 'object') { 
+          if (typeof data.checklist === 'object') {
             const { petsBool, pets, billsBool, bills, extras } = data.checklist;
-              dispatch(updateChecklistSummaryReducer(data.checklist));
-              dispatch(checklistCompleteReducer());
+            dispatch(updateChecklistSummaryReducer(data.checklist));
+            dispatch(checklistCompleteReducer());
           }
           // check for value
-          if (typeof data.plan === 'object') { 
-            dispatch(updateRitesPlanSummaryReducer(data.plan));
+          if (typeof data.burialPlan === 'object') {
+            dispatch(updateRitesPlanSummaryReducer(data.burialPlan));
             dispatch(planCompleteReducer());
-          // check for value
+            // check for value
           }
-          if (typeof data.service === 'object')  { 
+          if (typeof data.service === 'object') {
             dispatch(updateServiceSummaryReducer(data.service));
             dispatch(serviceCompleteReducer());
           }
@@ -110,31 +102,29 @@ const Login = (props) => {
     <div className='loginContainer'>
       <h2>Log In</h2>
       <form onSubmit={handleSubmitLogin}>
-          <div className="input-container">
-            <label htmlFor="email">
-              Email
-            </label>
-            <input
-                type='email'
-                value={inputUsername}
-                placeholder='username'
-                onChange={(event) => handleChangeLoginUserName(event)}
-              />
-          </div>
-          <div className="input-container">
-            <label htmlFor="password">
-              Password
-            </label>
-            <input
-                type='password'
-                value={inputPassword}
-                placeholder='password'
-                onChange={(event) => handleChangeLoginPassword(event)}
-              />
-          </div>
-        <div id="login-buttons">
-          <button type="submit">Log In</button>
-          <button onClick={() => history.push('/signup')}>Create An Account</button>
+        <div className='input-container'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            value={inputUsername}
+            placeholder='username'
+            onChange={(event) => handleChangeLoginUserName(event)}
+          />
+        </div>
+        <div className='input-container'>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            value={inputPassword}
+            placeholder='password'
+            onChange={(event) => handleChangeLoginPassword(event)}
+          />
+        </div>
+        <div id='login-buttons'>
+          <button type='submit'>Log In</button>
+          <button onClick={() => history.push('/signup')}>
+            Create An Account
+          </button>
         </div>
       </form>
     </div>
