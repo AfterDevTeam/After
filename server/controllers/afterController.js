@@ -158,13 +158,13 @@ afterController.updatePlan = async (req, res, next) => {
   try {
     let keyValueList = [];
     Object.keys(req.body.plan).forEach((key) =>
-      keyValueList.push(`${key}=${req.body.plan[key]}`)
+      keyValueList.push(`${key}='${req.body.plan[key]}'`)
     );
     console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
-    const planQuery = `UPDATE burialPlan SET (${stringList}) WHERE _id = '${req.body.userInfo.userId}'`;
-
+    const planQuery = `UPDATE burialPlan SET _id='${req.body.userInfo.userId}', ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    console.log('planQuery', planQuery);
     await db.query(planQuery);
     return next();
   } catch (error) {

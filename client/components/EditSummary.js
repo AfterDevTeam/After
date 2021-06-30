@@ -54,6 +54,8 @@ const EditSummary = () => {
   };
 
   const handlePlanSummaryChange = (prop) => (e) => {
+    console.log('prop', prop);
+    console.log('event in plan summary change', e.target.value);
     setPlanSummary({ ...planSummary, [prop]: e.target.value });
   };
 
@@ -69,28 +71,37 @@ const EditSummary = () => {
 
   const updateUserInfo = () => {
     axios
-      .put('/user/update', { body: userInfoSummary })
+      .put('/user/update', { userInfo: { ...userInfoSummary } })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const updatePlanInfo = () => {
     return axios
-      .put('/api/plan', { body: planSummary })
+      .put('/api/plan', {
+        plan: { ...planSummary },
+        userInfo: { ...userInfoSummary },
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const updateServiceInfo = () => {
     return axios
-      .put('/api/service', { body: serviceSummary })
+      .put('/api/service', {
+        service: serviceSummary,
+        userInfo: userInfoSummary,
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const updateChecklistInfo = () => {
     axios
-      .put('/api/future', { body: checklistSummary })
+      .put('/api/future', {
+        checklist: checklistSummary,
+        userInfo: userInfoSummary,
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -143,22 +154,25 @@ const EditSummary = () => {
                 <FormLabel component="legend">Select your rites.</FormLabel>
                 <RadioGroup aria-label="select-your-rites">
                   <FormControlLabel
-                    value="casket"
-                    rite="rite"
+                    value='casket'
+                    rite='Casket'
+                    id='rite'
                     control={<Radio />}
-                    label="Casket"
-                    onClick={handlePlanSummaryChange('Casket')}
+                    label='Casket'
+                    onClick={handlePlanSummaryChange('rite')}
                   />
                   <FormControlLabel
-                    value="cremation"
-                    rite="rite"
+                    value='cremation'
+                    rite='Cremation'
+                    id='rite'
                     control={<Radio />}
-                    label="Cremation"
-                    onClick={handlePlanSummaryChange('Cremation')}
+                    label='Cremation'
+                    onClick={handlePlanSummaryChange('rite')}
                   />
                   <FormControlLabel
-                    value="other"
-                    rite="rite"
+                    value='other'
+                    id='rite'
+                    rite='rite'
                     control={<Radio />}
                     label={
                       <TextField
