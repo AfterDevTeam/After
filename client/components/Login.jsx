@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import '../css/login.css';
+import '../css/Login.css';
 import { useDispatch } from 'react-redux';
 import {
   firstNameReducer,
@@ -13,11 +13,26 @@ import {
   emailReducer,
   userIdReducer,
 } from '../slices/userInfoSlice';
+import {
+  planCompleteReducer,
+  serviceCompleteReducer,
+  checklistCompleteReducer,
+} from '../slices/checkDataSlice';
+import  {
+  updateServiceSummaryReducer,
+} from '../slices/chooseServiceSlice';
+import {
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import {
+  updateChecklistSummaryReducer,
+} from '../slices/futureChecklistSlice';
+
+
 
 const Login = (props) => {
   //history for routing
   const history = useHistory();
-
   // dispatch for redux state
   const dispatch = useDispatch();
 
@@ -41,17 +56,33 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
-        if (typeof data.userInfo === 'object') {
+        console.log(data);
+        if (typeof data === 'object') {
           //save the data in the Redux store
-          const { firstName, lastName, email, userId } = data.userInfo;
-
-          console.log(data)
-
-          dispatch(firstNameReducer(firstName));
-          dispatch(lastNameReducer(lastName));
-          dispatch(emailReducer(email));
-          dispatch(userIdReducer(userId));
-          // reset the inputs to empty strings
+          // check for value
+          if (typeof data.userInfo === 'object') {
+            const { firstName, lastName, email, userId } = data.userInfo;
+                dispatch(firstNameReducer(firstName));
+                dispatch(lastNameReducer(lastName));
+                dispatch(emailReducer(email));
+                dispatch(userIdReducer(userId));
+          }
+          // check for value
+          if (typeof data.checklist === 'object') { 
+            const { petsBool, pets, billsBool, bills, extras } = data.checklist;
+              dispatch(updateChecklistSummaryReducer(data.checklist));
+              dispatch(checklistCompleteReducer());
+          }
+          // check for value
+          if (typeof data.plan === 'object') { 
+            dispatch(updateRitesPlanSummaryReducer(data.plan));
+            dispatch(planCompleteReducer());
+          // check for value
+          }
+          if (typeof data.service === 'object')  { 
+            dispatch(updateServiceSummaryReducer(data.service));
+            dispatch(serviceCompleteReducer());
+          }
           setInputUsername('');
           setInputPassword('');
           //redirect to dashboard
@@ -79,32 +110,32 @@ const Login = (props) => {
     <div className='loginContainer'>
       <h2>Log In</h2>
       <form onSubmit={handleSubmitLogin}>
-        <div>
-          <label>
-            Email
+          <div className="input-container">
+            <label htmlFor="email">
+              Email
+            </label>
             <input
-              type='email'
-              value={inputUsername}
-              placeholder='username'
-              onChange={(event) => handleChangeLoginUserName(event)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
+                type='email'
+                value={inputUsername}
+                placeholder='username'
+                onChange={(event) => handleChangeLoginUserName(event)}
+              />
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">
+              Password
+            </label>
             <input
-              type='text'
-              value={inputPassword}
-              placeholder='password'
-              onChange={(event) => handleChangeLoginPassword(event)}
-            />
-          </label>
+                type='text'
+                value={inputPassword}
+                placeholder='password'
+                onChange={(event) => handleChangeLoginPassword(event)}
+              />
+          </div>
+        <div id="login-buttons">
+          <button type="submit">Log In</button>
+          <button onClick={() => history.push('/signup')}>Create An Account</button>
         </div>
-        <div>
-          <Button type='submit'>Log in</Button>
-        </div>
-        <Link to='/SignUp'>Click here to make an account.</Link>
       </form>
     </div>
   );
