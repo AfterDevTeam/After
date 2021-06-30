@@ -15,7 +15,6 @@ export const service = createSlice({
     cateringBool: false,
     cateringService: '',
     extras: '',
-    serviceComplete: false,
   },
   reducers: {
     guestListReducer: (state, action) => {
