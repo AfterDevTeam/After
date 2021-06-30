@@ -2,15 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import DashboardSquare from './DashboardSquare';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import '../css/Dashboard.css';
 import { userInfoState } from '../slices/userInfoSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
+import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
 
 const Dashboard = () => {
   const state = useSelector(userInfoState);
+  const dispatch = useDispatch();
   const history = useHistory();
+  console.log('state', state);
 
   const [squareHidden, toggleSquareHidden] = useState({
     burialPlan: null,
@@ -38,6 +43,9 @@ const Dashboard = () => {
           futureChecklist: dashboardStatus.futureChecklist,
         })
       );
+    dispatch(updateChecklistSummaryReducer(state.checklist));
+    dispatch(updateRitesPlanSummaryReducer(state.plan));
+    dispatch(updateServiceSummaryReducer(state.service));
   }, []);
   console.log('squareHidden', squareHidden);
   return (
