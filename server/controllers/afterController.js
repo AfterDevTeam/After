@@ -146,8 +146,9 @@ afterController.addFuture = async (req, res, next) => {
 //  delete functionality
 afterController.deletePlan = async (req, res, next) => {
   try {
-    const planQuery = `DELETE FROM burialPlan WHERE _id = '${req.body.userInfo.userId}'`;
-    await db.query(planQuery);
+    const userId = req.body.userInfo.userId;
+    const planQuery = `DELETE FROM burialPlan WHERE _id = $1`;
+    await db.query(planQuery, [userId]);
     return next();
   } catch (error) {
     return next(error);
@@ -155,8 +156,9 @@ afterController.deletePlan = async (req, res, next) => {
 };
 afterController.deleteService = async (req, res, next) => {
   try {
-    const serviceQuery = `DELETE FROM service WHERE _id = '${req.body.userInfo.userId}'`;
-    await db.query(serviceQuery);
+    const userId = req.body.userInfo.userId;
+    const serviceQuery = `DELETE FROM service WHERE _id = $1`;
+    await db.query(serviceQuery, [userId]);
     return next();
   } catch (error) {
     return next(error);
@@ -164,8 +166,9 @@ afterController.deleteService = async (req, res, next) => {
 };
 afterController.deleteFuture = async (req, res, next) => {
   try {
-    const futureQuery = `DELETE FROM checklist WHERE _id = '${req.body.userInfo.userId}'`;
-    await db.query(futureQuery);
+    const userId = req.body.userInfo.userId;
+    const futureQuery = `DELETE FROM checklist WHERE _id = $1`;
+    await db.query(futureQuery, [userId]);
     return next();
   } catch (error) {
     return next(error);
@@ -175,6 +178,7 @@ afterController.deleteFuture = async (req, res, next) => {
 //  need update functionality
 afterController.updatePlan = async (req, res, next) => {
   try {
+    const userId = req.body.userInfo.userId;
     const keyValueList = [];
     Object.keys(req.body.plan).forEach((key) =>
       keyValueList.push(`${key}='${req.body.plan[key]}'`)
@@ -182,9 +186,9 @@ afterController.updatePlan = async (req, res, next) => {
     //console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
-    const planQuery = `UPDATE burialPlan SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    const planQuery = `UPDATE burialPlan SET ${stringList} WHERE '_id' = $1`;
     //console.log('planQuery', planQuery);
-    await db.query(planQuery);
+    await db.query(planQuery, [userId]);
     return next();
   } catch (error) {
     return next(error);
@@ -193,6 +197,7 @@ afterController.updatePlan = async (req, res, next) => {
 
 afterController.updateService = async (req, res, next) => {
   try {
+    const userId = req.body.userInfo.userId;
     //console.log(req.body.service);
     const keyValueList = [];
     Object.keys(req.body.service).forEach((key) =>
@@ -201,9 +206,9 @@ afterController.updateService = async (req, res, next) => {
     //console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
-    const serviceQuery = `UPDATE service SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    const serviceQuery = `UPDATE service SET ${stringList} WHERE '_id' = $1`;
     //console.log('serviceQuery', serviceQuery);
-    await db.query(serviceQuery);
+    await db.query(serviceQuery, [userId]);
     return next();
   } catch (error) {
     return next(error);
@@ -211,6 +216,7 @@ afterController.updateService = async (req, res, next) => {
 };
 afterController.updateFuture = async (req, res, next) => {
   try {
+    const userId = req.body.userInfo.userId;
     const keyValueList = [];
     Object.keys(req.body.checklist).forEach((key) =>
       keyValueList.push(`${key}='${req.body.checklist[key]}'`)
@@ -218,9 +224,9 @@ afterController.updateFuture = async (req, res, next) => {
     //console.log('this is the keyValueList for Update function', keyValueList);
     const stringList = keyValueList.toString();
 
-    const futureQuery = `UPDATE checklist SET ${stringList} WHERE '_id' = '${req.body.userInfo.userId}'`;
+    const futureQuery = `UPDATE checklist SET ${stringList} WHERE '_id' = $1`;
     //console.log('futureQuery', futureQuery);
-    await db.query(futureQuery);
+    await db.query(futureQuery, [userId]);
     return next();
   } catch (error) {
     return next(error);
