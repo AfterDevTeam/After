@@ -26,7 +26,7 @@ export const {
   planCompleteReducer,
   serviceCompleteReducer,
   checklistCompleteReducer,
-} = checklist.actions;
+} = checkData.actions;
 
 export default checkData.reducer;
 
