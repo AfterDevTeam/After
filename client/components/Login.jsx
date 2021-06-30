@@ -46,6 +46,7 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
+<<<<<<< HEAD
         console.log(data);
         if (typeof data === 'object') {
           //save the data in the Redux store
@@ -68,6 +69,13 @@ const Login = (props) => {
             const { guestList, participants, prayersBool, prayersRead, musicBool } = data.service;
 
 
+=======
+        if (typeof data.userInfo === 'object') {
+          //save the data in the Redux store
+          const { firstName, lastName, email, userId } = data.userInfo;
+
+          console.log(data)
+>>>>>>> 7a7ab89ae966f7a6f417979257e54d024f93d404
 
           // dispatch(serviceCompleteReducer(burialPlan));
           // dispatch(checklistCompleteReducer(service));
