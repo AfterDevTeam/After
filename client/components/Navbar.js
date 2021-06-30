@@ -67,10 +67,12 @@ const Navbar = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={() => history.push('/summary')}>
-                Profile
+                Summary
               </MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={() => history.push('/dashboard')}>
+                Dashboard
+              </MenuItem>
+              <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
             </Menu>
           </div>
           <Typography variant='h6' className='title'>

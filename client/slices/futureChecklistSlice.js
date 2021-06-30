@@ -10,6 +10,7 @@ export const checklist = createSlice({
     billsBool: false,
     bills: [],
     extras: '',
+    checklistComplete: false,
   },
   reducers: {
     petsReducer: (state, action) => {

@@ -1,12 +1,14 @@
 /** @format */
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { serviceState } from '../../slices/chooseServiceSlice';
 
 const ServicePlanSubmit = () => {
   const state = useSelector(serviceState);
+  console.log('serviceState', state);
+  const dispatch = useDispatch();
   const history = useHistory();
   console.log('state in submit component', state);
   const submitToDb = () => {
@@ -17,6 +19,7 @@ const ServicePlanSubmit = () => {
       },
       body: JSON.stringify(state),
     });
+
     history.push('/dashboard');
   };
 
