@@ -79,7 +79,7 @@ const Navbar = () => {
                 My Account
               </MenuItem>
               <MenuItem onClick={() => history.push('/dashboard')}>
-                Dashboard
+                Your Journey
               </MenuItem>
               <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
             </Menu>

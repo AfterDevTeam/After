@@ -1,6 +1,30 @@
 .dashboard-square {
   border: 2px solid;
   border-radius: 2px;
+  border-color: #A3CEF1;
   margin: 20px;
   padding: 10px;
+  background: linear-gradient(
+    to bottom, #A3CEF1 0%,
+    #A3CEF1 100%
+  );
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 4px 4px;
+  transition: background-size .2s;
 }
+
+.dashboard-square:hover {
+  background-size: 4px 50px;
+}
+
+.dashboard-square:active {
+  position: relative;
+  top: 2px;
+}
+
+.dashboard-square > a {
+  color: #274C77;
+  text-decoration: none;
+}
+
