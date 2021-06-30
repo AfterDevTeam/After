@@ -34,6 +34,9 @@ router.post('/service', afterController.addService, (req, res) => {
 router.post('/future', afterController.addFuture, (req, res) => {
   res.status(200).send('Successfully added to future');
 });
+router.post('/dashboard-check', afterController.dashboardCheck, (req, res) => {
+  res.status(200).send(res.locals.dashboardState);
+});
 
 // delete routes
 router.delete('/plan', afterController.deletePlan, (req, res) => {
@@ -50,12 +53,12 @@ router.delete('/future', afterController.deleteFuture, (req, res) => {
 router.put('/plan', afterController.updatePlan, (req, res) => {
   res.status(200).send('Update to plan was successful');
 });
-// router.put('/service', afterController.updateService, (req, res) => {
-//   res.status(200).send('Update to service was successful');
-// });
-// router.put('/future', afterController.updateFuture, (req, res) => {
-//   res.status(200).send('Update to future was successful');
-// });
+router.put('/service', afterController.updateService, (req, res) => {
+  res.status(200).send('Update to service was successful');
+});
+router.put('/future', afterController.updateFuture, (req, res) => {
+  res.status(200).send('Update to future was successful');
+});
 
 // router.post(
 //   '/guestlist/:id',
