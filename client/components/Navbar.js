@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textAlign: 'center',
     fontFamily: ['Sacramento', 'cursive'],
-    margin: '20px',
+    marginTop: '20px',
+    marginBottom: '20px',
+    marginRight: '100px',
   },
 }));
 
@@ -85,9 +87,6 @@ const Navbar = () => {
           <Typography variant='h3' className={classes.title}>
             After
           </Typography>
-          <Link to='/login'>
-            <Button color='inherit'>Login</Button>
-          </Link>
         </Toolbar>
       </AppBar>
     </div>
