@@ -19,6 +19,7 @@ import {
   updateRitesPlanSummaryReducer,
 } from '../slices/selectPlanSlice';
 import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +42,7 @@ const Summary = () => {
   useEffect(() => {
     getPlanInfo();
     getServiceInfo();
+    getChecklistInfo();
   }, []);
 
   const getPlanInfo = () => {
@@ -64,6 +66,18 @@ const Summary = () => {
         dispatch(updateServiceSummaryReducer(res.data.service));
       });
   };
+
+  const getChecklistInfo = () => {
+    return axios
+      .post('/api/checklistSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(updateChecklistSummaryReducer(res.data.checklist));
+      });
+  };
+
   console.log('User Info State in Summary: ', state2);
   return (
     <Container>

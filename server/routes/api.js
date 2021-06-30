@@ -51,6 +51,14 @@ router.post(
     res.status(200).json(res.locals);
   }
 );
+router.post(
+  '/checklistSummary',
+  afterController.getChecklistSummary,
+  (req, res) => {
+    console.log('res.locals in serviceSummary', res.locals);
+    res.status(200).json(res.locals);
+  }
+);
 
 // delete routes
 router.delete('/plan', afterController.deletePlan, (req, res) => {
