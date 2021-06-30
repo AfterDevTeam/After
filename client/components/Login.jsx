@@ -13,11 +13,26 @@ import {
   emailReducer,
   userIdReducer,
 } from '../slices/userInfoSlice';
+import {
+  planCompleteReducer,
+  serviceCompleteReducer,
+  checklistCompleteReducer,
+} from '../slices/checkDataSlice';
+import  {
+  updateServiceSummaryReducer,
+} from '../slices/chooseServiceSlice';
+import {
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import {
+  updateChecklistSummaryReducer,
+} from '../slices/futureChecklistSlice';
+
+
 
 const Login = (props) => {
   //history for routing
   const history = useHistory();
-
   // dispatch for redux state
   const dispatch = useDispatch();
 
@@ -41,15 +56,33 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
+        console.log(data);
         if (typeof data === 'object') {
           //save the data in the Redux store
-          const { firstName, lastName, email, userId } = data;
-
-          dispatch(firstNameReducer(firstName));
-          dispatch(lastNameReducer(lastName));
-          dispatch(emailReducer(email));
-          dispatch(userIdReducer(userId));
-          // reset the inputs to empty strings
+          // check for value
+          if (typeof data.userInfo === 'object') {
+            const { firstName, lastName, email, userId } = data.userInfo;
+                dispatch(firstNameReducer(firstName));
+                dispatch(lastNameReducer(lastName));
+                dispatch(emailReducer(email));
+                dispatch(userIdReducer(userId));
+          }
+          // check for value
+          if (typeof data.checklist === 'object') { 
+            const { petsBool, pets, billsBool, bills, extras } = data.checklist;
+              dispatch(updateChecklistSummaryReducer(data.checklist));
+              dispatch(checklistCompleteReducer());
+          }
+          // check for value
+          if (typeof data.plan === 'object') { 
+            dispatch(updateRitesPlanSummaryReducer(data.plan));
+            dispatch(planCompleteReducer());
+          // check for value
+          }
+          if (typeof data.service === 'object')  { 
+            dispatch(updateServiceSummaryReducer(data.service));
+            dispatch(serviceCompleteReducer());
+          }
           setInputUsername('');
           setInputPassword('');
           //redirect to dashboard

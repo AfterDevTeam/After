@@ -70,16 +70,19 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem 
-                onClick={() => history.push('/summary')}
-              >
-                Profile
+              <MenuItem onClick={() => history.push('/')}>Home</MenuItem>
+              <MenuItem onClick={() => history.push('/login')}>Login</MenuItem>
+              <MenuItem onClick={() => history.push('/signup')}>Signup</MenuItem>
+              <MenuItem onClick={() => history.push('/summary')}>
+                My Account
               </MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={() => history.push('/dashboard')}>
+                Dashboard
+              </MenuItem>
+              <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
             </Menu>
           </div>
-          <Typography variant='h3' className={ classes.title }>
+          <Typography variant='h3' className={classes.title}>
             After
           </Typography>
           <Link to='/login'>

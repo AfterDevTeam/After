@@ -53,12 +53,12 @@ router.delete('/future', afterController.deleteFuture, (req, res) => {
 router.put('/plan', afterController.updatePlan, (req, res) => {
   res.status(200).send('Update to plan was successful');
 });
-// router.put('/service', afterController.updateService, (req, res) => {
-//   res.status(200).send('Update to service was successful');
-// });
-// router.put('/future', afterController.updateFuture, (req, res) => {
-//   res.status(200).send('Update to future was successful');
-// });
+router.put('/service', afterController.updateService, (req, res) => {
+  res.status(200).send('Update to service was successful');
+});
+router.put('/future', afterController.updateFuture, (req, res) => {
+  res.status(200).send('Update to future was successful');
+});
 
 // router.post(
 //   '/guestlist/:id',
