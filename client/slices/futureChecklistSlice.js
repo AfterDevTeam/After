@@ -34,9 +34,6 @@ export const checklist = createSlice({
       state.bills = action.payload.bills;
       state.extras = action.payload.extras;
     },
-    checklistCompleteReducer: (state, action) => {
-      state.checklistComplete = true;
-    },
   },
 });
 
@@ -45,7 +42,6 @@ export const {
   billsReducer,
   extrasReducer,
   updateChecklistSummaryReducer,
-  checklistCompleteReducer,
 } = checklist.actions;
 
 export default checklist.reducer;

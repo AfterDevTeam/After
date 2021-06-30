@@ -1,6 +1,7 @@
 /** @format */
 
 import { configureStore } from '@reduxjs/toolkit';
+import checkDataSlice from './slices/checkDataSlice';
 import chooseServiceSlice from './slices/chooseServiceSlice';
 import chooseServiceReducer from './slices/chooseServiceSlice';
 import futureChecklistSlice from './slices/futureChecklistSlice';
@@ -13,5 +14,6 @@ export default configureStore({
     service: chooseServiceSlice,
     checklist: futureChecklistSlice,
     userInfo: userInfoSlice,
+    checkData: checkDataSlice,
   },
 });
