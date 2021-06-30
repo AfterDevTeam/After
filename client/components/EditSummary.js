@@ -117,32 +117,10 @@ const EditSummary = () => {
           <Grid item xs={12}>
             <Paper className={classes.paper2}>
               <Typography>First Name: {state.userInfo.firstName}</Typography>
-              {/* <TextField
-                onChange={handleUserInfoSummaryChange('firstName')}
-                firstName='firstName'
-                id='firstName'
-                label='First Name'
-                value={userInfoSummary.firstName}
-                variant='outlined'
-              /> */}
+
               <Typography>Last Name: {state.userInfo.lastName}</Typography>
-              {/* <TextField
-                onChange={handleUserInfoSummaryChange('lastName')}
-                lastName='lastName'
-                id='lastName'
-                label='Last Name'
-                value={userInfoSummary.lastName}
-                variant='outlined'
-              /> */}
+
               <Typography>email: {state.userInfo.email}</Typography>
-              {/* <TextField
-                onChange={handleUserInfoSummaryChange('email')}
-                email='email'
-                id='email'
-                label='email'
-                value={userInfoSummary.email}
-                variant='outlined'
-              /> */}
             </Paper>
           </Grid>
           <Grid item xs={4}>
