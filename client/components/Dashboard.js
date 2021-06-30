@@ -39,7 +39,7 @@ const Dashboard = () => {
         })
       );
   }, []);
-
+  console.log('squareHidden', squareHidden);
   return (
     <div id='dashboard-container'>
       <h1>Your Journey</h1>

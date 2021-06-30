@@ -19,6 +19,7 @@ export const service = createSlice({
   reducers: {
     guestListReducer: (state, action) => {
       console.log('action.payload in guestListReducer', action.payload);
+      if (action.payload === []) return;
       state.guestList.push(action.payload);
       return;
     },

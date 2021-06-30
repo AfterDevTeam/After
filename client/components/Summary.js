@@ -33,16 +33,18 @@ const Summary = () => {
   const regex = /\w/g;
 
   const parse = (str) => {
-    if (str === undefined || str.length === 0 || str === null) return null;
-    const result = [];
-    str.split('').forEach((char) => {
-      if (char !== '{' && char !== '}' && char !== '"') {
-        if (char === ',') char = ', ';
-        result.push(char);
-      }
-    });
-    console.log(result);
-    return result.join('');
+    if (str === undefined || str === null || str.length === 0) return null;
+    else {
+      const result = [];
+      str.split('').forEach((char) => {
+        if (char !== '{' && char !== '}' && char !== '"') {
+          if (char === ',') char = ', ';
+          result.push(char);
+        }
+      });
+      console.log(result);
+      return result.join('');
+    }
   };
 
   const { firstName, lastName, email } = state.userInfo;
