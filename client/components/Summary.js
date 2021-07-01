@@ -1,11 +1,6 @@
 /** @format */
 import React, { useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Button,
-  Box
-} from '@material-ui/core';
+import { Container, Typography, Button, Box } from '@material-ui/core';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,11 +34,11 @@ const Summary = () => {
   const state2 = useSelector(planState);
   const classes = useStyles();
 
-  useEffect(() => {
-    getPlanInfo();
-    getServiceInfo();
-    getChecklistInfo();
-  }, []);
+  // useEffect(() => {
+  //   getPlanInfo();
+  //   getServiceInfo();
+  //   getChecklistInfo();
+  // }, []);
 
   const getPlanInfo = () => {
     return axios
@@ -51,7 +46,7 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log(res);
+        console.log('res in burialPlan', res);
         dispatch(updateRitesPlanSummaryReducer(res.data.burialPlan));
       });
   };
@@ -62,7 +57,6 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log(res);
         dispatch(updateServiceSummaryReducer(res.data.service));
       });
   };
@@ -73,13 +67,57 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(updateChecklistSummaryReducer(res.data.checklist));
-      })
-      .then(() => {});
+      });
   };
 
-  console.log('User Info State in Summary: ', state2);
+  let { guestList, participants, prayersRead, musicPlayed, cateringService } =
+    state.service;
+
+  let { pets, bills } = state.checklist;
+  const parser = (str) => {
+    const result = [];
+
+    const regex = /\w+/g;
+    if (str === undefined || str === null || str.length < 1) {
+      console.log(str, typeof str);
+      return null;
+    } else {
+      console.log(str + 'is not undefined');
+      str.split('').forEach((char) => {
+        if (char.match(regex)) result.push(char);
+        else if (char === ',') result.push(char + ' ');
+      });
+      console.log('result', result);
+      return result.join('');
+    }
+  };
+
+  console.log('parsedGuestlist', guestList);
+  console.log('parsedParticipants', participants);
+  // useEffect(() => {
+  //   // guestList = parser(guestList);
+  //   // participants = parser(participants);
+  //   console.log('guestLIst in useEffect', guestList);
+  //   console.log('participants in useEffect', participants);
+
+  //   // musicPlayed = parser(musicPlayed);
+  //   // prayersRead = parser(prayersRead);
+  //   // pets = parser(pets);
+  // }, [state]);
+  guestList = parser(guestList);
+  participants = parser(participants);
+
+  pets = parser(pets);
+  bills = parser(bills);
+
+  // musicPlayed = parser(musicPlayed);
+  // prayersRead = parser(prayersRead);
+  // console.log('parsedParticipants', musicPlayed);
+  // console.log('parsedMusic', pets);
+  // console.log('parsedPrayers', prayersRead);
+
   return (
     <Container>
       <div className={classes.root}>
@@ -112,17 +150,11 @@ const Summary = () => {
             <Paper className={classes.paper}>
               <Typography>Service Plan</Typography>
               <br></br>
-              <Typography>Guest List: {state.service.guestList}</Typography>
-              <Typography>
-                Participants: {state.service.participants}
-              </Typography>
-              <Typography>
-                Prayers/Readings: {state.service.prayersRead}
-              </Typography>
-              <Typography>Music: {state.service.musicPlayed}</Typography>
-              <Typography>
-                Catering Service: {state.service.cateringService}
-              </Typography>
+              <Typography>Guest List: {guestList}</Typography>
+              <Typography>Participants: {participants}</Typography>
+              <Typography>Prayers/Readings: {prayersRead}</Typography>
+              <Typography>Music: {musicPlayed}</Typography>
+              <Typography>Catering Service: {cateringService}</Typography>
               <Typography>Extras {state.service.extras}</Typography>
             </Paper>
           </Grid>
@@ -130,18 +162,16 @@ const Summary = () => {
             <Paper className={classes.paper}>
               <Typography>Future Checklist</Typography>
               <br></br>
-              <Typography>Pets: {state.checklist.pets}</Typography>
+              <Typography>Pets: {pets}</Typography>
 
-              <Typography>Bills: {state.checklist.bills}</Typography>
+              <Typography>Bills: {bills}</Typography>
 
               <Typography>Extras {state.checklist.extras}</Typography>
             </Paper>
           </Grid>
-          <Box style={{margin: '0 auto', display: 'flex'}}>
-            <Button 
-              onClick={() => history.push('/edit')}>Edit</Button>
-            <Button 
-              onClick={() => window.print()}>Print</Button>
+          <Box style={{ margin: '0 auto', display: 'flex' }}>
+            <Button onClick={() => history.push('/edit')}>Edit</Button>
+            <Button onClick={() => window.print()}>Print</Button>
           </Box>
         </Grid>
       </div>
