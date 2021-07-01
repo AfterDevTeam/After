@@ -18,7 +18,7 @@ import {
   serviceCompleteReducer,
   checklistCompleteReducer,
 } from '../slices/checkDataSlice';
-import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+import { updateServiceLoginReducer } from '../slices/chooseServiceSlice';
 import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
 import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
@@ -72,7 +72,7 @@ const Login = (props) => {
             // check for value
           }
           if (typeof data.service === 'object') {
-            dispatch(updateServiceSummaryReducer(data.service));
+            dispatch(updateServiceLoginReducer(data.service));
             dispatch(serviceCompleteReducer());
           }
           setInputUsername('');

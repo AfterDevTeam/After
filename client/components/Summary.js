@@ -34,11 +34,11 @@ const Summary = () => {
   const state2 = useSelector(planState);
   const classes = useStyles();
 
-  useEffect(() => {
-    getPlanInfo();
-    getServiceInfo();
-    getChecklistInfo();
-  }, []);
+  // useEffect(() => {
+  //   getPlanInfo();
+  //   getServiceInfo();
+  //   getChecklistInfo();
+  // }, []);
 
   const getPlanInfo = () => {
     return axios
@@ -69,8 +69,7 @@ const Summary = () => {
       .then((res) => {
         // console.log(res);
         dispatch(updateChecklistSummaryReducer(res.data.checklist));
-      })
-      .then(() => {});
+      });
   };
 
   let { guestList, participants, prayersRead, musicPlayed, cateringService } =
@@ -97,21 +96,21 @@ const Summary = () => {
 
   console.log('parsedGuestlist', guestList);
   console.log('parsedParticipants', participants);
-  useEffect(() => {
-    // guestList = parser(guestList);
-    // participants = parser(participants);
-    console.log('guestLIst in useEffect', guestList);
-    console.log('participants in useEffect', participants);
+  // useEffect(() => {
+  //   // guestList = parser(guestList);
+  //   // participants = parser(participants);
+  //   console.log('guestLIst in useEffect', guestList);
+  //   console.log('participants in useEffect', participants);
 
-    // musicPlayed = parser(musicPlayed);
-    // prayersRead = parser(prayersRead);
-    // pets = parser(pets);
-  }, [state]);
+  //   // musicPlayed = parser(musicPlayed);
+  //   // prayersRead = parser(prayersRead);
+  //   // pets = parser(pets);
+  // }, [state]);
   guestList = parser(guestList);
   participants = parser(participants);
 
-  pets = parser(pets);
-  bills = parser(bills);
+  // pets = parser(pets);
+  // bills = parser(bills);
 
   // musicPlayed = parser(musicPlayed);
   // prayersRead = parser(prayersRead);

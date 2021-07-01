@@ -21,9 +21,10 @@ const ServicePlanSubmit = () => {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify(state),
+    }).then(() => {
+      dispatch(updateServiceSummaryReducer(state.service));
+      history.push('/dashboard');
     });
-    dispatch(updateServiceSummaryReducer(state.service));
-    history.push('/dashboard');
   };
 
   return (
