@@ -1,11 +1,6 @@
 /** @format */
 import React, { useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Button,
-  Box
-} from '@material-ui/core';
+import { Container, Typography, Button, Box } from '@material-ui/core';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,7 +46,7 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(updateRitesPlanSummaryReducer(res.data.burialPlan));
       });
   };
@@ -62,7 +57,7 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(updateServiceSummaryReducer(res.data.service));
       });
   };
@@ -73,7 +68,7 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(updateChecklistSummaryReducer(res.data.checklist));
       })
       .then(() => {});
@@ -137,11 +132,9 @@ const Summary = () => {
               <Typography>Extras {state.checklist.extras}</Typography>
             </Paper>
           </Grid>
-          <Box style={{margin: '0 auto', display: 'flex'}}>
-            <Button 
-              onClick={() => history.push('/edit')}>Edit</Button>
-            <Button 
-              onClick={() => window.print()}>Print</Button>
+          <Box style={{ margin: '0 auto', display: 'flex' }}>
+            <Button onClick={() => history.push('/edit')}>Edit</Button>
+            <Button onClick={() => window.print()}>Print</Button>
           </Box>
         </Grid>
       </div>
