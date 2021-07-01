@@ -1,3 +1,5 @@
+/** @format */
+
 const { Pool } = require('pg');
 
 const PG_URI =
@@ -9,7 +11,17 @@ const pool = new Pool({
 
 module.exports = {
   query: (text, params, callback) => {
-    console.log('Successfully executed query', text);
+    //console.log('executed query', text);
     return pool.query(text, params, callback);
   },
 };
+
+// Table Names:
+
+// burialplan
+
+//checklist
+
+// userinfo
+
+// service (not yet in DB)

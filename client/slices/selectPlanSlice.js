@@ -44,6 +44,17 @@ export const plan = createSlice({
       state.memorialService = true;
       state.memorialLocation = action.payload;
     },
+    updateRitesPlanSummaryReducer: (state, action) => {
+      console.log('UpdateRitesPlanReducer State', action.payload);
+      state.rite = action.payload.rite;
+      state.funeralHome = action.payload.funeralhome;
+      state.funeralBeforeRites = action.payload.funeralbeforerites;
+      state.funeralLocation = action.payload.funerallocation;
+      state.graveSideService = action.payload.graveSideService;
+      state.graveSideLocation = action.payload.gravesidelocation;
+      state.memorialService = action.payload.memorialservice;
+      state.memorialLocation = action.payload.memoriallocation;
+    },
   },
 });
 
@@ -55,6 +66,7 @@ export const {
   graveSideLocationReducer,
   memorialServiceReducer,
   memorialLocationReducer,
+  updateRitesPlanSummaryReducer,
 } = plan.actions;
 
 export default plan.reducer;

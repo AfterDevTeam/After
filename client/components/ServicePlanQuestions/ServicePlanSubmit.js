@@ -1,16 +1,18 @@
 /** @format */
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { planState } from '../../slices/selectPlanSlice';
+import { serviceState } from '../../slices/chooseServiceSlice';
 
-const BurialPlanSubmit = () => {
-  const state = useSelector(planState);
+const ServicePlanSubmit = () => {
+  const state = useSelector(serviceState);
+  console.log('serviceState', state);
+  const dispatch = useDispatch();
   const history = useHistory();
-
+  console.log('state in submit component', state);
   const submitToDb = () => {
-    fetch('/api/plan', {
+    fetch('/api/service', {
       method: 'POST',
       headers: {
         'Content-type': 'Application/JSON',
@@ -29,4 +31,4 @@ const BurialPlanSubmit = () => {
   );
 };
 
-export default BurialPlanSubmit;
+export default ServicePlanSubmit;

@@ -10,81 +10,42 @@ import {
   Radio,
   TextField,
 } from '@material-ui/core';
+import { service } from '../../slices/chooseServiceSlice';
 
-const Music = () => {
-  const { funeralService, gravesideService, memorialService } = service;
-  const funeralHidden = !service.funeralService;
-  const gravesideHidden = !service.gravesideService;
-  const memorialHidden = !service.memorialService;
+const Music = ({ serviceItems, setServiceItems }) => {
+  const { musicBool } = serviceItems;
+  const musicHidden = !serviceItems.musicBool;
 
   const handleChange = (event) => {
-    setService({ ...service, [event.target.name]: event.target.checked });
+    setServiceItems({
+      ...serviceItems,
+      [event.target.name]: event.target.checked,
+    });
   };
-
   return (
     <div>
       <FormControl component='fieldset'>
-        <FormLabel component='legend'>Select your services.</FormLabel>
+        <FormLabel component='legend'>
+          Do you want any special music played?
+        </FormLabel>
         <FormGroup>
           <FormControlLabel
             control={
               <Checkbox
-                checked={funeralService}
+                checked={musicBool}
                 onChange={handleChange}
-                name='funeralService'
+                name='musicBool'
               />
             }
-            label='I want a funeral service before the burial/cremation.'
+            label='I want some special music played at my service.'
           />
-          {funeralHidden === false && (
+          {musicBool === true && (
             <TextField
-              placeholder='Location'
+              placeholder='Music'
               onChange={(e) => {
-                setService({
-                  ...service,
-                  funeralServiceLocation: e.target.value,
-                });
-              }}
-            />
-          )}
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={gravesideService}
-                onChange={handleChange}
-                name='gravesideService'
-              />
-            }
-            label='I want a graveside service.'
-          />
-          {gravesideHidden === false && (
-            <TextField
-              placeholder='Location'
-              onChange={(e) => {
-                setService({
-                  ...service,
-                  gravesideServiceLocation: e.target.value,
-                });
-              }}
-            />
-          )}
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={memorialService}
-                onChange={handleChange}
-                name='memorialService'
-              />
-            }
-            label='I want a memorial service after the burial/cremation.'
-          />
-          {memorialHidden === false && (
-            <TextField
-              placeholder='Location'
-              onChange={(e) => {
-                setService({
-                  ...service,
-                  memorialServiceLocation: e.target.value,
+                setServiceItems({
+                  ...serviceItems,
+                  musicPlayed: e.target.value,
                 });
               }}
             />
@@ -95,4 +56,4 @@ const Music = () => {
   );
 };
 
-export default ServiceQuestions;
+export default Music;

@@ -1,7 +1,7 @@
 // import package modules
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
+import '../css/SplashPage.css';
 
 // Photo by <a href="https://unsplash.com/@marekpiwnicki?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marek Piwnicki</a> on <a href="https://unsplash.com/s/photos/sunset?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 import sunsetSplashImage from '../images/sunset_splashPage_image';
@@ -28,9 +28,9 @@ const SplashPage = (() => {
                 <img src={sunsetSplashImage} alt='sunset' style={sunsetSplashImageStyle}></img>
             </picture>
             <header>
-                <h1>Prepare for what comes after.</h1>
+                <h1>Prepare for what comes <span id="splash-after">after</span>.</h1>
             </header>
-            <div>
+            <div id="splash-button-container">
                 <button type='button' id='myself' onClick={(e) => loginRedirectOnClick(e)}>Plan for Myself</button>
                 <button type='button' id='lovedOne' onClick={(e) => loginRedirectOnClick(e)}>Plan for a Loved One</button>
             </div>

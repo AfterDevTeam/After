@@ -19,23 +19,42 @@ export const service = createSlice({
   reducers: {
     guestListReducer: (state, action) => {
       console.log('action.payload in guestListReducer', action.payload);
-      // state.guestList.push(action.payload);
+      state.guestList = action.payload;
       return;
     },
     participantsReducer: (state, action) => {
       console.log('action.payload in participantsReducer', action.payload);
+      state.participants = action.payload;
     },
     prayersReadReducer: (state, action) => {
       console.log('action.payload in prayersReadReducer', action.payload);
+      state.prayersBool = true;
+      state.prayersRead = action.payload;
     },
     musicPlayedReducer: (state, action) => {
       console.log('action.payload in musicPlayedReducer', action.payload);
+      state.musicBool = true;
+      state.musicPlayed = action.payload;
     },
     cateringServiceReducer: (state, action) => {
       console.log('action.payload in cateringServiceReducer', action.payload);
+      state.cateringBool = true;
+      state.cateringService = action.payload;
     },
     extrasReducer: (state, action) => {
       console.log('action.payload in extrasReducer', action.payload);
+      state.extras = action.payload;
+    },
+    updateServiceSummaryReducer: (state, action) => {
+      state.guestList = action.payload.guestlist;
+      state.participants = action.payload.participants;
+      state.prayersBool = action.payload.prayersbool;
+      state.prayersRead = action.payload.prayersread;
+      state.musicBool = action.payload.musicbool;
+      state.musicPlayed = action.payload.musicplayed;
+      state.cateringBool = action.payload.cateringbool;
+      state.cateringService = action.payload.cateringservice;
+      state.extras = action.payload.extras;
     },
   },
 });
@@ -47,6 +66,7 @@ export const {
   musicPlayedReducer,
   cateringServiceReducer,
   extrasReducer,
+  updateServiceSummaryReducer,
 } = service.actions;
 
 export default service.reducer;
