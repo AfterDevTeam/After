@@ -21,10 +21,10 @@ const ChecklistSubmit = () => {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify(state),
+    }).then(() => {
+      dispatch(updateChecklistSummaryReducer(state.checklist));
+      history.push('/dashboard');
     });
-
-    dispatch(updateChecklistSummaryReducer(state.checklist));
-    history.push('/dashboard');
   };
 
   return (

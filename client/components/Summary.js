@@ -109,8 +109,8 @@ const Summary = () => {
   guestList = parser(guestList);
   participants = parser(participants);
 
-  // pets = parser(pets);
-  // bills = parser(bills);
+  pets = parser(pets);
+  bills = parser(bills);
 
   // musicPlayed = parser(musicPlayed);
   // prayersRead = parser(prayersRead);

@@ -19,8 +19,8 @@ import {
   checklistCompleteReducer,
 } from '../slices/checkDataSlice';
 import { updateServiceLoginReducer } from '../slices/chooseServiceSlice';
-import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
-import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
+import { updateRitesPlanLoginReducer } from '../slices/selectPlanSlice';
+import { updateChecklistLoginReducer } from '../slices/futureChecklistSlice';
 
 const Login = (props) => {
   //history for routing
@@ -62,18 +62,18 @@ const Login = (props) => {
           // check for value
           if (typeof data.checklist === 'object') {
             const { petsBool, pets, billsBool, bills, extras } = data.checklist;
-            dispatch(updateChecklistSummaryReducer(data.checklist));
-            dispatch(checklistCompleteReducer());
+            // dispatch(updateChecklistLoginReducer(data.checklist));
+            // dispatch(checklistCompleteReducer());
           }
           // check for value
           if (typeof data.burialPlan === 'object') {
-            dispatch(updateRitesPlanSummaryReducer(data.burialPlan));
-            dispatch(planCompleteReducer());
+            // dispatch(updateRitesPlanLoginReducer(data.burialPlan));
+            // dispatch(planCompleteReducer());
             // check for value
           }
           if (typeof data.service === 'object') {
-            dispatch(updateServiceLoginReducer(data.service));
-            dispatch(serviceCompleteReducer());
+            // dispatch(updateServiceLoginReducer(data.service));
+            // dispatch(serviceCompleteReducer());
           }
           setInputUsername('');
           setInputPassword('');

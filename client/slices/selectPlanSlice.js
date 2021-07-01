@@ -16,20 +16,20 @@ export const plan = createSlice({
   },
   reducers: {
     chooseRitesReducer: (state, action) => {
-      console.log('action.payload in Rites reducer', action.payload);
+      // console.log('action.payload in Rites reducer', action.payload);
       state.rite = action.payload;
     },
     funeralHomeReducer: (state, action) => {
-      console.log('action.payload in funeralHomeReducer', action.payload);
+      // console.log('action.payload in funeralHomeReducer', action.payload);
       state.funeralHome = action.payload;
     },
     funeralLocationReducer: (state, action) => {
-      console.log('action.payload in funeralLocationReducer', action.payload);
+      // console.log('action.payload in funeralLocationReducer', action.payload);
       state.funeralBeforeRites = true;
       state.funeralLocation = action.payload;
     },
     graveSideServiceReducer: (state, action) => {
-      console.log('action.payload in graveSideServiceReducer', action.payload);
+      // console.log('action.payload in graveSideServiceReducer', action.payload);
     },
     graveSideLocationReducer: (state, action) => {
       console.log('action.payload in graveSideLocationReducer', action.payload);
@@ -40,12 +40,23 @@ export const plan = createSlice({
       console.log('action.payload in memorialServiceReducer', action.payload);
     },
     memorialLocationReducer: (state, action) => {
-      console.log('action.payload in memorialLocationReducer', action.payload);
+      // console.log('action.payload in memorialLocationReducer', action.payload);
       state.memorialService = true;
       state.memorialLocation = action.payload;
     },
     updateRitesPlanSummaryReducer: (state, action) => {
       console.log('UpdateRitesPlanReducer State', action.payload);
+      state.rite = action.payload.rite;
+      state.funeralHome = action.payload.funeralhome;
+      state.funeralBeforeRites = action.payload.funeralbeforerites;
+      state.funeralLocation = action.payload.funerallocation;
+      state.graveSideService = action.payload.graveSideService;
+      state.graveSideLocation = action.payload.gravesidelocation;
+      state.memorialService = action.payload.memorialservice;
+      state.memorialLocation = action.payload.memoriallocation;
+    },
+    updateRitesPlanLoginReducer: (state, action) => {
+      console.log('UpdateRitesPlanLoginReducer action.payload', action.payload);
       state.rite = action.payload.rite;
       state.funeralHome = action.payload.funeralhome;
       state.funeralBeforeRites = action.payload.funeralbeforerites;
@@ -67,6 +78,7 @@ export const {
   memorialServiceReducer,
   memorialLocationReducer,
   updateRitesPlanSummaryReducer,
+  updateRitesPlanLoginReducer,
 } = plan.actions;
 
 export default plan.reducer;
