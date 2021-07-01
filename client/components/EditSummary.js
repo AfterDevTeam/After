@@ -45,6 +45,7 @@ const EditSummary = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const state = useSelector(userInfoState);
+  
   const [userInfoSummary, setUserInfoSummary] = useState(state.userInfo);
   const [planSummary, setPlanSummary] = useState(state.plan);
   const [serviceSummary, setServiceSummary] = useState(state.service);
