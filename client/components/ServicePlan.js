@@ -23,11 +23,11 @@ import '../css/Carousel.css';
 
 const ServicePlan = () => {
   const dispatch = useDispatch();
+
+  //state for carousel question
   const [SPQuestionIdx, setSPQuestionIdx] = useState(0);
 
-  const [guestList, setGuestList] = useState(null);
-  const [participants, setParticipants] = useState(null);
-
+  //state for service items to send to database
   const [serviceItems, setServiceItems] = useState({
     guestList: [],
     participants: [],
@@ -39,7 +39,6 @@ const ServicePlan = () => {
     cateringService: '',
     extras: '',
   });
-  // console.log('guestList', guestList);
 
   const ServicePlanQuestions = [
     <GuestList serviceItems={serviceItems} setServiceItems={setServiceItems} />,
@@ -72,6 +71,7 @@ const ServicePlan = () => {
         <button
           disabled={SPQuestionIdx === 6}
           onClick={() => {
+            //dispatch state to redux store depending on which question in the carousel
             if (SPQuestionIdx === 0)
               dispatch(guestListReducer(serviceItems.guestList));
             if (SPQuestionIdx === 1)

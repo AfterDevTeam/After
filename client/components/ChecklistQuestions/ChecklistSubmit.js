@@ -14,6 +14,7 @@ const ChecklistSubmit = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //submits checklist information to database and redirects to dashboard
   const submitToDb = () => {
     fetch('/api/future', {
       method: 'POST',

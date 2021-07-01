@@ -79,6 +79,7 @@ const Dashboard = () => {
       });
   }, []);
 
+  //conditionally renders each dashboard square depending on carousel completion status
   return (
     <div id='dashboard-container'>
       <h1>Your Journey</h1>
