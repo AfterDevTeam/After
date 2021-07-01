@@ -15,7 +15,7 @@ import '../css/Carousel.css';
 
 const BurialPlan = () => {
   const dispatch = useDispatch();
-  
+
   //state for carousel questions
   const [BPQuestionIdx, setBPQuestionIdx] = useState(0);
 
@@ -38,7 +38,6 @@ const BurialPlan = () => {
     <ServiceQuestions service={service} setService={setService} />,
     <BurialPlanSubmit />,
   ];
-
 
   return(
     <div className="carousel-container">
