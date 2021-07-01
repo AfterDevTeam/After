@@ -1,5 +1,6 @@
 /** @format */
 
+const { Dns } = require('@material-ui/icons');
 const db = require('../models/afterModels.js');
 
 const createTableController = {};
@@ -93,6 +94,21 @@ createTableController.createServiceTable = (req, res, next) => {
     .then((data) => {
       next();
     })
+    .catch((err) => next(err));
+};
+
+createTableController.createSessionTable = (req, res, next) => {
+  const createSessionTable = {
+    text: `CREATE TABLE IF NOT EXISTS session(
+      cookieid UUID,
+      createdAt TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	    expiration TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP + interval '10 days',
+      PRIMARY KEY (cookieid)
+    )`,
+  };
+
+  db.query(createSessionTable)
+    .then((data) => next())
     .catch((err) => next(err));
 };
 
