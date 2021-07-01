@@ -3,8 +3,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import '../css/Login.css';
 import { useDispatch } from 'react-redux';
 import {
@@ -21,6 +19,7 @@ import {
 import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
 import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
 import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
+import { loggedInReducer } from '../slices/loggedStatusSlice';
 
 const Login = (props) => {
   //history for routing
@@ -61,7 +60,6 @@ const Login = (props) => {
           }
           // check for value
           if (typeof data.checklist === 'object') {
-            const { petsBool, pets, billsBool, bills, extras } = data.checklist;
             dispatch(updateChecklistSummaryReducer(data.checklist));
             dispatch(checklistCompleteReducer());
           }
@@ -75,6 +73,7 @@ const Login = (props) => {
             dispatch(updateServiceSummaryReducer(data.service));
             dispatch(serviceCompleteReducer());
           }
+          dispatch(loggedInReducer(true));
           setInputUsername('');
           setInputPassword('');
           //redirect to dashboard

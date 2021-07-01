@@ -12,6 +12,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { MenuItem } from '@material-ui/core';
+import { GetApp } from '@material-ui/icons';
+import { loggedInReducer } from '../slices/loggedStatusSlice';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +35,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// need to create a state variable to track logged in/out  (create a slice?)
+  // when attempting to click my account or your journey, check state - if logged in is false, redirect to login, if true load component
+  // upon successful login - logged in is true
+  // upon logout - loggin in is set to false, user state is cleared, and history is blocked
+
+
 const Navbar = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -43,6 +53,12 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // create a logout function
+  const logOutUser = () => {
+    history.push('/');
+    dispatch(loggedInReducer(false));
+  }
 
   const classes = useStyles();
 
@@ -81,7 +97,7 @@ const Navbar = () => {
               <MenuItem onClick={() => history.push('/dashboard')}>
                 Your Journey
               </MenuItem>
-              <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
+              <MenuItem onClick={logOutUser}>Logout</MenuItem>
             </Menu>
           </div>
           <Typography variant='h3' className={classes.title}>
