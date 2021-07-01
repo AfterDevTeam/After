@@ -13,6 +13,7 @@ const BurialPlanSubmit = () => {
   const state = useSelector(planState);
   const history = useHistory();
 
+  //submits burial/rite information to database and redirects to dashboard
   const submitToDb = () => {
     fetch('/api/plan', {
       method: 'POST',
