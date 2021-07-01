@@ -39,9 +39,6 @@ const Dashboard = () => {
           futureChecklist: dashboardStatus.futureChecklist,
         })
       );
-    dispatch(updateRitesPlanSummaryReducer(state.plan));
-    dispatch(updateServiceSummaryReducer(state.service));
-    dispatch(updateChecklistSummaryReducer(state.checklist));
   }, []);
 
   return (

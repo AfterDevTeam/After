@@ -2,12 +2,16 @@
 
 import { HistorySharp } from '@material-ui/icons';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { checklistState } from '../../slices/futureChecklistSlice';
+import {
+  checklistState,
+  updateChecklistSummaryReducer,
+} from '../../slices/futureChecklistSlice';
 
 const ChecklistSubmit = () => {
   const state = useSelector(checklistState);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const submitToDb = () => {
@@ -19,11 +23,12 @@ const ChecklistSubmit = () => {
       body: JSON.stringify(state),
     });
 
+    dispatch(updateChecklistSummaryReducer(state.checklist));
     history.push('/dashboard');
   };
 
   return (
-    <div id="submit-carousel"> 
+    <div id='submit-carousel'>
       <span>Are you ready to submit your checklist?</span>
       <button onClick={submitToDb}>Submit</button>
     </div>
