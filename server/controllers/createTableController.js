@@ -102,8 +102,7 @@ createTableController.createSessionTable = (req, res, next) => {
     text: `CREATE TABLE IF NOT EXISTS session(
       cookieid UUID,
       createdAt TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-	    expiration TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP + interval '10 days',
-      PRIMARY KEY (cookieid)
+	    expiration TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP + interval '10 days'
     )`,
   };
 

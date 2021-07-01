@@ -81,7 +81,11 @@ const Navbar = () => {
               <MenuItem onClick={() => history.push('/dashboard')}>
                 Your Journey
               </MenuItem>
-              <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
+              <MenuItem onClick={() => {
+                fetch('/user/logout', {
+                  method: 'PUT'
+                })
+                history.push('/')}}>Logout</MenuItem>
             </Menu>
           </div>
           <Typography variant='h3' className={classes.title}>
