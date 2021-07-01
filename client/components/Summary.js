@@ -45,6 +45,7 @@ const Summary = () => {
     getChecklistInfo();
   }, []);
 
+  //retrieve plan information for summary from database
   const getPlanInfo = () => {
     return axios
       .post('/api/planSummary', {
@@ -56,6 +57,7 @@ const Summary = () => {
       });
   };
 
+  //retrieve service information for summary from database
   const getServiceInfo = () => {
     return axios
       .post('/api/serviceSummary', {
@@ -67,6 +69,7 @@ const Summary = () => {
       });
   };
 
+  //retrieve checklist information for summary from database
   const getChecklistInfo = () => {
     return axios
       .post('/api/checklistSummary', {
@@ -79,7 +82,6 @@ const Summary = () => {
       .then(() => {});
   };
 
-  console.log('User Info State in Summary: ', state2);
   return (
     <Container>
       <div className={classes.root}>

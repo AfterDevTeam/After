@@ -15,11 +15,14 @@ import '../css/Carousel.css';
 
 const BurialPlan = () => {
   const dispatch = useDispatch();
+  
+  //state for carousel questions
   const [BPQuestionIdx, setBPQuestionIdx] = useState(0);
+
   const [rite, setRite] = useState(null);
   const [funeralHome, setFuneralHome] = useState(null);
 
-
+  //state for service information to send to database
   const [service, setService] = useState({
     funeralService: false,
     funeralServiceLocation: '',
