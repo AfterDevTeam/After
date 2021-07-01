@@ -6,53 +6,54 @@ export const plan = createSlice({
   name: 'plan',
   initialState: {
     rite: '',
-    funeralHome: '',
-    funeralBeforeRites: false,
-    funeralLocation: '',
-    graveSideService: false,
-    graveSideLocation: '',
-    memorialService: false,
-    memorialLocation: '',
+    funeralhome: '',
+    funeralbeforerites: false,
+    funerallocation: '',
+    gravesideservice: false,
+    gravesidelocation: '',
+    memorialservice: false,
+    memoriallocation: '',
   },
   reducers: {
     chooseRitesReducer: (state, action) => {
-      console.log('action.payload in Rites reducer', action.payload);
+      // console.log('action.payload in Rites reducer', action.payload);
       state.rite = action.payload;
     },
     funeralHomeReducer: (state, action) => {
-      console.log('action.payload in funeralHomeReducer', action.payload);
-      state.funeralHome = action.payload;
+      // console.log('action.payload in funeralHomeReducer', action.payload);
+      state.funeralhome = action.payload;
     },
     funeralLocationReducer: (state, action) => {
-      console.log('action.payload in funeralLocationReducer', action.payload);
-      state.funeralBeforeRites = true;
-      state.funeralLocation = action.payload;
+      // console.log('action.payload in funeralLocationReducer', action.payload);
+      state.funeralbeforerites = true;
+      state.funerallocation = action.payload;
     },
     graveSideServiceReducer: (state, action) => {
-      console.log('action.payload in graveSideServiceReducer', action.payload);
+      // console.log('action.payload in graveSideServiceReducer', action.payload);
     },
     graveSideLocationReducer: (state, action) => {
-      console.log('action.payload in graveSideLocationReducer', action.payload);
-      state.graveSideService = true;
-      state.graveSideLocation = action.payload;
+      // console.log('action.payload in graveSideLocationReducer', action.payload);
+      state.gravesideservice = true;
+      state.gravesidelocation = action.payload;
     },
     memorialServiceReducer: (state, action) => {
-      console.log('action.payload in memorialServiceReducer', action.payload);
+      // console.log('action.payload in memorialServiceReducer', action.payload);
     },
     memorialLocationReducer: (state, action) => {
-      console.log('action.payload in memorialLocationReducer', action.payload);
-      state.memorialService = true;
-      state.memorialLocation = action.payload;
+      // console.log('action.payload in memorialLocationReducer', action.payload);
+      state.memorialservice = true;
+      state.memoriallocation = action.payload;
     },
     updateRitesPlanSummaryReducer: (state, action) => {
+      console.log('UpdateRitesPlanReducer State', action.payload);
       state.rite = action.payload.rite;
-      state.funeralHome = action.payload.funeralHome;
-      state.funeralBeforeRites = action.payload.funeralBeforeRites;
-      state.funeralLocation = action.payload.funeralLocation;
-      state.graveSideService = action.payload.graveSideService;
-      state.graveSideLocation = action.payload.graveSideLocation;
-      state.memorialService = action.payload.memorialService;
-      state.memorialLocation = action.payload.memorialLocation;
+      state.funeralhome = action.payload.funeralhome;
+      state.funeralbeforerites = action.payload.funeralbeforerites;
+      state.funerallocation = action.payload.funerallocation;
+      state.gravesideservice = action.payload.gravesideservice;
+      state.gravesidelocation = action.payload.gravesidelocation;
+      state.memorialservice = action.payload.memorialservice;
+      state.memoriallocation = action.payload.memoriallocation;
     },
   },
 });

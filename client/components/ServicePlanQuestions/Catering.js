@@ -13,7 +13,7 @@ import {
 import { service } from '../../slices/chooseServiceSlice';
 
 const Catering = ({ serviceItems, setServiceItems }) => {
-  const { cateringBool } = serviceItems;
+  const { cateringbool } = serviceItems;
   const cateringHidden = !serviceItems.cateringBool;
 
   const handleChange = (event) => {
@@ -32,20 +32,20 @@ const Catering = ({ serviceItems, setServiceItems }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={cateringBool}
+                checked={cateringbool}
                 onChange={handleChange}
-                name='cateringBool'
+                name='cateringbool'
               />
             }
             label='I would like someone to cater my service'
           />
-          {cateringBool === true && (
+          {cateringbool === true && (
             <TextField
               placeholder='Caterer'
               onChange={(e) => {
                 setServiceItems({
                   ...serviceItems,
-                  cateringService: e.target.value,
+                  cateringservice: e.target.value,
                 });
               }}
             />

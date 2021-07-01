@@ -17,23 +17,23 @@ export const userInfo = createSlice({
   },
   reducers: {
     userIdReducer: (state, action) => {
-      console.log('action.payload in userId reducer', action.payload);
+      // console.log('action.payload in userId reducer', action.payload);
       state.userId = action.payload;
     },
     firstNameReducer: (state, action) => {
-      console.log('action.payload in firstName reducer', action.payload);
+      // console.log('action.payload in firstName reducer', action.payload);
       state.firstName = action.payload;
     },
     lastNameReducer: (state, action) => {
-      console.log('action.payload in lastName reducer', action.payload);
+      // console.log('action.payload in lastName reducer', action.payload);
       state.lastName = action.payload;
     },
     emailReducer: (state, action) => {
-      console.log('action.payload in emailReducer reducer', action.payload);
+      // console.log('action.payload in emailReducer reducer', action.payload);
       state.email = action.payload;
     },
     showPasswordReducer: (state, action) => {
-      console.log('action.payload in showPassword reducer', action.payload);
+      // console.log('action.payload in showPassword reducer', action.payload);
       state.showPassword = !action.payload;
     },
     updateUserInfoSummaryReducer: (state, action) => {
