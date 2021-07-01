@@ -34,6 +34,8 @@ const Summary = () => {
   const state2 = useSelector(planState);
   const classes = useStyles();
 
+  const parser = () => {};
+
   useEffect(() => {
     getPlanInfo();
     getServiceInfo();
