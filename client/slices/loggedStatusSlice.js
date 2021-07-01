@@ -9,7 +9,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const loggedStatus = createSlice({
   name: 'loggedStatus',
   initialState: {
-    loggedIn: 'false',
+    loggedIn: false,
   },
   reducers: {
     loggedInReducer: (state, action) => {
