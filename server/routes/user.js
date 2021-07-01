@@ -20,9 +20,7 @@ router.post(
   afterController.getService,
   afterController.getFuture,
   (req, res) => {
-    res
-      .status(200)
-      .send(res.locals || JSON.stringify('Failed to login'));
+    res.status(200).send(res.locals || JSON.stringify('Failed to login'));
   }
 );
 

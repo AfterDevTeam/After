@@ -26,7 +26,6 @@ app.use('/user', userRouter);
 app.use(express.static(path.join(__dirname, './build')));
 
 app.get('/', (req, res) => {
-  //console.log("It's working!");
   return res
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));
