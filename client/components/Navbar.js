@@ -57,9 +57,9 @@ const Navbar = () => {
 
   // create a logout function
   const logOutUser = () => {
-    fetch('/user/logout', {
-      method: 'PUT'
-    })
+    // fetch('/user/logout', {
+    //   method: 'PUT'
+    // })
     // upon logout - loggin in is set to false, user state is cleared, and history is blocked
     dispatch(updateUserInfoSummaryReducer({
       firstName: '',
