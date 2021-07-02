@@ -100,23 +100,23 @@ const Navbar = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={() => history.push('/')}>Home</MenuItem>
-              { !state.loggedStatus.loggedIn &&
+              { state.loggedStatus.loggedIn === false &&
                 <MenuItem onClick={() => history.push('/login')}>Login</MenuItem>
               }
-              { !state.loggedStatus.loggedIn &&              
+              { state.loggedStatus.loggedIn === false &&              
               <MenuItem onClick={() => history.push('/signup')}>Signup</MenuItem>
               }
-              { state.loggedStatus.loggedIn &&
+              { state.loggedStatus.loggedIn === true &&
                 <MenuItem onClick={() => history.push('/summary')}>
                 My Account
               </MenuItem>
               } 
-              { state.loggedStatus.loggedIn &&   
+              { state.loggedStatus.loggedIn === true &&   
               <MenuItem onClick={() => history.push('/dashboard')}>
                 Your Journey
               </MenuItem>
               }
-              { state.loggedStatus.loggedIn &&     
+              { state.loggedStatus.loggedIn === true &&     
               <MenuItem onClick={logOutUser}>Logout</MenuItem>
               }
             </Menu>
