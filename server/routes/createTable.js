@@ -38,5 +38,12 @@ router.post(
   }
 );
 
+router.post(
+  '/session',
+  createTableController.createSessionTable,
+  (req, res) => {
+    res.status(200).send('session Created');
+  }
+)
 
 module.exports = router;
