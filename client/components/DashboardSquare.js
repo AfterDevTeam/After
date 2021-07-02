@@ -9,8 +9,11 @@ const DashboardSquare = (props) => {
   const history = useHistory();
 
   return (
-    <div className='dashboard-square' onClick={() => history.push(props.route)}>
-      {props.title}
+    <div 
+      className='dashboard-square' 
+      onClick={() => history.push(props.route)}
+    >
+      <Link to={props.route}>{props.title}</Link>
     </div>
   );
 };

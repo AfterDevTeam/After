@@ -22,6 +22,11 @@ button:hover:not([disabled]) {
   color: #274C77;
 }
 
+button:focus:not([disabled]) {
+  background-color: #E7ECEF;
+  color: #274C77;
+}
+
 button:active {
   position: relative;
   top: 2px;

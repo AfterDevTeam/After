@@ -158,7 +158,7 @@ const Summary = () => {
               <Typography>Prayers/Readings: {prayersRead}</Typography>
               <Typography>Music: {musicPlayed}</Typography>
               <Typography>Catering Service: {cateringService}</Typography>
-              <Typography>Extras {state.service.extras}</Typography>
+              <Typography>Extras: {state.service.extras}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -169,7 +169,7 @@ const Summary = () => {
 
               <Typography>Bills: {bills}</Typography>
 
-              <Typography>Extras {state.checklist.extras}</Typography>
+              <Typography>Extras: {state.checklist.extras}</Typography>
             </Paper>
           </Grid>
           <Box style={{ margin: '0 auto', display: 'flex' }}>
