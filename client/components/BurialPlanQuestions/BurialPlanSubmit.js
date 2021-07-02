@@ -21,10 +21,10 @@ const BurialPlanSubmit = () => {
         'Content-type': 'Application/JSON',
       },
       body: JSON.stringify(state),
+    }).then(() => {
+      dispatch(updateRitesPlanSummaryReducer(state.plan));
+      history.push('/dashboard');
     });
-    dispatch(updateRitesPlanSummaryReducer(state.plan));
-
-    history.push('/dashboard');
   };
 
   return (
