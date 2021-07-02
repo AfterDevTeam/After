@@ -64,7 +64,18 @@ module.exports = {
     // Proxy says taht any request made to '/api' will be routed to our server on localhost:3000
     // proxy should match whatever is going to match your fetch request on your frontend.
     proxy: {
-      '/': 'http://localhost:3000',
+      '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/create/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/user/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
   },
 };

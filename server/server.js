@@ -6,6 +6,7 @@ const path = require('path');
 const { ModuleFilenameHelpers } = require('webpack');
 const fs = require('fs');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 3000;
 const userRouter = require('./routes/user.js');
@@ -13,6 +14,9 @@ const apiRouter = require('./routes/api');
 
 // To make my life easier
 const createTableRouter = require('./routes/createTable.js');
+
+// Handle cookie
+app.use(cookieParser());
 
 // Handle Parsing Request Body
 app.use(express.json());
@@ -26,7 +30,6 @@ app.use('/user', userRouter);
 app.use(express.static(path.join(__dirname, './build')));
 
 app.get('/', (req, res) => {
-  //console.log("It's working!");
   return res
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));

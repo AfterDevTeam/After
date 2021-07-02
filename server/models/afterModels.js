@@ -1,9 +1,10 @@
 /** @format */
 
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const PG_URI =
-  'postgres://cixbhgbm:g8ed4jT6WbNDz0m-hfCTuqzIJnaFR_jq@batyr.db.elephantsql.com/cixbhgbm';
+  `postgres://${process.env.Userdatabase}:${process.env.Password}@batyr.db.elephantsql.com/cixbhgbm`;
 
 const pool = new Pool({
   connectionString: PG_URI,

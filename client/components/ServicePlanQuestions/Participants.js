@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core';
 
 const Participants = ({ serviceItems, setServiceItems }) => {
-  // console.log('setGuestList', props);
 
   return (
     <div>
@@ -35,7 +34,6 @@ const Participants = ({ serviceItems, setServiceItems }) => {
           facilitate your service.
         </FormHelperText>
       </FormControl>
-      {/* {Guests} */}
     </div>
   );
 };

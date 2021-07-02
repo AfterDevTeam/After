@@ -15,8 +15,11 @@ import '../css/Carousel.css';
 
 const Checklist = () => {
   const dispatch = useDispatch();
+
+  //state for carousel questions
   const [checklistQuestionIdx, setChecklistQuestionIdx] = useState(0);
 
+  //state for checklist information to send to database
   const [checklist, setChecklist] = useState({
     petsBool: false,
     petsList: '',

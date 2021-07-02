@@ -1,14 +1,19 @@
 /** @format */
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { planState } from '../../slices/selectPlanSlice';
+import {
+  planState,
+  updateRitesPlanSummaryReducer,
+} from '../../slices/selectPlanSlice';
 
 const BurialPlanSubmit = () => {
+  const dispatch = useDispatch();
   const state = useSelector(planState);
   const history = useHistory();
 
+  //submits burial/rite information to database and redirects to dashboard
   const submitToDb = () => {
     fetch('/api/plan', {
       method: 'POST',
@@ -17,12 +22,13 @@ const BurialPlanSubmit = () => {
       },
       body: JSON.stringify(state),
     });
+    dispatch(updateRitesPlanSummaryReducer(state.plan));
 
     history.push('/dashboard');
   };
 
   return (
-    <div id="submit-carousel">
+    <div id='submit-carousel'>
       <span>Are you ready to submit your arrangements?</span>
       <button onClick={submitToDb}>Submit</button>
     </div>
