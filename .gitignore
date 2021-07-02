@@ -35,7 +35,8 @@ hs_err_pid*
 /build
 
 # misc
-.DS_Store
+.DS_Storegit 
+.env
 .env.local
 .env.development.local
 .env.test.local

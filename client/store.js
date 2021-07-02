@@ -7,6 +7,7 @@ import chooseServiceReducer from './slices/chooseServiceSlice';
 import futureChecklistSlice from './slices/futureChecklistSlice';
 import selectPlanSlice from './slices/selectPlanSlice';
 import userInfoSlice from './slices/userInfoSlice';
+import loggedStatusSlice from './slices/loggedStatusSlice';
 
 export default configureStore({
   reducer: {
@@ -15,5 +16,6 @@ export default configureStore({
     checklist: futureChecklistSlice,
     userInfo: userInfoSlice,
     checkData: checkDataSlice,
+    loggedStatus: loggedStatusSlice,
   },
 });
