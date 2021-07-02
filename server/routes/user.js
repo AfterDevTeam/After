@@ -3,8 +3,8 @@
 const express = require('express');
 const afterController = require('../controllers/afterController.js');
 const userController = require('../controllers/userController.js');
-const cookiesController = require('../controllers/cookiesController.js')
-const sessionController = require('../controllers/sessionController.js')
+const cookiesController = require('../controllers/cookiesController.js');
+const sessionController = require('../controllers/sessionController.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -32,8 +32,8 @@ router.put('/update', userController.updateUser, (req, res) =>
   res.status(200).send('User Info Updated')
 );
 
-router.put('/logout', sessionController.logOut, (req,res)=>{
-  res.status(200).send('Logged Out')
-})
+router.put('/logout', sessionController.logOut, (req, res) => {
+  res.status(200).send('Logged Out');
+});
 
 module.exports = router;

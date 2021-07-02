@@ -3,8 +3,7 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const PG_URI =
-  `postgres://${process.env.Userdatabase}:${process.env.Password}@batyr.db.elephantsql.com/cixbhgbm`;
+const PG_URI = `postgres://${process.env.Userdatabase}:${process.env.Password}@batyr.db.elephantsql.com/cixbhgbm`;
 
 const pool = new Pool({
   connectionString: PG_URI,
@@ -17,12 +16,9 @@ module.exports = {
   },
 };
 
-// Table Names:
-
-// burialplan
-
-//checklist
-
-// userinfo
-
-// service (not yet in DB)
+/* Table Names:
+  burialplan
+  checklist
+  userinfo
+  service
+*/

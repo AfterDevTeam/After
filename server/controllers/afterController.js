@@ -69,7 +69,6 @@ afterController.getFuture = async (req, res, next) => {
 
 // these are the add controllers for the carousel
 afterController.addPlan = async (req, res, next) => {
-  console.log('req.body in add plan ', req.body);
   try {
     const text = `INSERT INTO burialPlan (_id, rite,funeralHome,funeralBeforeRites, funeralLocation,graveSideService,graveSideLocation,memorialService,memorialLocation) 
       values($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
@@ -109,7 +108,6 @@ afterController.addService = async (req, res, next) => {
       req.body.service.cateringService,
       req.body.service.extras,
     ];
-    console.log('values:', values);
     res.locals = await db.query(text, values);
     next();
   } catch (error) {
@@ -186,7 +184,6 @@ afterController.updatePlan = async (req, res, next) => {
 
     const planQuery =
       'UPDATE burialPlan SET rite = $2,funeralHome = $3,funeralBeforeRites = $4, funeralLocation = $5,graveSideService = $6,graveSideLocation = $7,memorialService = $8,memorialLocation = $9 WHERE _id = $1';
-    //console.log('planQuery', planQuery);
     await db.query(planQuery, values);
     return next();
   } catch (error) {
@@ -211,7 +208,7 @@ afterController.updateService = async (req, res, next) => {
 
     const serviceQuery =
       'UPDATE service SET guestList = $2,participants = $3,prayersBool = $4,prayersRead = $5,musicBool = $6, musicPlayed = $7,cateringBool = $8,cateringService = $9,extras = $10 WHERE _id = $1';
-    //console.log('serviceQuery', serviceQuery);
+
     await db.query(serviceQuery, values);
     return next();
   } catch (error) {
@@ -232,7 +229,7 @@ afterController.updateFuture = async (req, res, next) => {
 
     const futureQuery =
       'UPDATE checklist SET petsBool = $2,pets = $3,billsBool = $4,bills = $5,extras = $6 WHERE _id = $1';
-    //console.log('futureQuery', futureQuery);
+
     await db.query(futureQuery, values);
     return next();
   } catch (error) {
@@ -329,6 +326,5 @@ afterController.getChecklistSummary = async (req, res, next) => {
     return next();
   }
 };
-
 
 module.exports = afterController;

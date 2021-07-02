@@ -44,6 +44,6 @@ router.post(
   (req, res) => {
     res.status(200).send('session Created');
   }
-)
+);
 
 module.exports = router;
