@@ -27,7 +27,6 @@ const Dashboard = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        console.log('res in burialPlan', res);
         dispatch(updateRitesPlanLoginReducer(res.data.burialPlan));
       });
   };
@@ -48,7 +47,6 @@ const Dashboard = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        // console.log(res);
         dispatch(updateChecklistLoginReducer(res.data.checklist));
       });
   };

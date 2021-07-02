@@ -26,12 +26,9 @@ const SignUp = () => {
     showPassword: false,
   });
 
-  console.log('signUpInputs ', signUpInputs);
-
   // function to update state upon textfield user input
   const handleChangeSignUp = (prop) => (event) => {
     setSignUpInputs({ ...signUpInputs, [prop]: event.target.value });
-    console.log('signUpInput ${prop}: ', prop);
   };
 
   // function to not/show password (currently not implemented)
@@ -44,7 +41,6 @@ const SignUp = () => {
 
   // function to add user to database using only local state because no passwords are stored on the front end
   const addUserToDatabase = () => {
-    console.log('signUpInputs ', signUpInputs);
     fetch('/user/signup', {
       method: 'POST',
       headers: {
@@ -56,10 +52,11 @@ const SignUp = () => {
   };
 
   return (
-    <Container 
-      maxWidth='xs'>
-      <div id="signup-container">
-        <h2>Start planning for what comes <span id="signup-after">after</span>.</h2>
+    <Container maxWidth='xs'>
+      <div id='signup-container'>
+        <h2>
+          Start planning for what comes <span id='signup-after'>after</span>.
+        </h2>
         <form className='signUpForm'>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -105,6 +102,7 @@ const SignUp = () => {
                 id='password'
                 label='Password'
                 value={signUpInputs.password}
+                type='password'
                 required
                 variant='outlined'
                 fullWidth
@@ -127,7 +125,9 @@ const SignUp = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Link to='/login' className="login-link">Already have an account? Sign in.</Link>
+              <Link to='/login' className='login-link'>
+                Already have an account? Sign in.
+              </Link>
             </Grid>
           </Grid>
         </form>
