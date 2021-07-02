@@ -1,3 +1,5 @@
+/** @format */
+
 import render from 'dom-serializer';
 import React from 'react';
 import {
@@ -11,7 +13,7 @@ import {
 
 const BillsQuestion = ({ checklist, setChecklist }) => {
   const { billsBool } = checklist;
-  const petsHidden = !billsBool; 
+  const petsHidden = !billsBool;
 
   const handleChange = (event) => {
     setChecklist({ ...checklist, [event.target.name]: event.target.checked });
@@ -20,7 +22,10 @@ const BillsQuestion = ({ checklist, setChecklist }) => {
   return (
     <div>
       <FormControl component='fieldset'>
-        <FormLabel component='legend'>Do you have any outstanding bills or expenses that need to be taken care of?</FormLabel>
+        <FormLabel component='legend'>
+          Do you have any outstanding bills or expenses that need to be taken
+          care of?
+        </FormLabel>
         <FormGroup>
           <FormControlLabel
             control={
@@ -38,7 +43,9 @@ const BillsQuestion = ({ checklist, setChecklist }) => {
               onChange={(e) => {
                 setChecklist({
                   ...checklist,
-                  billsList: (e.target.value).split(',').map(elem => elem.trim())
+                  billsList: e.target.value
+                    .split(',')
+                    .map((elem) => elem.trim()),
                 });
               }}
             />
@@ -46,7 +53,7 @@ const BillsQuestion = ({ checklist, setChecklist }) => {
         </FormGroup>
       </FormControl>
     </div>
-  )
-}
+  );
+};
 
 export default BillsQuestion;
