@@ -59,8 +59,6 @@ const EditSummary = () => {
   };
 
   const handlePlanSummaryChange = (prop) => (e) => {
-    console.log('prop', prop);
-    console.log('event in plan summary change', e.target.value);
     setPlanSummary({ ...planSummary, [prop]: e.target.value });
   };
 
@@ -77,7 +75,6 @@ const EditSummary = () => {
   const updateUserInfo = () => {
     axios
       .put('/user/update', { userInfo: { ...userInfoSummary } })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
@@ -87,7 +84,6 @@ const EditSummary = () => {
         plan: { ...planSummary },
         userInfo: { ...userInfoSummary },
       })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
@@ -97,7 +93,6 @@ const EditSummary = () => {
         service: serviceSummary,
         userInfo: userInfoSummary,
       })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
@@ -107,14 +102,9 @@ const EditSummary = () => {
         checklist: checklistSummary,
         userInfo: userInfoSummary,
       })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
   const classes = useStyles();
-  console.log('userInfoSummary: ', userInfoSummary);
-  console.log('planSummary: ', planSummary);
-  console.log('serviceSummary: ', serviceSummary);
-  console.log('checklistSummary: ', checklistSummary);
 
   let { guestList, participants, prayersRead, musicPlayed, cateringService } =
     serviceSummary;
@@ -126,15 +116,13 @@ const EditSummary = () => {
 
     const regex = /\w+/g;
     if (str === undefined || str === null || str.length < 1) {
-      console.log(str, typeof str);
       return null;
     } else {
-      console.log(str + 'is not undefined');
       str.split('').forEach((char) => {
         if (char.match(regex)) result.push(char);
         else if (char === ',') result.push(char + ' ');
       });
-      console.log('result', result);
+
       return result.join('');
     }
   };

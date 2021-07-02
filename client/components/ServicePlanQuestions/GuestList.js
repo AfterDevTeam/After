@@ -12,8 +12,6 @@ import {
 } from '@material-ui/core';
 
 const GuestList = ({ serviceItems, setServiceItems }) => {
-  console.log('service items', serviceItems);
-
   return (
     <div>
       <FormControl>

@@ -34,12 +34,6 @@ const Summary = () => {
   const state2 = useSelector(planState);
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   getPlanInfo();
-  //   getServiceInfo();
-  //   getChecklistInfo();
-  // }, []);
-
   //retrieve plan information for summary from database
   const getPlanInfo = () => {
     return axios
@@ -70,7 +64,6 @@ const Summary = () => {
         userInfo: state.userInfo,
       })
       .then((res) => {
-        // console.log(res);
         dispatch(updateChecklistSummaryReducer(res.data.checklist));
       });
   };
@@ -97,29 +90,11 @@ const Summary = () => {
     }
   };
 
-  console.log('parsedGuestlist', guestList);
-  console.log('parsedParticipants', participants);
-  // useEffect(() => {
-  //   // guestList = parser(guestList);
-  //   // participants = parser(participants);
-  //   console.log('guestLIst in useEffect', guestList);
-  //   console.log('participants in useEffect', participants);
-
-  //   // musicPlayed = parser(musicPlayed);
-  //   // prayersRead = parser(prayersRead);
-  //   // pets = parser(pets);
-  // }, [state]);
   guestList = parser(guestList);
   participants = parser(participants);
 
   pets = parser(pets);
   bills = parser(bills);
-
-  // musicPlayed = parser(musicPlayed);
-  // prayersRead = parser(prayersRead);
-  // console.log('parsedParticipants', musicPlayed);
-  // console.log('parsedMusic', pets);
-  // console.log('parsedPrayers', prayersRead);
 
   return (
     <Container>

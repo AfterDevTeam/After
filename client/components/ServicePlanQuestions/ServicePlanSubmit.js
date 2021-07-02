@@ -10,10 +10,10 @@ import {
 
 const ServicePlanSubmit = () => {
   const state = useSelector(serviceState);
-  console.log('serviceState', state);
+
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log('state in submit component', state);
+
   const submitToDb = () => {
     fetch('/api/service', {
       method: 'POST',

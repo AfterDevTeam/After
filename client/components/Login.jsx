@@ -47,7 +47,7 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
-        console.log('data in login', data);
+
         if (typeof data === 'object') {
           //save the data in the Redux store
           // check for value
