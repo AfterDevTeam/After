@@ -21,11 +21,11 @@ import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux';
 
 //Other Components
+import { userInfoState } from '../slices/userInfoSlice';
 import {
-  userInfoState,
-  updateUserInfoSummaryReducer,
-} from '../slices/userInfoSlice';
-import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
+  updateRitesPlanLoginReducer,
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
 import {
   musicPlayedReducer,
   updateServiceSummaryReducer,
@@ -81,8 +81,8 @@ const EditSummary = () => {
   const updatePlanInfo = () => {
     return axios
       .put('/api/plan', {
-        plan: { ...planSummary },
-        userInfo: { ...userInfoSummary },
+        plan: planSummary,
+        userInfo: userInfoSummary,
       })
       .catch((err) => console.log(err));
   };
@@ -111,6 +111,7 @@ const EditSummary = () => {
 
   let { pets, bills } = checklistSummary;
 
+  console.log('plan', planSummary);
   const parser = (str) => {
     const result = [];
 
@@ -324,7 +325,6 @@ const EditSummary = () => {
           </Grid>
           <Button
             onClick={() => {
-              dispatch(updateUserInfoSummaryReducer(userInfoSummary));
               dispatch(updateRitesPlanSummaryReducer(planSummary));
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
