@@ -4,8 +4,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { ModuleFilenameHelpers } = require('webpack');
-const fs = require('fs');
-const cors = require('cors');
+//  const fs = require('fs');
+//  const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 3000;
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-//  global error handler function - for use in controller to log errors
+//  global error handler function - for use in controller to log errors - not currently used
 function errorHandler(err, req, res, next) {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
