@@ -154,7 +154,7 @@ const EditSummary = () => {
                 <FormLabel component='legend'>Select your rites.</FormLabel>
                 <RadioGroup aria-label='select-your-rites'>
                   <FormControlLabel
-                    value='casket'
+                    value='Casket'
                     rite='Casket'
                     id='rite'
                     control={<Radio />}
