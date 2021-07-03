@@ -21,12 +21,15 @@ import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux';
 
 //Other Components
+import { userInfoState } from '../slices/userInfoSlice';
 import {
-  userInfoState,
-  updateUserInfoSummaryReducer,
-} from '../slices/userInfoSlice';
-import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
-import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
+  updateRitesPlanLoginReducer,
+  updateRitesPlanSummaryReducer,
+} from '../slices/selectPlanSlice';
+import {
+  musicPlayedReducer,
+  updateServiceSummaryReducer,
+} from '../slices/chooseServiceSlice';
 import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +48,7 @@ const EditSummary = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const state = useSelector(userInfoState);
+
   const [userInfoSummary, setUserInfoSummary] = useState(state.userInfo);
   const [planSummary, setPlanSummary] = useState(state.plan);
   const [serviceSummary, setServiceSummary] = useState(state.service);
@@ -55,8 +59,6 @@ const EditSummary = () => {
   };
 
   const handlePlanSummaryChange = (prop) => (e) => {
-    console.log('prop', prop);
-    console.log('event in plan summary change', e.target.value);
     setPlanSummary({ ...planSummary, [prop]: e.target.value });
   };
 
@@ -73,17 +75,15 @@ const EditSummary = () => {
   const updateUserInfo = () => {
     axios
       .put('/user/update', { userInfo: { ...userInfoSummary } })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const updatePlanInfo = () => {
     return axios
       .put('/api/plan', {
-        plan: { ...planSummary },
-        userInfo: { ...userInfoSummary },
+        plan: planSummary,
+        userInfo: userInfoSummary,
       })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
@@ -93,7 +93,6 @@ const EditSummary = () => {
         service: serviceSummary,
         userInfo: userInfoSummary,
       })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
@@ -103,14 +102,36 @@ const EditSummary = () => {
         checklist: checklistSummary,
         userInfo: userInfoSummary,
       })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
   const classes = useStyles();
-  console.log('userInfoSummary: ', userInfoSummary);
-  console.log('planSummary: ', planSummary);
-  console.log('serviceSummary: ', serviceSummary);
-  console.log('checklistSummary: ', checklistSummary);
+
+  let { guestList, participants, prayersRead, musicPlayed, cateringService } =
+    serviceSummary;
+
+  let { pets, bills } = checklistSummary;
+
+  console.log('plan', planSummary);
+  const parser = (str) => {
+    const result = [];
+
+    const regex = /\w+/g;
+    if (str === undefined || str === null || str.length < 1) {
+      return null;
+    } else {
+      str.split('').forEach((char) => {
+        if (char.match(regex)) result.push(char);
+        else if (char === ',') result.push(char + ' ');
+      });
+
+      return result.join('');
+    }
+  };
+
+  guestList = parser(guestList);
+  participants = parser(participants);
+  pets = parser(pets);
+  bills = parser(bills);
   return (
     <Container>
       <div className={classes.root2}>
@@ -133,7 +154,7 @@ const EditSummary = () => {
                 <FormLabel component='legend'>Select your rites.</FormLabel>
                 <RadioGroup aria-label='select-your-rites'>
                   <FormControlLabel
-                    value='casket'
+                    value='Casket'
                     rite='Casket'
                     id='rite'
                     control={<Radio />}
@@ -141,7 +162,7 @@ const EditSummary = () => {
                     onClick={handlePlanSummaryChange('rite')}
                   />
                   <FormControlLabel
-                    value='cremation'
+                    value='Cremation'
                     rite='Cremation'
                     id='rite'
                     control={<Radio />}
@@ -212,55 +233,49 @@ const EditSummary = () => {
             <Paper className={classes.paper2}>
               <Typography>Service Plan</Typography>
               <br></br>
-              <Typography>Guest List: {state.service.guestList}</Typography>
+              <Typography>Guest List: {guestList}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('guestList')}
                 guestList='guestList'
                 id='guestList'
                 label='Guest List'
-                value={serviceSummary.guestList}
+                value={guestList}
                 variant='outlined'
               />
-              <Typography>
-                Participants: {state.service.participants}
-              </Typography>
+              <Typography>Participants: {participants}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('participants')}
                 participants='participants'
                 id='participants'
                 label='Participants'
-                value={serviceSummary.participants}
+                value={participants}
                 variant='outlined'
               />
-              <Typography>
-                Prayers/Readings: {state.service.prayersRead}
-              </Typography>
+              <Typography>Prayers/Readings: {prayersRead}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('prayersRead')}
                 prayersRead='prayersRead'
                 id='prayersRead'
                 label='Prayers/Readings'
-                value={serviceSummary.prayersRead}
+                value={prayersRead}
                 variant='outlined'
               />
-              <Typography>Music: {state.service.musicPlayed}</Typography>
+              <Typography>Music: {musicPlayed}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('musicPlayed')}
                 musicPlayed='musicPlayed'
                 id='musicPlayed'
                 label='Music Played'
-                value={serviceSummary.musicPlayed}
+                value={musicPlayed}
                 variant='outlined'
               />
-              <Typography>
-                Catering Service: {state.service.cateringService}
-              </Typography>
+              <Typography>Catering Service: {cateringService}</Typography>
               <TextField
                 onChange={handleServiceSummaryChange('cateringService')}
                 cateringService='cateringService'
                 id='cateringService'
                 label='Catering Service'
-                value={serviceSummary.cateringService}
+                value={cateringService}
                 variant='outlined'
               />
               <Typography>Extras {state.service.extras}</Typography>
@@ -284,17 +299,17 @@ const EditSummary = () => {
                 pets='pets'
                 id='pets'
                 label='Pets'
-                value={checklistSummary.pets}
+                value={pets}
                 variant='outlined'
               />
 
-              <Typography>Bills: {state.checklist.bills}</Typography>
+              <Typography>Bills: {bills}</Typography>
               <TextField
                 onChange={handleChecklistSummaryChange('bills')}
                 bills='bills'
                 id='bills'
                 label='Bills'
-                value={checklistSummary.bills}
+                value={bills}
                 variant='outlined'
               />
               <Typography>Extras {state.checklist.extras}</Typography>
@@ -310,7 +325,6 @@ const EditSummary = () => {
           </Grid>
           <Button
             onClick={() => {
-              dispatch(updateUserInfoSummaryReducer(userInfoSummary));
               dispatch(updateRitesPlanSummaryReducer(planSummary));
               dispatch(updateServiceSummaryReducer(serviceSummary));
               dispatch(updateChecklistSummaryReducer(checklistSummary));
@@ -320,7 +334,7 @@ const EditSummary = () => {
               updateChecklistInfo();
               history.push('/summary');
             }}
-            style={{margin: '0 auto', display: 'flex'}}
+            style={{ margin: '0 auto', display: 'flex' }}
           >
             Submit
           </Button>

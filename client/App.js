@@ -18,8 +18,15 @@ import Checklist from './components/Checklist';
 import Summary from './components/Summary';
 import EditSummary from './components/EditSummary';
 
+// state for rendering and preventing component load after log out.
+import { useSelector } from 'react-redux';
+import { loggedStatusState } from './slices/loggedStatusSlice'; 
+
 // react router
 const App = () => {
+
+  const state = useSelector(loggedStatusState);
+
   return (
     <div>
       <BrowserRouter>
@@ -28,12 +35,30 @@ const App = () => {
           <Route exact path='/' component={SplashPage} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/burial-plan' component={BurialPlan} />
-          <Route exact path='/service-plan' component={ServicePlan} />
-          <Route exact path='/checklist' component={Checklist} />
-          <Route exact path='/summary' component={Summary} />
-          <Route exact path='/edit' component={EditSummary} />
+          { state.loggedStatus.loggedIn 
+            ? <Route exact path='/dashboard' component={Dashboard} />
+            : <Route exact path='/' component={SplashPage} />
+          }     
+          { state.loggedStatus.loggedIn 
+            ? <Route exact path='/burial-plan' component={BurialPlan} />
+            : <Route exact path='/' component={SplashPage} />
+          }
+          { state.loggedStatus.loggedIn
+            ? <Route exact path='/service-plan' component={ServicePlan} />
+            : <Route exact path='/' component={SplashPage} />
+          }
+          { state.loggedStatus.loggedIn
+            ? <Route exact path='/checklist' component={Checklist} />
+            : <Route exact path='/' component={SplashPage} />
+          }
+          { state.loggedStatus.loggedIn
+            ? <Route exact path='/summary' component={Summary} />
+            : <Route exact path='/' component={SplashPage} />
+          }
+          { state.loggedStatus.loggedIn
+            ? <Route exact path='/edit' component={EditSummary} />
+            : <Route exact path='/' component={SplashPage} />
+          }
         </Switch>
       </BrowserRouter>
     </div>

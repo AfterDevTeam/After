@@ -12,6 +12,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { MenuItem } from '@material-ui/core';
+import { GetApp } from '@material-ui/icons';
+
+// import reducers to set state for log in/out
+import { loggedInReducer } from '../slices/loggedStatusSlice';
+import { updateUserInfoSummaryReducer } from '../slices/userInfoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+//import state from redux store
+import { loggedStatusState } from '../slices/loggedStatusSlice'; 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(loggedStatusState);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -43,6 +54,22 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // create a logout function
+  const logOutUser = () => {
+    // fetch('/user/logout', {
+    //   method: 'PUT'
+    // })
+    // upon logout - loggin in is set to false, user state is cleared, and history is blocked
+    dispatch(updateUserInfoSummaryReducer({
+      firstName: '',
+      lastName: '',
+      email: '',
+      userId: '',
+    }));
+    dispatch(loggedInReducer(false));
+    history.push('/');
+  }
 
   const classes = useStyles();
 
@@ -73,15 +100,25 @@ const Navbar = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={() => history.push('/')}>Home</MenuItem>
-              <MenuItem onClick={() => history.push('/login')}>Login</MenuItem>
+              { state.loggedStatus.loggedIn === false &&
+                <MenuItem onClick={() => history.push('/login')}>Login</MenuItem>
+              }
+              { state.loggedStatus.loggedIn === false &&              
               <MenuItem onClick={() => history.push('/signup')}>Signup</MenuItem>
-              <MenuItem onClick={() => history.push('/summary')}>
+              }
+              { state.loggedStatus.loggedIn === true &&
+                <MenuItem onClick={() => history.push('/summary')}>
                 My Account
               </MenuItem>
+              } 
+              { state.loggedStatus.loggedIn === true &&   
               <MenuItem onClick={() => history.push('/dashboard')}>
                 Your Journey
               </MenuItem>
-              <MenuItem onClick={() => history.push('/login')}>Logout</MenuItem>
+              }
+              { state.loggedStatus.loggedIn === true &&     
+              <MenuItem onClick={logOutUser}>Logout</MenuItem>
+              }
             </Menu>
           </div>
           <Typography variant='h3' className={classes.title}>

@@ -16,7 +16,7 @@ const RitesQuestion = ({ setRite }) => {
       <FormControl component='fieldset'>
         <RadioGroup aria-label='select-your-rites'>
           <FormControlLabel
-            value='casket'
+            value='Casket'
             control={<Radio />}
             label='Casket'
             onClick={() => setRite('Casket')}
@@ -32,7 +32,7 @@ const RitesQuestion = ({ setRite }) => {
             control={<Radio />}
             label={
               <TextField
-                style={{width: 250}}
+                style={{ width: 250 }}
                 placeholder='Other: Write your wishes here.'
                 onChange={(e) => {
                   setRite('Other: ' + e.target.value);

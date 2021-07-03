@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production nodemon server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"nodemon server/server.js\"",
+    "dev": "concurrently \"nodemon server/server.js\" \"cross-env NODE_ENV=development webpack serve --hot --open\"",
     "debug": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"nodemon --inspect server/server.js\""
   },
   "repository": {
@@ -27,6 +27,7 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

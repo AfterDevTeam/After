@@ -3,7 +3,6 @@
 const express = require('express');
 
 const afterController = require('../controllers/afterController.js');
-const multipleInsertController = require('../controllers/multipleInsertController');
 
 const router = express.Router();
 
@@ -39,7 +38,6 @@ router.post('/dashboard-check', afterController.dashboardCheck, (req, res) => {
 });
 
 router.post('/planSummary', afterController.getPlanSummary, (req, res) => {
-  console.log('res.locals in planSummary', res.locals);
   res.status(200).json(res.locals);
 });
 
@@ -47,7 +45,6 @@ router.post(
   '/serviceSummary',
   afterController.getServiceSummary,
   (req, res) => {
-    console.log('res.locals in serviceSummary', res.locals);
     res.status(200).json(res.locals);
   }
 );
@@ -55,21 +52,20 @@ router.post(
   '/checklistSummary',
   afterController.getChecklistSummary,
   (req, res) => {
-    console.log('res.locals in checklistSummary', res.locals);
     res.status(200).json(res.locals);
   }
 );
 
 // delete routes
-router.delete('/plan', afterController.deletePlan, (req, res) => {
-  res.status(200).send('Entry was deleted Successfully');
-});
-router.delete('/service', afterController.deleteService, (req, res) => {
-  res.status(200).send('Entry was deleted Successfully');
-});
-router.delete('/future', afterController.deleteFuture, (req, res) => {
-  res.status(200).send('Entry was deleted Successfully');
-});
+// router.delete('/plan', afterController.deletePlan, (req, res) => {
+//   res.status(200).send('Entry was deleted Successfully');
+// });
+// router.delete('/service', afterController.deleteService, (req, res) => {
+//   res.status(200).send('Entry was deleted Successfully');
+// });
+// router.delete('/future', afterController.deleteFuture, (req, res) => {
+//   res.status(200).send('Entry was deleted Successfully');
+// });
 
 //  update routes
 router.put('/plan', afterController.updatePlan, (req, res) => {
@@ -81,22 +77,5 @@ router.put('/service', afterController.updateService, (req, res) => {
 router.put('/future', afterController.updateFuture, (req, res) => {
   res.status(200).send('Update to future was successful');
 });
-
-// router.post(
-//   '/guestlist/:id',
-//   multipleInsertController.populateGuestList,
-//   (req, res) => {
-//     res.status(200).send('Created Guest List');
-//   }
-// );
-
-//consider moving these into routers/user.js
-// router.post('/register', afterController.registerUser, (req, res) =>{
-//   res.status(200).json(res.locals.registerSuccessful)}
-// );
-
-// router.get('/getUserId', afterController.getUserId, (req, res) =>
-//   res.status(200).json(res.locals.userid)
-// );
 
 module.exports = router;

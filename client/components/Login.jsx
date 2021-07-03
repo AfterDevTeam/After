@@ -3,8 +3,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import '../css/Login.css';
 import { useDispatch } from 'react-redux';
 import {
@@ -21,6 +19,7 @@ import {
 import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
 import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
 import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
+import { loggedInReducer } from '../slices/loggedStatusSlice';
 
 const Login = (props) => {
   //history for routing
@@ -48,7 +47,7 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         //if response is an object, successful retrieval from database
-        console.log('data in login', data);
+
         if (typeof data === 'object') {
           //save the data in the Redux store
           // check for value
@@ -61,20 +60,23 @@ const Login = (props) => {
           }
           // check for value
           if (typeof data.checklist === 'object') {
-            const { petsBool, pets, billsBool, bills, extras } = data.checklist;
             dispatch(updateChecklistSummaryReducer(data.checklist));
             dispatch(checklistCompleteReducer());
+            const { petsBool, pets, billsBool, bills, extras } = data.checklist;
+            // dispatch(updateChecklistLoginReducer(data.checklist));
+            // dispatch(checklistCompleteReducer());
           }
           // check for value
           if (typeof data.burialPlan === 'object') {
-            dispatch(updateRitesPlanSummaryReducer(data.burialPlan));
-            dispatch(planCompleteReducer());
+            // dispatch(updateRitesPlanLoginReducer(data.burialPlan));
+            // dispatch(planCompleteReducer());
             // check for value
           }
           if (typeof data.service === 'object') {
-            dispatch(updateServiceSummaryReducer(data.service));
-            dispatch(serviceCompleteReducer());
+            // dispatch(updateServiceLoginReducer(data.service));
+            // dispatch(serviceCompleteReducer());
           }
+          dispatch(loggedInReducer(true));
           setInputUsername('');
           setInputPassword('');
           //redirect to dashboard

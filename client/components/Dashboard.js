@@ -5,9 +5,10 @@ import DashboardSquare from './DashboardSquare';
 import { useSelector, useDispatch } from 'react-redux';
 import '../css/Dashboard.css';
 import { userInfoState } from '../slices/userInfoSlice';
-import { updateRitesPlanSummaryReducer } from '../slices/selectPlanSlice';
-import { updateServiceSummaryReducer } from '../slices/chooseServiceSlice';
-import { updateChecklistSummaryReducer } from '../slices/futureChecklistSlice';
+import { updateRitesPlanLoginReducer } from '../slices/selectPlanSlice';
+import { updateServiceLoginReducer } from '../slices/chooseServiceSlice';
+import { updateChecklistLoginReducer } from '../slices/futureChecklistSlice';
+import axios from 'axios';
 
 const Dashboard = () => {
   const state = useSelector(userInfoState);
@@ -19,6 +20,36 @@ const Dashboard = () => {
     futureChecklist: null,
   });
   const userId = state.userInfo.userId;
+
+  const getPlanInfo = () => {
+    return axios
+      .post('/api/planSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        dispatch(updateRitesPlanLoginReducer(res.data.burialPlan));
+      });
+  };
+
+  const getServiceInfo = () => {
+    return axios
+      .post('/api/serviceSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        dispatch(updateServiceLoginReducer(res.data.service));
+      });
+  };
+
+  const getChecklistInfo = () => {
+    return axios
+      .post('/api/checklistSummary', {
+        userInfo: state.userInfo,
+      })
+      .then((res) => {
+        dispatch(updateChecklistLoginReducer(res.data.checklist));
+      });
+  };
 
   //check database using userID to see if dashboard square is rendered or not
   useEffect(() => {
@@ -38,12 +69,15 @@ const Dashboard = () => {
           service: dashboardStatus.service,
           futureChecklist: dashboardStatus.futureChecklist,
         })
-      );
-    dispatch(updateRitesPlanSummaryReducer(state.plan));
-    dispatch(updateServiceSummaryReducer(state.service));
-    dispatch(updateChecklistSummaryReducer(state.checklist));
+      )
+      .then(() => {
+        getPlanInfo();
+        getServiceInfo();
+        getChecklistInfo();
+      });
   }, []);
 
+  //conditionally renders each dashboard square depending on carousel completion status
   return (
     <div id='dashboard-container'>
       <h1>Your Journey</h1>

@@ -1,7 +1,7 @@
 /** @format */
 
 const db = require('../models/afterModels.js');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 const SaltFactor = 5;
 
@@ -49,15 +49,15 @@ userController.verifyUser = async (req, res, next) => {
 
 userController.createUser = async (req, res, next) => {
   try {
-    const { firstName, lastName, email} = req.body;
-    let {password} = req.body
+    const { firstName, lastName, email } = req.body;
+    let { password } = req.body;
     const queryText = `SELECT * FROM userinfo WHERE email = '${email}'`;
     const queryResult = await db.query(queryText);
-    
+
     const salt = await bcrypt.genSalt(SaltFactor);
     const hash = await bcrypt.hash(password, salt);
     password = hash;
-    
+
     const value = [firstName, lastName, email, password];
 
     if (queryResult.rowCount === 0) {
